@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Exploring Differential Equations - 1.2: Slope Fields</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Chp1/03-Phase-Line.html" rel="next">
+<link href="../Chp1/01-What-is-a-Differential-Equation.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Chp1/01-What-is-a-Differential-Equation.html">Chapter 1: First Order Differential Equations</a></li><li class="breadcrumb-item"><a href="../Chp1/02-Slope-Fields.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">1.2: Slope Fields</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Exploring Differential Equations</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Chapter 1: First Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/01-What-is-a-Differential-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1: Interpreting Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/02-Slope-Fields.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.2: Slope Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/03-Phase-Line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3: The Phase Plane</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/04-Eulers-Method.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4: Numerically Approximations of Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/05-Separable-Diff-Eqs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5: Separable Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/06-Integrating-Factors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6: Solving Linear First Order Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/07-Mixture-Applications.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7: Applications to Compartmental Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/08-Application-Heating-and-Cooling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8: Applications to Heating and Cooling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/ODE-Tools-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for First Order ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Chapter 2: Second Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/09-Intro-to-Second-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1: Second Order Linear Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/10-Homogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2: Homogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/11-Nonhomogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3: Nonhomogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/12-Superposition-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4: Superposition and General Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/13-Mass-Spring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/Mass-Spring-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Mass-Spring Systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Chapter 3: Systems of Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/14-Introduction-to-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1: Introduction to Systems of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/15-Phase-Plane-Portrait.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2: Phase Plane Portraits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/16-Phase-Plane-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3: Phase Plane Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/17-Linear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4: Population Dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/18-Stability-of-Equilibrium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5: Stability of Equilibria</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/19-Nonlinear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6: Dynamics of Non-Linear Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/Phase-Portraits-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Phase Planes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Chapter 4: Laplace Transforms</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1: Introduction to Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/21-Properties-of-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2: Properties of Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/22-Inverse-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3: Inverse Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/23-Solving-IVP-with-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4: Solving ODEs with Laplace Transforms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#plotting-a-differential-equations" id="toc-plotting-a-differential-equations" class="nav-link active" data-scroll-target="#plotting-a-differential-equations">Plotting A Differential Equations</a>
+  <ul class="collapse">
+  <li><a href="#sec-02quest1" id="toc-sec-02quest1" class="nav-link" data-scroll-target="#sec-02quest1">Question 1:</a>
+  <ul class="collapse">
+  <li><a href="#sec-02quest1a" id="toc-sec-02quest1a" class="nav-link" data-scroll-target="#sec-02quest1a">Question 1a:</a></li>
+  <li><a href="#sec-02quest1b" id="toc-sec-02quest1b" class="nav-link" data-scroll-target="#sec-02quest1b">Question 1b:</a></li>
+  <li><a href="#sec-02quest1c" id="toc-sec-02quest1c" class="nav-link" data-scroll-target="#sec-02quest1c">Question 1c:</a></li>
+  </ul></li>
+  <li><a href="#sec-02quest2" id="toc-sec-02quest2" class="nav-link" data-scroll-target="#sec-02quest2">Question 2:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-2" id="toc-solution-to-question-2" class="nav-link" data-scroll-target="#solution-to-question-2">Solution to Question 2:</a></li>
+  </ul></li>
+  <li><a href="#sec-02quest3" id="toc-sec-02quest3" class="nav-link" data-scroll-target="#sec-02quest3">Question 3:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-3" id="toc-solution-to-question-3" class="nav-link" data-scroll-target="#solution-to-question-3">Solution to Question 3:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#plotting-slope-fields-in-python" id="toc-plotting-slope-fields-in-python" class="nav-link" data-scroll-target="#plotting-slope-fields-in-python">Plotting Slope Fields in Python</a>
+  <ul class="collapse">
+  <li><a href="#importing-packages" id="toc-importing-packages" class="nav-link" data-scroll-target="#importing-packages">Importing Packages</a></li>
+  <li><a href="#setting-up-the-grid" id="toc-setting-up-the-grid" class="nav-link" data-scroll-target="#setting-up-the-grid">Setting Up the Grid</a></li>
+  <li><a href="#defining-the-differential-equation" id="toc-defining-the-differential-equation" class="nav-link" data-scroll-target="#defining-the-differential-equation">Defining the Differential Equation</a></li>
+  <li><a href="#plotting-a-slope-field-with-slope_field" id="toc-plotting-a-slope-field-with-slope_field" class="nav-link" data-scroll-target="#plotting-a-slope-field-with-slope_field">Plotting a Slope Field with <code>slope_field()</code></a>
+  <ul class="collapse">
+  <li><a href="#sec-LoadModule" id="toc-sec-LoadModule" class="nav-link" data-scroll-target="#sec-LoadModule">Loading <code>ode_tools</code> from GitHub</a></li>
+  <li><a href="#importing-the-slope_field-plotting-function" id="toc-importing-the-slope_field-plotting-function" class="nav-link" data-scroll-target="#importing-the-slope_field-plotting-function">Importing the <code>slope_field</code> Plotting Function</a></li>
+  </ul></li>
+  <li><a href="#plotting-a-different-slope-field" id="toc-plotting-a-different-slope-field" class="nav-link" data-scroll-target="#plotting-a-different-slope-field">Plotting a Different Slope Field</a>
+  <ul class="collapse">
+  <li><a href="#now-were-ready-to-run-slope_field" id="toc-now-were-ready-to-run-slope_field" class="nav-link" data-scroll-target="#now-were-ready-to-run-slope_field">Now We’re Ready to Run <code>slope_field()</code></a></li>
+  </ul></li>
+  <li><a href="#changing-the-color-of-vectors" id="toc-changing-the-color-of-vectors" class="nav-link" data-scroll-target="#changing-the-color-of-vectors">Changing the Color of Vectors</a></li>
+  <li><a href="#sec-02quest4" id="toc-sec-02quest4" class="nav-link" data-scroll-target="#sec-02quest4">Question 4:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-4" id="toc-solution-to-question-4" class="nav-link" data-scroll-target="#solution-to-question-4">Solution to Question 4:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#plotting-solutions-in-a-slope-field" id="toc-plotting-solutions-in-a-slope-field" class="nav-link" data-scroll-target="#plotting-solutions-in-a-slope-field">Plotting Solutions in a Slope Field</a>
+  <ul class="collapse">
+  <li><a href="#sec-02quest5" id="toc-sec-02quest5" class="nav-link" data-scroll-target="#sec-02quest5">Question 5:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-5" id="toc-solution-to-question-5" class="nav-link" data-scroll-target="#solution-to-question-5">Solution to Question 5:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#creative-commons-license-information" id="toc-creative-commons-license-information" class="nav-link" data-scroll-target="#creative-commons-license-information">Creative Commons License Information</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">1.2: Slope Fields</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/02-Slope-Fields.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><font color="dodgerblue">Reading: <em>Notes on Diffy Q’s</em> Section 1.2</font></p>
+<section id="plotting-a-differential-equations" class="level1">
+<h1>Plotting A Differential Equations</h1>
+<hr>
+<p>A <font color="dodgerblue"><strong>slope field</strong></font> is a graphical representation of a rate of change equation. Given a rate of change equation, if we plug in particular values of <span class="math inline">\((t,y)\)</span> then <span class="math inline">\(\dfrac{dy}{dt}\)</span> tells you the slope of the tangent vector to the solution at that point.</p>
+<p>For example, consider the rate of change equation <span class="math inline">\(\dfrac{dy}{dt}=y+2t\)</span>. At the point <span class="math inline">\((1, 3)\)</span>, the value of <span class="math inline">\(\dfrac{dy}{dt}\)</span> is <span class="math inline">\(5\)</span>. Thus, the slope field for this equation would show a vector at the point <span class="math inline">\((1, 3)\)</span> with slope <span class="math inline">\(5\)</span>. A slope field depicts the exact slope of many such vectors, where we take each vector to be uniform length. Slope fields are useful because they provide a graphical approach for obtaining qualitatively correct graphs of the functions that satisfy a differential equation.</p>
+<section id="sec-02quest1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-02quest1">Question 1:</h2>
+<hr>
+<p>In the code cell below a partially completed slope field for <span class="math inline">\(\dfrac{dP}{dt}=0.8P\)</span> is provided.</p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:517,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660152172107,&quot;user&quot;:{&quot;displayName&quot;:&quot;Adam Spiegler&quot;,&quot;userId&quot;:&quot;08916726237218427358&quot;},&quot;user_tz&quot;:360}" data-outputid="d493674f-ab6a-4e73-fd73-e2bbf9ded0bb">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot vectors</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, color <span class="op">=</span> <span class="st">'b'</span>)  <span class="co"># plots vector at (0,0) with slope 0/1 = 0 </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">1.6</span>, color <span class="op">=</span> <span class="st">'b'</span>)  <span class="co"># plots vector at (0,2) with slope 1.6/1 = 1.6</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="fl">0.8</span>, color <span class="op">=</span> <span class="st">'b'</span>)  <span class="co"># plots vector at (-1,-1) with slope -0.8/1 = -0.8</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set limits on x and y axes</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="op">-</span><span class="fl">3.5</span>, <span class="fl">3.5</span>])</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="op">-</span><span class="fl">3.5</span>, <span class="fl">3.5</span>])</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Label axes</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"t"</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"P"</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a grid and axes to plot</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, which<span class="op">=</span><span class="st">'both'</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="sec-02quest1a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-02quest1a">Question 1a:</h3>
+<hr>
+<p>Plot many more tangent vectors to create a slope field.</p>
+<section id="solution-to-question-1a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1a">Solution to Question 1a:</h4>
+<hr>
+<p>Complete the table below to identify more vectors in the slope field.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th><span class="math display">\[\large t\]</span></th>
+<th><span class="math display">\[\large P\]</span></th>
+<th><span class="math display">\[\large \dfrac{dP}{dt} = 0.8P\]</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>2</td>
+<td>1.6</td>
+</tr>
+<tr class="odd">
+<td>-1</td>
+<td>-1</td>
+<td>-0.8</td>
+</tr>
+<tr class="even">
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="odd">
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="even">
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="odd">
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="even">
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+</tbody>
+</table>
+<p><br><br>
+<br><br>
+<mark>Then plot the vectors by editing the code cell below.</mark> <br><br>
+<br></p>
+<div class="cell" data-executioninfo="{&quot;elapsed&quot;:517,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1660152172107,&quot;user&quot;:{&quot;displayName&quot;:&quot;Adam Spiegler&quot;,&quot;userId&quot;:&quot;08916726237218427358&quot;},&quot;user_tz&quot;:360}" data-outputid="d493674f-ab6a-4e73-fd73-e2bbf9ded0bb">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot vectors</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, color <span class="op">=</span> <span class="st">'b'</span>)  <span class="co"># plots vector at (0,0) with slope 0/1 = 0 </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">1.6</span>, color <span class="op">=</span> <span class="st">'b'</span>)  <span class="co"># plots vector at (0,2) with slope 1.6/1 = 1.6</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="fl">0.8</span>, color <span class="op">=</span> <span class="st">'b'</span>)  <span class="co"># plots vector at (-1,-1) with slope -0.8/1 = -0.8</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#########################################################################</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#STUDENT TO DO: Uncomment out each line and add your vectors to the plot</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#########################################################################</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.quiver(??, ??, 1, ??, color = 'b')  # add your vector 1</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.quiver(??, ??, 1, ??, color = 'b')  # add your vector 2</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.quiver(??, ??, 1, ??, color = 'b')  # add your vector 3</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.quiver(??, ??, 1, ??, color = 'b')  # add your vector 4</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.quiver(??, ??, 1, ??, color = 'b')  # add your vector 5</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Set limits on x and y axes</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="op">-</span><span class="fl">3.5</span>, <span class="fl">3.5</span>])</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="op">-</span><span class="fl">3.5</span>, <span class="fl">3.5</span>])</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Label axes</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"t"</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"P"</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a grid and axes to plot</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, which<span class="op">=</span><span class="st">'both'</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-02quest1b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-02quest1b">Question 1b:</h3>
+<hr>
+<p>Use your slope field to sketch qualitatively correct graphs of the solution functions that start at <span class="math inline">\(P = 0, -1\)</span>, and <span class="math inline">\(2\)</span>, respectively.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The value of <span class="math inline">\(P\)</span> at an initial time (typically <span class="math inline">\(t = 0\)</span>) is called an <strong>initial condition</strong>.</p>
+</div>
+</div>
+<section id="solution-to-question-1b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1b">Solution to Question 1b:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-02quest1c" class="level3">
+<h3 class="anchored" data-anchor-id="sec-02quest1c">Question 1c:</h3>
+<hr>
+<p>Recall that a solution to a differential equation is a function that satisfies the differential equation. Explain how the graph with initial condition <span class="math inline">\(P(0) = 1\)</span> can graphically be thought of as a solution to the differential equation when the differential equation is represented by its slope field.</p>
+<section id="solution-to-question-1c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1c">Solution to Question 1c:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="sec-02quest2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-02quest2">Question 2:</h2>
+<hr>
+<p>Below are seven differential equations and three different slope fields. <strong>Without using technology</strong>, identify which differential equation is the best match for each slope field (thus you will have four rate of change equations left over). <strong>Explain your reasoning.</strong></p>
+<p><span class="math display">\[
+\text{(i) } \frac{dy}{dt}=t-1 \quad \text{(ii) } \frac{dy}{dt}=1-y^2 \quad \text{(iii) } \frac{dy}{dt}=y^2-t^2 \quad \text{(iv) } \frac{dy}{dt}=1-y
+\]</span></p>
+<p><span class="math display">\[
+\text{(v) } \frac{dy}{dt}=t^2-y^2 \quad \text{(vi) } \frac{dy}{dt}=1-t \quad \text{(vii) } \frac{dy}{dt}=9t^2-y^2
+\]</span></p>
+<p>width=50% fig-alt=“Balancing Yes and No”</p>
+<table class="table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 34%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Slope Field 1</th>
+<th>Slope Field 2</th>
+<th>Slope Field 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="https://raw.githubusercontent.com/CU-Denver-MathStats-OER/ODEs/main/Chp1/Images/02SlopeField1.png" alt="Slope Field 1" width="300"></td>
+<td><img src="https://raw.githubusercontent.com/CU-Denver-MathStats-OER/ODEs/main/Chp1/Images/02SlopeField2.png" alt="Slope Field 2" width="300"></td>
+<td><img src="https://raw.githubusercontent.com/CU-Denver-MathStats-OER/ODEs/main/Chp1/Images/02SlopeField3.png" alt="Slope Field 3" width="300"></td>
+</tr>
+</tbody>
+</table>
+<section id="solution-to-question-2" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-2">Solution to Question 2:</h3>
+<hr>
+<p><br></p>
+<ul>
+<li><p>Slope field 1 matches equation <mark>??</mark></p></li>
+<li><p>Slope field 2 matches equation <mark>??</mark></p></li>
+<li><p>Slope field 3 matches equation <mark>??</mark></p></li>
+</ul>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-02quest3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-02quest3">Question 3:</h2>
+<hr>
+<p>For each of the slope fields in the previous question, sketch in graphs of several different qualitatively correct solutions. <strong>Do not use any technology to answer this question.</strong></p>
+<section id="solution-to-question-3" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-3">Solution to Question 3:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<mark>Sketch your answers on the slope fields above.</mark></p>
+<p><br> <br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="plotting-slope-fields-in-python" class="level1">
+<h1>Plotting Slope Fields in Python</h1>
+<hr>
+<p>Recall that to create a slope field we can follow the following routine:</p>
+<ol type="1">
+<li>Pick a point <span class="math inline">\((t, x)\)</span> and evaluate the differential equation <span class="math inline">\(\frac{dx}{dt}\)</span> at that point.</li>
+<li>Draw a line segment (of uniform length) with slope <span class="math inline">\(m=\frac{dx}{dt}\)</span>.</li>
+<li>Repeat.</li>
+</ol>
+<p>Below we go through code that generates a slope field for the differential equation</p>
+<p><span class="math display">\[\frac{dx}{dt} = 9.8 - \frac{x}{5}.\]</span></p>
+<section id="importing-packages" class="level2">
+<h2 class="anchored" data-anchor-id="importing-packages">Importing Packages</h2>
+<hr>
+<p>First we import two packages we frequently will use:</p>
+<ul>
+<li><font color="dodgerblue"><strong>NumPy</strong></font> is a package that is convenient for working with multidimensional arrays (such as vectors and matrices). See <a href="https://numpy.org/doc/stable/user/whatisnumpy.html">NumPy help documentation</a>.</li>
+<li><font color="dodgerblue"><strong>Matplotlib</strong></font> we <strong>already imported in the first code cell above</strong>. It is package useful for creating static, animated, and interactive visualizations. See <a href="https://numpy.org/doc/stable/user/whatisnumpy.html">Matplotlib help documentation</a>.
+<ul>
+<li>The <code>pyplot</code> subpackage in <code>matplotlib</code> that is a great tool in computational math. See <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.html">pyplot help documentation</a>.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="setting-up-the-grid" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-the-grid">Setting Up the Grid</h2>
+<hr>
+<p>The code cell below creates a set of points <span class="math inline">\((t,x)\)</span> at which we will plot a line segment in the slope field.</p>
+<ul>
+<li>Generate vector of <span class="math inline">\(11\)</span> evenly spaced <span class="math inline">\(t\)</span>-values starting at <span class="math inline">\(t=0\)</span> and ending at <span class="math inline">\(t=10\)</span>.</li>
+<li>Generate vector of <span class="math inline">\(10\)</span> evenly spaced <span class="math inline">\(x\)</span>-values starting at <span class="math inline">\(x=40\)</span> and ending at <span class="math inline">\(x=60\)</span></li>
+<li>You choose range of values and how many slopes you want to plot in your slope field.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># np.linspace(initial, end, number_values)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">11</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">40</span>,<span class="dv">60</span>,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="defining-the-differential-equation" class="level2">
+<h2 class="anchored" data-anchor-id="defining-the-differential-equation">Defining the Differential Equation</h2>
+<hr>
+<p>In the code cell below, we define the differential equation <code>diffeq</code> whose slope field will be plotted. <strong>By default, we still use <span class="math inline">\(t\)</span> to denote the independent variable and <span class="math inline">\(x\)</span> the dependent variable.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the differential equation</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, x):  <span class="co"># t is independent variable and x is dependent variable</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">9.8</span> <span class="op">-</span> (x <span class="op">/</span> <span class="dv">5</span>)  <span class="co"># enter the formula for dx/dt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="plotting-a-slope-field-with-slope_field" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-a-slope-field-with-slope_field">Plotting a Slope Field with <code>slope_field()</code></h2>
+<hr>
+<p>We now import a function named <code>slope_field()</code> that lives inside a module named <code>ode_tools</code> stored in GitHub.</p>
+<ul>
+<li>See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/ODE-Tools-Tutorial.ipynb">Quick Reference Guide on How to Use Python Functions for Chapter 1</a> for more detailed instructions.</li>
+<li>The actual Python code can be found in the file named <strong>ode_tools.py</strong>.</li>
+<li><font color="tomato">You do NOT need to open, view, or edit the code in the file <strong>ode_tools.py</strong> found in the utils folder.</font></li>
+</ul>
+<ol type="1">
+<li><p>Input vectors of values for <code>t</code> and <code>x</code> (points where the vectors will be plotted) and define <code>diffeq</code>.</p>
+<ul>
+<li>Note this step has been performed in the previous code cells.</li>
+</ul></li>
+<li><p>Load <code>ode_tools</code> Module from GitHub.</p></li>
+<li><p>We import the <code>slope_field()</code> function.</p>
+<ul>
+<li>You will need to load the <code>ode_tools</code> module from GitHub described in Step 2.</li>
+<li>Like packages, you only need to import a function one time after opening a notebook.</li>
+</ul></li>
+<li><p>We generate the slope field by running the function with the command <code>slope_field(t, x, diffeq)</code>.</p></li>
+</ol>
+<section id="sec-LoadModule" class="level3">
+<h3 class="anchored" data-anchor-id="sec-LoadModule">Loading <code>ode_tools</code> from GitHub</h3>
+<hr>
+<ul>
+<li>Run the code cell below to load the most up to date modules stored in GitHub.</li>
+<li>You will only need to run this code cell one time during an active session.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>CU<span class="op">-</span>Denver<span class="op">-</span>MathStats<span class="op">-</span>OER<span class="op">/</span>ODEs</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>clear_output()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importing-the-slope_field-plotting-function" class="level3">
+<h3 class="anchored" data-anchor-id="importing-the-slope_field-plotting-function">Importing the <code>slope_field</code> Plotting Function</h3>
+<hr>
+<p>After you followed the instructions above and set your file path, you are now ready to import the <code>slope_field</code> function from the <code>ode_tools</code> module.</p>
+<p><mark>Now all remaining code cells will work in both Google Colab and Jupyter!</mark></p>
+<p><strong>Run the code cell below to generate the plot of the slope field.</strong></p>
+<ul>
+<li>Note we have already defined arrays <code>t</code> and <code>x</code> in previous cell.</li>
+<li>We have already defined <code>diffeq</code> in a previous cell.</li>
+<li>Thus the lines of code are commented out below.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.ode_tools <span class="im">import</span> slope_field  <span class="co"># Only need to import one time.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># np.linspace(initial, end, number_values)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#t = np.linspace(0,10,11)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#x = np.linspace(40,60,10)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup the differential equation</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#def diffeq(t, x):  # t is independent variable and x is dependent variable</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#    return 9.8 - (x / 5)  # enter the formula for dx/dt</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the slope field plotter</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>slope_field(t, x, diffeq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="plotting-a-different-slope-field" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-a-different-slope-field">Plotting a Different Slope Field</h2>
+<hr>
+<p>Next we use <code>slope_field()</code> to generate a plot of the slope corresponding to</p>
+<p><span class="math display">\[\color{dodgerblue}{\frac{dy}{dq} = 4q^2 - y^2}.\]</span></p>
+<p>We initially choose to plot the slope field over <span class="math inline">\(-5 \leq q \leq 5\)</span> and <span class="math inline">\(-5 \leq y \leq 5\)</span>.</p>
+<ul>
+<li><p>Note in the <code>slope_field()</code> function <span class="math inline">\(t\)</span> and <span class="math inline">\(x\)</span> are used to denote the independent and dependent variables, respectively.</p></li>
+<li><p>We can change the letters that we use so the code matches our equation.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># np.linspace(initial, end, number_values)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">11</span>)  <span class="co"># pick 11 values from q=-5 to q=5</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">11</span>)  <span class="co"># pick 11 values from y=-5 to y=5</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a new differential equation</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(q, y):  <span class="co"># x and t are dependent and independent variables</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">4</span><span class="op">*</span>q<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> y<span class="op">**</span><span class="dv">2</span>  <span class="co"># formula for dy/dq</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="now-were-ready-to-run-slope_field" class="level3">
+<h3 class="anchored" data-anchor-id="now-were-ready-to-run-slope_field">Now We’re Ready to Run <code>slope_field()</code></h3>
+<hr>
+<p>Now that we have defined the three inputs need for the <code>slope_field()</code> function, we can generate a new slope field with the simple one line below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>slope_field(q, y, diffeq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="changing-the-color-of-vectors" class="level2">
+<h2 class="anchored" data-anchor-id="changing-the-color-of-vectors">Changing the Color of Vectors</h2>
+<hr>
+<p>If we want to change any of the default options, we simply input new options into the <code>slope_field()</code> function.</p>
+<ul>
+<li>The default color for the vectors is <code>color = 'black'</code>. If you want black arrows, you do not need to specify any color.</li>
+<li>To change the color of the vectors, add the option <code>color = 'color_name'</code> inside <code>slope_field()</code> as illustrated in the code cell below.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change color to blue</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>slope_field(q, y, diffeq, color<span class="op">=</span><span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sec-02quest4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-02quest4">Question 4:</h2>
+<hr>
+<p>Plot each of the four differential equations whose slope fields were not plotted in <a href="#sec-02quest2">question 2</a>.</p>
+<section id="solution-to-question-4" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-4">Solution to Question 4:</h3>
+<hr>
+<p><br> <br> <mark>Replace each ?? in each of the four code cells below to plot each slope field.</mark> <br> <br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot missing slope field 1</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define points where vectors will be plotted</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(??, ??, ??)  <span class="co"># Independent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(??, ??, ??)  <span class="co"># Dependent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the differential equation</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, y):  <span class="co"># t is independent variable and y is dependent variable</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ??  <span class="co"># enter the formula for dy/dt</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the slope field plotter</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>slope_field(t, y, diffeq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot missing slope field 2</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define points where vectors will be plotted</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(??, ??, ??)  <span class="co"># Independent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(??, ??, ??)  <span class="co"># Dependent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the differential equation</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, y):  <span class="co"># t is independent variable and y is dependent variable</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ??  <span class="co"># enter the formula for dy/dt</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the slope field plotter</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>slope_field(t, y, diffeq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot missing slope field 3</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define points where vectors will be plotted</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(??, ??, ??)  <span class="co"># Independent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(??, ??, ??)  <span class="co"># Dependent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the differential equation</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, y):  <span class="co"># t is independent variable and y is dependent variable</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ??  <span class="co"># enter the formula for dy/dt</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the slope field plotter</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>slope_field(t, y, diffeq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot missing slope field 4</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define points where vectors will be plotted</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(??, ??, ??)  <span class="co"># Independent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(??, ??, ??)  <span class="co"># Dependent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the differential equation</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, y):  <span class="co"># t is independent variable and y is dependent variable</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ??  <span class="co"># enter the formula for dy/dt</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the slope field plotter</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>slope_field(t, y, diffeq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="plotting-solutions-in-a-slope-field" class="level1">
+<h1>Plotting Solutions in a Slope Field</h1>
+<hr>
+<p>We have seen that slope fields are useful for sketching graphs to approximate solutions that pass thru certain points. The arrows should be approximately tangent to the curve we sketch. In addition to the <code>slope_field()</code> function we used earlier, the <code>ode_tools</code> module defines other functions. We can import a function named <code>plot_sol()</code> to plot a slope field as well as the solution that passes thru a given point.</p>
+<p>There is a function named <code>plot_sol()</code> that lives inside a module named <code>ode_tools</code>.</p>
+<ul>
+<li>See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/ODE-Tools-Tutorial.ipynb">Quick Reference Guide on How to Use Python Functions for Chapter 1</a> for more detailed instructions.</li>
+</ul>
+<ol type="1">
+<li><p>Input vectors of values for <code>t</code> and <code>x</code> (points where the vectors will be plotted) and define <code>diffeq</code>.</p></li>
+<li><p><font color="dodgerblue">Define an initial condition <span class="math inline">\((t_0, x_0)\)</span>.</font></p><font color="dodgerblue">
+</font><ul><font color="dodgerblue">
+<li>The initial value of <span class="math inline">\(t\)</span> stored in the variable named <code>t0</code>.</li>
+</font><li><font color="dodgerblue">The initial value of <span class="math inline">\(x\)</span> is stored in the variable named <code>x0</code>.</font> <br></li>
+</ul></li>
+<li><p>If you have not already done so, load the <code>ode_tools</code> module from GitHub. See <a href="#sec-LoadModule">Loading from GitHub Instructions</a>.</p>
+<ul>
+<li><mark>If you already loaded <code>ode_tools</code> from GitHub when using the <code>slope_field()</code> function, you can skip this step.</mark></li>
+</ul></li>
+<li><p>Import the <code>plot_sol()</code> function.</p>
+<ul>
+<li>Like packages, you only need to import a function one time after opening a notebook.</li>
+</ul></li>
+<li><p>Generate the slope field by running the function with the command <code>plot_sol(t, x, diffeq, t0, x0)</code>.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.ode_tools <span class="im">import</span> plot_sol  <span class="co"># Only need to import the function once</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define points where vectors will be plotted</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">11</span>)  <span class="co"># Independent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">40</span>,<span class="dv">60</span>,<span class="dv">10</span>)  <span class="co"># Dependent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the differential equation</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, x):  <span class="co"># t is independent variable and x is dependent variable</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">9.8</span> <span class="op">-</span> (x <span class="op">/</span> <span class="dv">5</span>)  <span class="co"># enter the formula for dx/dt</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter t0, the initial value of t</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter x0, the value of x at t0</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="dv">55</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the function to create a plot</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>plot_sol(t, x, diffeq, t0, x0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="sec-02quest5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-02quest5">Question 5:</h2>
+<hr>
+<p>Use the <code>plot_sol()</code> function to create a plot of the slope field and solution to the initial value problem</p>
+<p><span class="math display">\[\color{dodgerblue}{\frac{dy}{dq} = 4q^2 - y^2, \qquad y(-2)=3}.\]</span></p>
+<section id="solution-to-question-5" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-5">Solution to Question 5:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<mark>Complete the code block below.</mark><br>
+<br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#from utils.ode_tools import plot_sol  # Only need to import the function once</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define points where vectors will be plotted</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> np.linspace(??, ??, ??)  <span class="co"># Independent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(??, ??, ??)  <span class="co"># Dependent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the differential equation</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(q, y):  <span class="co"># q is independent variable and y is dependent variable</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ??  <span class="co"># enter the formula for dy/dq</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter q0, the initial value of q</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter y0, the value of y at q0</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>q0 <span class="op">=</span> ??</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> ??</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the function to create a plot</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>plot_sol(q, y, diffeq, q0, y0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="creative-commons-license-information" class="level1">
+<h1>Creative Commons License Information</h1>
+<hr>
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><em>Exploring Differential Equations</em></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/CU-Denver-MathStats-OER/ODEs" property="cc:attributionName" rel="cc:attributionURL">Adam Spiegler</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/CU-Denver-MathStats-OER/ODEs" rel="dct:source">https://github.com/CU-Denver-MathStats-OER/ODEs</a> and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., &amp; Fortune, N. (2018). <em>Inquiry oriented differential equations: Course materials</em>. Available at <a href="https://iode.sdsu.edu">https://iode.sdsu.edu</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Chp1/01-What-is-a-Differential-Equation.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.1: Interpreting Differential Equations</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Chp1/03-Phase-Line.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">1.3: The Phase Plane</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Exploring Differential Equations by Adam Spiegler</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" class="img-fluid" alt="Creative Commons License"> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-N-SA 4.0</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

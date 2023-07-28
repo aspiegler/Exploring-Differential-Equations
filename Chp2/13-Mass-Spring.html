@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Exploring Differential Equations - 2.5: Experimenting with Mass-Spring Systems</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Chp2/Mass-Spring-Tutorial.html" rel="next">
+<link href="../Chp2/12-Superposition-2nd-Order.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Chp2/09-Intro-to-Second-Order.html">Chapter 2: Second Order Differential Equations</a></li><li class="breadcrumb-item"><a href="../Chp2/13-Mass-Spring.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Exploring Differential Equations</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Chapter 1: First Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/01-What-is-a-Differential-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1: Interpreting Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/02-Slope-Fields.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2: Slope Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/03-Phase-Line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3: The Phase Plane</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/04-Eulers-Method.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4: Numerically Approximations of Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/05-Separable-Diff-Eqs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5: Separable Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/06-Integrating-Factors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6: Solving Linear First Order Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/07-Mixture-Applications.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7: Applications to Compartmental Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/08-Application-Heating-and-Cooling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8: Applications to Heating and Cooling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/ODE-Tools-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for First Order ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Chapter 2: Second Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/09-Intro-to-Second-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1: Second Order Linear Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/10-Homogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2: Homogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/11-Nonhomogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3: Nonhomogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/12-Superposition-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4: Superposition and General Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/13-Mass-Spring.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/Mass-Spring-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Mass-Spring Systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Chapter 3: Systems of Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/14-Introduction-to-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1: Introduction to Systems of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/15-Phase-Plane-Portrait.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2: Phase Plane Portraits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/16-Phase-Plane-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3: Phase Plane Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/17-Linear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4: Population Dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/18-Stability-of-Equilibrium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5: Stability of Equilibria</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/19-Nonlinear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6: Dynamics of Non-Linear Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/Phase-Portraits-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Phase Planes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Chapter 4: Laplace Transforms</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1: Introduction to Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/21-Properties-of-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2: Properties of Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/22-Inverse-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3: Inverse Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/23-Solving-IVP-with-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4: Solving ODEs with Laplace Transforms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-13damping" id="toc-sec-13damping" class="nav-link active" data-scroll-target="#sec-13damping">Over, Under, and Critically Damped</a>
+  <ul class="collapse">
+  <li><a href="#sec-13quest1" id="toc-sec-13quest1" class="nav-link" data-scroll-target="#sec-13quest1">Question 1</a>
+  <ul class="collapse">
+  <li><a href="#sec-13quest1a" id="toc-sec-13quest1a" class="nav-link" data-scroll-target="#sec-13quest1a">Question 1a</a></li>
+  <li><a href="#sec-13quest1b" id="toc-sec-13quest1b" class="nav-link" data-scroll-target="#sec-13quest1b">Question 1b</a></li>
+  <li><a href="#sec-13quest1c" id="toc-sec-13quest1c" class="nav-link" data-scroll-target="#sec-13quest1c">Question 1c</a></li>
+  <li><a href="#sec-13quest1d" id="toc-sec-13quest1d" class="nav-link" data-scroll-target="#sec-13quest1d">Question 1d</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-13lab" id="toc-sec-13lab" class="nav-link" data-scroll-target="#sec-13lab">Testing Our Results in the Mass-Spring Lab</a>
+  <ul class="collapse">
+  <li><a href="#sec-13LoadModule" id="toc-sec-13LoadModule" class="nav-link" data-scroll-target="#sec-13LoadModule">Loading <code>mass_spring</code> from GitHub</a></li>
+  <li><a href="#sec-13import" id="toc-sec-13import" class="nav-link" data-scroll-target="#sec-13import">Importing <code>damped_harmonic_oscillator</code></a></li>
+  <li><a href="#sec-13mass-spring" id="toc-sec-13mass-spring" class="nav-link" data-scroll-target="#sec-13mass-spring">Running Experiments</a></li>
+  <li><a href="#sec-13quest2" id="toc-sec-13quest2" class="nav-link" data-scroll-target="#sec-13quest2">Question 2</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-2" id="toc-solution-to-question-2" class="nav-link" data-scroll-target="#solution-to-question-2">Solution to Question 2</a></li>
+  </ul></li>
+  <li><a href="#sec-13quest3" id="toc-sec-13quest3" class="nav-link" data-scroll-target="#sec-13quest3">Question 3</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-3" id="toc-solution-to-question-3" class="nav-link" data-scroll-target="#solution-to-question-3">Solution to Question 3</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-13units" id="toc-sec-13units" class="nav-link" data-scroll-target="#sec-13units">Units of the Coefficients</a>
+  <ul class="collapse">
+  <li><a href="#sec-13quest4" id="toc-sec-13quest4" class="nav-link" data-scroll-target="#sec-13quest4">Question 4</a>
+  <ul class="collapse">
+  <li><a href="#sec-13quest4a" id="toc-sec-13quest4a" class="nav-link" data-scroll-target="#sec-13quest4a">Question 4a</a></li>
+  <li><a href="#sec-13quest4b" id="toc-sec-13quest4b" class="nav-link" data-scroll-target="#sec-13quest4b">Question 4b</a></li>
+  </ul></li>
+  <li><a href="#sec-13quest5" id="toc-sec-13quest5" class="nav-link" data-scroll-target="#sec-13quest5">Question 5</a>
+  <ul class="collapse">
+  <li><a href="#sec-13quest5a" id="toc-sec-13quest5a" class="nav-link" data-scroll-target="#sec-13quest5a">Question 5a</a></li>
+  <li><a href="#sec-13quest5b" id="toc-sec-13quest5b" class="nav-link" data-scroll-target="#sec-13quest5b">Question 5b</a></li>
+  <li><a href="#sec-13quest5c" id="toc-sec-13quest5c" class="nav-link" data-scroll-target="#sec-13quest5c">Question 5c</a></li>
+  <li><a href="#sec-13quest5d" id="toc-sec-13quest5d" class="nav-link" data-scroll-target="#sec-13quest5d">Question 5d</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-13forced" id="toc-sec-13forced" class="nav-link" data-scroll-target="#sec-13forced">Forced Oscillations</a>
+  <ul class="collapse">
+  <li><a href="#sec-13quest6" id="toc-sec-13quest6" class="nav-link" data-scroll-target="#sec-13quest6">Question 6</a>
+  <ul class="collapse">
+  <li><a href="#sec-13quest6a" id="toc-sec-13quest6a" class="nav-link" data-scroll-target="#sec-13quest6a">Question 6a</a></li>
+  <li><a href="#sec-13quest6b" id="toc-sec-13quest6b" class="nav-link" data-scroll-target="#sec-13quest6b">Question 6b</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-append-mass-spring" id="toc-sec-append-mass-spring" class="nav-link" data-scroll-target="#sec-append-mass-spring">Appendix: Testing Our Results in the Mass-Spring Lab</a>
+  <ul class="collapse">
+  <li><a href="#sec-append-LoadModule" id="toc-sec-append-LoadModule" class="nav-link" data-scroll-target="#sec-append-LoadModule">Loading <code>mass_spring</code> from GitHub</a></li>
+  <li><a href="#sec-append-import" id="toc-sec-append-import" class="nav-link" data-scroll-target="#sec-append-import">Importing <code>damped_harmonic_oscillator</code></a></li>
+  <li><a href="#sec-append-mass-spring-exp" id="toc-sec-append-mass-spring-exp" class="nav-link" data-scroll-target="#sec-append-mass-spring-exp">Running Experiments</a></li>
+  <li><a href="#sec-append-side-by-side" id="toc-sec-append-side-by-side" class="nav-link" data-scroll-target="#sec-append-side-by-side">Running A Side-by-Side Comparison</a></li>
+  </ul></li>
+  <li><a href="#sec-13cc" id="toc-sec-13cc" class="nav-link" data-scroll-target="#sec-13cc">Creative Commons License Information</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/13-Mass-Spring.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><font color="dodgerblue">Reading: <em>Notes on Diffy Q’s</em> Section 2.4 and Section 2.6</font></p>
+<p>Recall the mass-spring oscillator introduced in <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/10-Homogeneous-2nd-Order.ipynb">Worksheet 10 Homogeneous 2nd Order</a>. We connect an object with <font color="mediumseagreen">mass <span class="math inline">\(m\)</span></font> kg to a spring with <font color="dodgerblue">stiffness coefficient</font> <span class="math inline">\(k\)</span> kg/sec<span class="math inline">\(^2\)</span> that is connected to a stationary wall on the other end. We give the mass some initial position <span class="math inline">\(s_0\)</span> and velocity <span class="math inline">\(v_0\)</span>, and we observe the mechanics of how the mass moves along a surface with <font color="tomato">friction coefficient <span class="math inline">\(b\)</span></font> kg/sec.&nbsp;Such a system is called a <font color="dodgerblue"><strong>mass-spring oscillator</strong></font> or a <font color="dodgerblue"><strong>harmonic oscillator</strong></font>. The position of the mass at time, <span class="math inline">\(y(t)\)</span>, is modeled by the second order differential equation</p>
+<p><span class="math display">\[\large {\color{mediumseagreen}{m}}y''+{\color{tomato}{b}}y'+{\color{dodgerblue}{k}}y=0; \qquad y(0)=s_0, \quad y'(0)=v_0.\]</span></p>
+<p><img src="https://raw.githubusercontent.com/CU-Denver-MathStats-OER/ODEs/main/Chp2/Images/10mass-spring.png" alt="Mass-Spring Oscillator"></p>
+<section id="sec-13damping" class="level1">
+<h1>Over, Under, and Critically Damped</h1>
+<hr>
+<ul>
+<li><p>If there is <strong>no friction (<span class="math inline">\(\mathbf{b=0}\)</span>)</strong>, then the system is <font color="dodgerblue"><strong>undamped</strong></font>.</p></li>
+<li><p>If there is a <strong>little bit of friction</strong>, the mass will oscillate and move to the other side of its equilibrium before settling back at its equilibrium position in the long run. Such a system is called <font color="dodgerblue"><strong>underdamped</strong></font>.</p></li>
+<li><p>If there is a <strong>lot of friction</strong>, the mass will simply settle back at the equilibrium position (without moving to the other side of the equilibrium). Such a system is called <font color="dodgerblue"><strong>overdamped</strong></font>.</p></li>
+<li><p>When the system has just the perfect amount of friction such that:</p>
+<ul>
+<li>If there is <em>less friction</em>, the mass is <em>underdamped</em>, and</li>
+<li>If there is <em>more friction</em>, the mass is <em>overdamped</em>.</li>
+<li>We say the system is <font color="dodgerblue"><strong>critically damped</strong></font>.</li>
+</ul></li>
+</ul>
+<section id="sec-13quest1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-13quest1">Question 1</h2>
+<hr>
+<p>Consider a mass-spring system with a mass <span class="math inline">\(m=2\)</span> kg, spring constant <span class="math inline">\(k=3\)</span> newtons per meter, and damping constant <span class="math inline">\(b=1\)</span> newton seconds per meter.</p>
+<section id="sec-13quest1a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest1a">Question 1a</h3>
+<hr>
+<p>Set up and find a general solution to the corresponding differential equation.</p>
+<section id="solution-to-question-1a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1a">Solution to Question 1a</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-13quest1b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest1b">Question 1b</h3>
+<hr>
+<p>Is the system underdamped, overdamped, or critically damped?</p>
+<section id="solution-to-question-1b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1b">Solution to Question 1b</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-13quest1c" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest1c">Question 1c</h3>
+<hr>
+<p>What is the period of solution? How many cycles does the mass-spring complete each second?</p>
+<section id="solution-to-question-1c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1c">Solution to Question 1c</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-13quest1d" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest1d">Question 1d</h3>
+<hr>
+<p>Find a value for the constant <span class="math inline">\(b\)</span> so the sytem is critically damped.</p>
+<section id="solution-to-question-1d" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1d">Solution to Question 1d</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+</section>
+<section id="sec-13lab" class="level1">
+<h1>Testing Our Results in the Mass-Spring Lab</h1>
+<hr>
+<p>We now import a function named <code>damped_harmonic_oscillator()</code> that lives inside a module named <code>mass_spring</code> stored in GitHub.</p>
+<ul>
+<li>See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/Mass-Spring-Tutorial.ipynb">Mass-Spring-Tutorial.ipynb</a> for more detailed instructions.</li>
+</ul>
+<section id="sec-13LoadModule" class="level2">
+<h2 class="anchored" data-anchor-id="sec-13LoadModule">Loading <code>mass_spring</code> from GitHub</h2>
+<hr>
+<ul>
+<li>Run the code cell below to load the most up to date modules stored in GitHub.</li>
+<li>You will only need to run this code cell one time during an active session.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>CU<span class="op">-</span>Denver<span class="op">-</span>MathStats<span class="op">-</span>OER<span class="op">/</span>ODEs</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>clear_output()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sec-13import" class="level2">
+<h2 class="anchored" data-anchor-id="sec-13import">Importing <code>damped_harmonic_oscillator</code></h2>
+<hr>
+<p>In code cell below, we import the <code>damped_harmonic_oscillator</code> function from the <code>mass_spring</code> module.</p>
+<ul>
+<li>If you receive an error when running the second code cell, this means you have not loaded <code>mass_spring</code> from GitHub in a previous code cell.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.mass_spring <span class="im">import</span> damped_harmonic_oscillator  <span class="co"># Only need to import one time.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sec-13mass-spring" class="level2">
+<h2 class="anchored" data-anchor-id="sec-13mass-spring">Running Experiments</h2>
+<hr>
+<p>Recall the mass-spring system (also called a <strong>damped harmonic oscillator</strong>) has the following model</p>
+<p><span class="math display">\[my''+by'+ky=0; \ \ y(0)=s_0 \ \ y'(0)=v_0.\]</span></p>
+<p>In <a href="#sec-13quest1">Question 1</a> we have:</p>
+<ul>
+<li><span class="math inline">\(m=2\)</span>, <span class="math inline">\(b=1\)</span>, and <span class="math inline">\(k=3\)</span>.</li>
+<li>Note the animation may take several seconds to complete running.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>damped_harmonic_oscillator(m<span class="op">=</span><span class="dv">2</span>,  <span class="co"># mass is 2</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                           b<span class="op">=</span><span class="dv">1</span>,  <span class="co"># friction is 1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                           k<span class="op">=</span><span class="dv">3</span>,  <span class="co"># stiffness is 3</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                           A<span class="op">=</span><span class="dv">0</span>,  <span class="co"># amplitude of forcing</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                           omega<span class="op">=</span><span class="dv">1</span>,  <span class="co"># frequency coefficient</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                           x0<span class="op">=</span>[<span class="dv">1</span>,<span class="dv">0</span>])  <span class="co"># initial position and velocity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sec-13quest2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-13quest2">Question 2</h2>
+<hr>
+<p>Summarize the relation between damping of the mass-spring oscillator, the roots of the underlying characteristic equation, and formulas of the solutions.</p>
+<section id="solution-to-question-2" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-2">Solution to Question 2</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-13quest3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-13quest3">Question 3</h2>
+<hr>
+<p>Find an external forcing function of the form <span class="math inline">\(F(t) = A\cos{(\omega t)}\)</span> that will have resonance with the undamped mass-spring system with <span class="math inline">\(m=2\)</span> kg and spring coefficient <span class="math inline">\(k=3\)</span> N/m. Test your answer using the <code>damped_harmonic_oscillator</code> function above.</p>
+<section id="solution-to-question-3" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-3">Solution to Question 3</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="sec-13units" class="level1">
+<h1>Units of the Coefficients</h1>
+<hr>
+<p>For these questions we will measure quantities using the metric system:</p>
+<ul>
+<li>The overall force is measured in newtons, <span class="math inline">\(N\)</span>.
+<ul>
+<li>It is equal to the force that would give a mass of one kilogram an acceleration of one meter per <span class="math inline">\(\mbox{sec}^2\)</span>,</li>
+</ul></li>
+<li>The spring constant <span class="math inline">\(k\)</span> has units of force per unit of distance. For example newtons per meter, N/m.</li>
+<li>The damping constant is a unit of impulse per unit of distance. For example newton seconds per meter, <span class="math inline">\(\mbox{N} \cdot \mbox{s}\)</span> per meter.</li>
+</ul>
+<section id="sec-13quest4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-13quest4">Question 4</h2>
+<hr>
+<p>You place an object whose mass <span class="math inline">\(m\)</span> (in kg) is unknown on top of a spring in a vaccum (ignoring all other forces such as friction and gravity) and put the system in motion. You observed the mass bounce up and down. Let <span class="math inline">\(y\)</span> denote the vertical distance of the mass from its equilibrium position, with <span class="math inline">\(y&gt;0\)</span> when the mass is stretched above the equilibrium.</p>
+<p>If external forces such as friction and gravity are absent, then the location of the mass <span class="math inline">\(y\)</span> follows the same model for the undamped free mass-spring system: <span class="math display">\[my''+ky=0\]</span>.</p>
+<section id="sec-13quest4a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest4a">Question 4a</h3>
+<hr>
+<p>If the spring constant of the spring is <span class="math inline">\(k=4 \mbox{ N/m}\)</span>, then give a solution to the initial value problem. Note your answer will depend on the mass <span class="math inline">\(m\)</span>.</p>
+<section id="solution-to-question-4a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4a">Solution to Question 4a</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-13quest4b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest4b">Question 4b</h3>
+<hr>
+<p>If the mass bounces with a frequency of <span class="math inline">\(0.8\)</span> cycles per second, then give the value of the mass <span class="math inline">\(m\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>One cycle means the mass goes from equilibrium, down, then back up, and returns to equilibrium.</p>
+</div>
+</div>
+<section id="solution-to-question-4b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4b">Solution to Question 4b</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="sec-13quest5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-13quest5">Question 5</h2>
+<hr>
+<p>A <span class="math inline">\(5000\)</span> kg railcar hits a spring bumper at a speed of <span class="math inline">\(1\)</span> meter per second, and the spring compresses by <span class="math inline">\(0.1\)</span> m. Assume no damping.</p>
+<section id="sec-13quest5a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest5a">Question 5a</h3>
+<hr>
+<p>Find the value of the spring constant <span class="math inline">\(k\)</span>.</p>
+<section id="solution-to-question-5a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-5a">Solution to Question 5a</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-13quest5b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest5b">Question 5b</h3>
+<hr>
+<p>How far does the spring compress when a <span class="math inline">\(10,\!000\)</span> kg railcar hits the spring at the same speed?</p>
+<section id="solution-to-question-5b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-5b">Solution to Question 5b</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-13quest5c" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest5c">Question 5c</h3>
+<hr>
+<p>If the spring would break if it compresses more than <span class="math inline">\(0.3\)</span> m, what is the maximum mass of a railcar that can hit at 1 m/s?</p>
+<section id="solution-to-question-5c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-5c">Solution to Question 5c</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-13quest5d" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest5d">Question 5d</h3>
+<hr>
+<p>What is the maximum mass of a railcar that can hit the spring without breaking it at a speed of 2 m/s.</p>
+<section id="solution-to-question-5d" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-5d">Solution to Question 5d</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+</section>
+<section id="sec-13forced" class="level1">
+<h1>Forced Oscillations</h1>
+<hr>
+<p>Thus far, we have been considering the dynamics of a mass-spring systems free of external forces. Now we consider what happens if we add an external driving force.</p>
+<ul>
+<li>The spring has one end attached to the mass and the other end is now attached to a spinning wheel.</li>
+<li>The wheel acts externally, as a forcing function we denote <span class="math inline">\(F_{\rm Ext}(t)\)</span>.</li>
+<li>The mass-spring system is now modeled by a nonhomogeneous equation</li>
+</ul>
+<p><font color="dodgerblue"> <span class="math display">\[ mx'' + by' + ky = F_{\rm Ext}(t).\]</span> </font></p>
+<ul>
+<li>If the wheel has fixed radius and velocity, the forcing function is a trigonometric function of the form <font color="dodgerblue"><span class="math inline">\(F_{\rm Ext}(t)= A \cos{(\omega t)}\)</span></font> or <font color="dodgerblue"><span class="math inline">\(F_{\rm Ext}(t)= A \sin{(\omega t)}\)</span></font> (or a sum of similar sine and cosine fuctions).</li>
+</ul>
+<section id="sec-13quest6" class="level2">
+<h2 class="anchored" data-anchor-id="sec-13quest6">Question 6</h2>
+<hr>
+<p>A water tower in an earthquake acts as a mass-spring system. Assume the the container on top is full and the water does not move around. The container is the mass, and the support is the spring. The container with the water has a mass of <span class="math inline">\(10,\!000\)</span> kg. It takes a force of 1000 newtons to displace the container 1 meter. For simplicity, we <strong>assume no friction</strong>. The earthquake induces an external force given by <span class="math inline">\(F(t)=m\omega^2\cos{(\omega t)}\)</span> where <span class="math inline">\(\omega\)</span> denotes the frequency (number of cycles per second). When the earthquake hits, the water tower is at rest.</p>
+<section id="sec-13quest6a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest6a">Question 6a</h3>
+<hr>
+<p>What is the natural frequency of the water tower? This means, if there is no external force (homoegenous), what is the frequency of the homogeneous solution?</p>
+<section id="solution-to-question-6a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-6a">Solution to Question 6a</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-13quest6b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-13quest6b">Question 6b</h3>
+<hr>
+<p>If the water tower moves more than <span class="math inline">\(1.5\)</span> meters from its equilbrium resting position, the tower will collapse. Suppose an earthquake with a frequency of <span class="math inline">\(0.5\)</span> cycles per second hits, will the water tower collpase or remain standing? Provide supporting work, graphs, and/or explanations to support your answer.</p>
+<section id="solution-to-question-6b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-6b">Solution to Question 6b</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+</section>
+<section id="sec-append-mass-spring" class="level1">
+<h1>Appendix: Testing Our Results in the Mass-Spring Lab</h1>
+<hr>
+<p>We now import a function named <code>damped_harmonic_oscillator()</code> that lives inside a module named <code>mass_spring</code> stored in GitHub.</p>
+<ul>
+<li>See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/Mass-Spring-Tutorial.ipynb">Mass-Spring-Tutorial.ipynb</a> for more detailed instructions.</li>
+</ul>
+<section id="sec-append-LoadModule" class="level2">
+<h2 class="anchored" data-anchor-id="sec-append-LoadModule">Loading <code>mass_spring</code> from GitHub</h2>
+<hr>
+<ul>
+<li>Run the code cell below to load the most up to date modules stored in GitHub.</li>
+<li>You will only need to run this code cell one time during an active session.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>CU<span class="op">-</span>Denver<span class="op">-</span>MathStats<span class="op">-</span>OER<span class="op">/</span>ODEs</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>clear_output()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sec-append-import" class="level2">
+<h2 class="anchored" data-anchor-id="sec-append-import">Importing <code>damped_harmonic_oscillator</code></h2>
+<hr>
+<p>In code cell below, we import the <code>damped_harmonic_oscillator</code> function from the <code>mass_spring</code> module.</p>
+<ul>
+<li>If you receive an error when running the second code cell, this means you have not loaded <code>mass_spring</code> from GitHub in a previous code cell.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.mass_spring <span class="im">import</span> damped_harmonic_oscillator  <span class="co"># Only need to import one time.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sec-append-mass-spring-exp" class="level2">
+<h2 class="anchored" data-anchor-id="sec-append-mass-spring-exp">Running Experiments</h2>
+<hr>
+<p>Recall the mass-spring system (also called a <strong>damped harmonic oscillator</strong>) has the following model</p>
+<p><span class="math display">\[my''+by'+ky=0; \ \ y(0)=s_0 \ \ y'(0)=v_0.\]</span></p>
+<p>In <a href="#sec-13quest1">Question 1</a> we have:</p>
+<ul>
+<li><span class="math inline">\(m=2\)</span>, <span class="math inline">\(b=1\)</span>, and <span class="math inline">\(k=3\)</span>.</li>
+<li>Note the animation may take several seconds to complete running.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>damped_harmonic_oscillator(m<span class="op">=</span><span class="dv">2</span>,  <span class="co"># mass is 2</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                           b<span class="op">=</span><span class="dv">1</span>,  <span class="co"># friction is 1</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                           k<span class="op">=</span><span class="dv">3</span>,  <span class="co"># stiffness is 3</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                           A<span class="op">=</span><span class="dv">0</span>,  <span class="co"># amplitude of forcing</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                           omega<span class="op">=</span><span class="dv">1</span>,  <span class="co"># frequency coefficient</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                           x0<span class="op">=</span>[<span class="dv">1</span>,<span class="dv">0</span>])  <span class="co"># initial position and velocity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sec-append-side-by-side" class="level2">
+<h2 class="anchored" data-anchor-id="sec-append-side-by-side">Running A Side-by-Side Comparison</h2>
+<hr>
+<p>The function <code>damped_harmonic_comp()</code> will simultaneously run to animations for two different mass-spring systems.</p>
+<p>Below we compare an underdampled and overdamped system.</p>
+<ol type="1">
+<li>You first need to import the <code>damped_harmonic_comp</code> function from <code>mass_spring</code>. You only need to do this one time in an active sesion.</li>
+<li>Set parameters for both systems.</li>
+<li>Run the code cell. I may take up to a minute to run.</li>
+<li>Press the play button.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.mass_spring <span class="im">import</span> damped_harmonic_oscillator_comp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>damped_harmonic_oscillator_comp(m<span class="op">=</span>[<span class="fl">0.2</span>, <span class="fl">0.3</span>],  <span class="co"># masses</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                                b<span class="op">=</span>[<span class="fl">0.5</span>, <span class="fl">0.1</span>],  <span class="co"># frictions</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                                k<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>],  <span class="co"># stiffnesses  </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                                A<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Amplitudes of forcing</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                                omega<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>],  <span class="co"># frequency coefficients</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                                x0<span class="op">=</span>[[<span class="fl">0.5</span>, <span class="dv">1</span>], [<span class="op">-</span><span class="fl">0.5</span>, <span class="op">-</span><span class="dv">1</span>]],  <span class="co"># initial conditions</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                                fps<span class="op">=</span><span class="dv">4</span>,  <span class="co"># frames per second</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                                tf<span class="op">=</span><span class="dv">40</span>)  <span class="co"># total time</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-13cc" class="level1">
+<h1>Creative Commons License Information</h1>
+<hr>
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><em>Exploring Differential Equations</em></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/CU-Denver-MathStats-OER/ODEs" property="cc:attributionName" rel="cc:attributionURL">Adam Spiegler</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/CU-Denver-MathStats-OER/ODEs" rel="dct:source">https://github.com/CU-Denver-MathStats-OER/ODEs</a> and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., &amp; Fortune, N. (2018). <em>Inquiry oriented differential equations: Course materials</em>. Available at <a href="https://iode.sdsu.edu">https://iode.sdsu.edu</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Chp2/12-Superposition-2nd-Order.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">2.4: Superposition and General Solutions</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Chp2/Mass-Spring-Tutorial.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Python Tutorial for Mass-Spring Systems</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Exploring Differential Equations by Adam Spiegler</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" class="img-fluid" alt="Creative Commons License"> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-N-SA 4.0</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Exploring Differential Equations - 1.7: Applications to Compartmental Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Chp1/08-Application-Heating-and-Cooling.html" rel="next">
+<link href="../Chp1/06-Integrating-Factors.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Chp1/01-What-is-a-Differential-Equation.html">Chapter 1: First Order Differential Equations</a></li><li class="breadcrumb-item"><a href="../Chp1/07-Mixture-Applications.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">1.7: Applications to Compartmental Analysis</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Exploring Differential Equations</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Chapter 1: First Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/01-What-is-a-Differential-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1: Interpreting Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/02-Slope-Fields.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2: Slope Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/03-Phase-Line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3: The Phase Plane</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/04-Eulers-Method.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4: Numerically Approximations of Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/05-Separable-Diff-Eqs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5: Separable Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/06-Integrating-Factors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6: Solving Linear First Order Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/07-Mixture-Applications.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.7: Applications to Compartmental Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/08-Application-Heating-and-Cooling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8: Applications to Heating and Cooling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/ODE-Tools-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for First Order ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Chapter 2: Second Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/09-Intro-to-Second-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1: Second Order Linear Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/10-Homogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2: Homogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/11-Nonhomogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3: Nonhomogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/12-Superposition-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4: Superposition and General Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/13-Mass-Spring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/Mass-Spring-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Mass-Spring Systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Chapter 3: Systems of Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/14-Introduction-to-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1: Introduction to Systems of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/15-Phase-Plane-Portrait.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2: Phase Plane Portraits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/16-Phase-Plane-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3: Phase Plane Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/17-Linear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4: Population Dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/18-Stability-of-Equilibrium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5: Stability of Equilibria</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/19-Nonlinear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6: Dynamics of Non-Linear Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/Phase-Portraits-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Phase Planes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Chapter 4: Laplace Transforms</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1: Introduction to Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/21-Properties-of-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2: Properties of Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/22-Inverse-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3: Inverse Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/23-Solving-IVP-with-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4: Solving ODEs with Laplace Transforms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#one-compartment-systems" id="toc-one-compartment-systems" class="nav-link active" data-scroll-target="#one-compartment-systems">One-Compartment Systems</a>
+  <ul class="collapse">
+  <li><a href="#sec-07quest1" id="toc-sec-07quest1" class="nav-link" data-scroll-target="#sec-07quest1">Question 1:</a>
+  <ul class="collapse">
+  <li><a href="#sec-07quest1a" id="toc-sec-07quest1a" class="nav-link" data-scroll-target="#sec-07quest1a">Question 1a:</a></li>
+  <li><a href="#sec-07quest1b" id="toc-sec-07quest1b" class="nav-link" data-scroll-target="#sec-07quest1b">Question 1b:</a></li>
+  <li><a href="#sec-07quest1c" id="toc-sec-07quest1c" class="nav-link" data-scroll-target="#sec-07quest1c">Question 1c:</a></li>
+  <li><a href="#sec-07quest1d" id="toc-sec-07quest1d" class="nav-link" data-scroll-target="#sec-07quest1d">Question 1d:</a></li>
+  <li><a href="#sec-07quest1e" id="toc-sec-07quest1e" class="nav-link" data-scroll-target="#sec-07quest1e">Question 1e:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#population-models" id="toc-population-models" class="nav-link" data-scroll-target="#population-models">Population Models</a>
+  <ul class="collapse">
+  <li><a href="#sec-07quest2" id="toc-sec-07quest2" class="nav-link" data-scroll-target="#sec-07quest2">Question 2:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-2" id="toc-solution-to-question-2" class="nav-link" data-scroll-target="#solution-to-question-2">Solution to Question 2:</a></li>
+  </ul></li>
+  <li><a href="#the-logistic-model" id="toc-the-logistic-model" class="nav-link" data-scroll-target="#the-logistic-model">The Logistic Model</a></li>
+  <li><a href="#sec-07quest3" id="toc-sec-07quest3" class="nav-link" data-scroll-target="#sec-07quest3">Question 3:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-3" id="toc-solution-to-question-3" class="nav-link" data-scroll-target="#solution-to-question-3">Solution to Question 3:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#practice-population-model-for-rabbits" id="toc-practice-population-model-for-rabbits" class="nav-link" data-scroll-target="#practice-population-model-for-rabbits">Practice: Population Model for Rabbits</a>
+  <ul class="collapse">
+  <li><a href="#sec-07quest4" id="toc-sec-07quest4" class="nav-link" data-scroll-target="#sec-07quest4">Question 4:</a>
+  <ul class="collapse">
+  <li><a href="#sec-07quest4a" id="toc-sec-07quest4a" class="nav-link" data-scroll-target="#sec-07quest4a">Question 4a:</a></li>
+  <li><a href="#sec-07quest4b" id="toc-sec-07quest4b" class="nav-link" data-scroll-target="#sec-07quest4b">Question 4b:</a></li>
+  <li><a href="#sec-07quest4c" id="toc-sec-07quest4c" class="nav-link" data-scroll-target="#sec-07quest4c">Question 4c:</a></li>
+  <li><a href="#sec-07quest4d" id="toc-sec-07quest4d" class="nav-link" data-scroll-target="#sec-07quest4d">Question 4d:</a></li>
+  <li><a href="#sec-07quest4e" id="toc-sec-07quest4e" class="nav-link" data-scroll-target="#sec-07quest4e">Question 4e:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#practice-chlorine-levels-in-pool" id="toc-practice-chlorine-levels-in-pool" class="nav-link" data-scroll-target="#practice-chlorine-levels-in-pool">Practice: Chlorine Levels in Pool</a>
+  <ul class="collapse">
+  <li><a href="#sec-07quest5" id="toc-sec-07quest5" class="nav-link" data-scroll-target="#sec-07quest5">Question 5:</a>
+  <ul class="collapse">
+  <li><a href="#sec-07quest5a" id="toc-sec-07quest5a" class="nav-link" data-scroll-target="#sec-07quest5a">Question 5a:</a></li>
+  <li><a href="#sec-07quest5b" id="toc-sec-07quest5b" class="nav-link" data-scroll-target="#sec-07quest5b">Question 5b:</a></li>
+  <li><a href="#sec-07quest5c" id="toc-sec-07quest5c" class="nav-link" data-scroll-target="#sec-07quest5c">Question 5c:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#appendix-a-general-formula-for-solution-to-the-logistic-population-model" id="toc-appendix-a-general-formula-for-solution-to-the-logistic-population-model" class="nav-link" data-scroll-target="#appendix-a-general-formula-for-solution-to-the-logistic-population-model">Appendix: A General Formula for Solution to the Logistic Population Model</a>
+  <ul class="collapse">
+  <li><a href="#partial-fraction-decomposition-with-sympy" id="toc-partial-fraction-decomposition-with-sympy" class="nav-link" data-scroll-target="#partial-fraction-decomposition-with-sympy">Partial Fraction Decomposition with <code>SymPy</code></a></li>
+  <li><a href="#integrate-both-sides" id="toc-integrate-both-sides" class="nav-link" data-scroll-target="#integrate-both-sides">Integrate Both Sides</a></li>
+  <li><a href="#finding-an-explicit-form-solve-for-p" id="toc-finding-an-explicit-form-solve-for-p" class="nav-link" data-scroll-target="#finding-an-explicit-form-solve-for-p">Finding an Explicit Form: Solve for <span class="math inline">\(P\)</span></a></li>
+  <li><a href="#simplifying-the-explicit-solution" id="toc-simplifying-the-explicit-solution" class="nav-link" data-scroll-target="#simplifying-the-explicit-solution">Simplifying the Explicit Solution</a></li>
+  </ul></li>
+  <li><a href="#creative-commons-license-information" id="toc-creative-commons-license-information" class="nav-link" data-scroll-target="#creative-commons-license-information">Creative Commons License Information</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">1.7: Applications to Compartmental Analysis</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/07-Mixture-Applications.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><font color="dodgerblue">Reading: Section 4.1 from <a href="https://math.libretexts.org/Bookshelves/Differential_Equations/Book%3A_Elementary_Differential_Equations_with_Boundary_Value_Problems_(Trench)/04%3A_Applications_of_First_Order_Equations/4.01%3A_Growth_and_Decay"><font color="orange">**Exploring Differential Equations* with Boundary Value Problems* by William F. Trench</font></a> which is shared under a <a href="https://creativecommons.org/licenses/by-nc-sa/3.0"><font color="orange">CC BY-NC-SA 3.0</font></a> license.</font></p>
+<section id="one-compartment-systems" class="level1">
+<h1>One-Compartment Systems</h1>
+<hr>
+<p>A <font color="dodgerblue"><strong>one-compartment</strong></font> system consists of</p>
+<ul>
+<li><span class="math inline">\(x(t)\)</span> that represents the amount of a substance (such as salt or population of rabbits) at time <span class="math inline">\(t\)</span>.</li>
+<li>an input rate of <span class="math inline">\(x\)</span>.</li>
+<li>an output rate of <span class="math inline">\(x\)</span>.</li>
+</ul>
+<p><span class="math display">\[\color{dodgerblue}{\boxed{\large \frac{dx}{dt} = \mbox{input rate} - \mbox{output rate} }}\]</span></p>
+<section id="sec-07quest1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-07quest1">Question 1:</h2>
+<hr>
+<p>A brine solution of salt water that has concentration <span class="math inline">\(0.05\)</span> kg per L flows at a constant rate of 6 L per minute into a tank which is initially contains 50 L of a 1% salt solution. The brine solution flows out of the tank at a rate of 4 L per minute. Let <span class="math inline">\(x(t)\)</span> denote the mass of the salt in the tank at time <span class="math inline">\(t\)</span> (in minutes).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>1% salt solution means 1 kg of salt per 100 L of solution.</p>
+</div>
+</div>
+<section id="sec-07quest1a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest1a">Question 1a:</h3>
+<hr>
+<p>What is the input rate of <span class="math inline">\(x\)</span>?</p>
+<section id="solution-to-question-1a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1a">Solution to Question 1a:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-07quest1b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest1b">Question 1b:</h3>
+<hr>
+<p>What is the output rate of <span class="math inline">\(x\)</span>?</p>
+<section id="solution-to-question-1b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1b">Solution to Question 1b:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-07quest1c" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest1c">Question 1c:</h3>
+<hr>
+<p>What is the initial mass of the salt in the tank?</p>
+<section id="solution-to-question-1c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1c">Solution to Question 1c:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-07quest1d" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest1d">Question 1d:</h3>
+<hr>
+<p>Construct a model for this initial value problem (but do not solve it).</p>
+<section id="solution-to-question-1d" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1d">Solution to Question 1d:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-07quest1e" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest1e">Question 1e:</h3>
+<hr>
+<p>What method(s) can we apply to solve the equation in <a href="#sec-07quest1d">Question 1d</a> (but don’t solve it)?</p>
+<section id="solution-to-question-1e" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1e">Solution to Question 1e:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+</section>
+<section id="population-models" class="level1">
+<h1>Population Models</h1>
+<hr>
+<p>The <font color="dodgerblue"><strong>Malthusian law of population growth</strong></font> says the rate of change of the population, <span class="math inline">\(\frac{dP}{dt}\)</span>, is <strong>directly proportional to the population present</strong>, <span class="math inline">\(P\)</span>, at time <span class="math inline">\(t\)</span>:</p>
+<p><span class="math display">\[\color{dodgerblue}{\large \boxed{\frac{dP}{dt} = kP, \quad P(0)=P_0}.}\]</span></p>
+<section id="sec-07quest2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-07quest2">Question 2:</h2>
+<hr>
+<p>Let <span class="math inline">\(P\)</span> denote the population of the world (in billions) <span class="math inline">\(t\)</span> years since <span class="math inline">\(1960\)</span>. In 1960 the world’s population was approximately 3 billion, and the population growth is model by <span class="math display">\[\frac{dP}{dt} =0.2P  , \qquad \ P(0)=3.\]</span></p>
+<p>Solving this model gives <span class="math inline">\(P(t)=3e^{0.02t}\)</span>, and predicts the population in 2021 is <span class="math inline">\(10.16\)</span> billion.</p>
+<p>Why do you think predicted value is different from the actual value?</p>
+<section id="solution-to-question-2" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-2">Solution to Question 2:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="the-logistic-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-logistic-model">The Logistic Model</h2>
+<hr>
+<p>We can construct our population model by considering:</p>
+<p><span class="math display">\[\color{dodgerblue}{\large \frac{dP}{dt} = \bigg( \mbox{Birth Rate} \bigg) - \bigg( \mbox{Death Rate} \bigg).}\]</span></p>
+<p>Competition within the population causes the populations to decrease (disease, murder, natural disasters, war, lack of food/water). If we assume the <strong>death rate is proportional to the total number of possible two-party interactions</strong>, we get:</p>
+<p><span class="math display">\[ \mbox{Death rate} = k_2 \left( \begin{array}{c} P\\ 2 \end{array} \right) = k_2 \left( \frac{P(P-1)}{2} \right) .\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\left( \begin{array}{c} P\\ 2 \end{array} \right)\)</span> denotes “<span class="math inline">\(P\)</span> choose 2”, and in general we have <span class="math inline">\(\displaystyle \left( \begin{array}{c} n\\ k \end{array} \right) = \frac{n!}{k!(n-k)!}\)</span>.</p>
+</div>
+</div>
+<p>Taking both the birth and death rates into account, we get the <font color="dodgerblue">Logistic model</font> for population change which we simplify:</p>
+<p><span class="math display">\[\frac{dP}{dt} = \bigg( \hspace{1in} \mbox{??} \hspace{1in}  \bigg) - \bigg(  \hspace{1in} \mbox{??} \hspace{1in} \bigg) .\]</span></p>
+</section>
+<section id="sec-07quest3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-07quest3">Question 3:</h2>
+<hr>
+<p>Replace the <mark>??</mark> in the formula above with an appropriate expression. Then show that the model above can be rewritten in the form <span class="math inline">\(\dfrac{dP}{dt} = -AP(P-L)\)</span> where <span class="math inline">\(A\)</span> and <span class="math inline">\(L\)</span> are positive constants.</p>
+<section id="solution-to-question-3" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-3">Solution to Question 3:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<mark>Enter your answers in place of the two ??’s in the previous Markdown cell.</mark> <br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="practice-population-model-for-rabbits" class="level1">
+<h1>Practice: Population Model for Rabbits</h1>
+<hr>
+<table class="table">
+<colgroup>
+<col style="width: 48%">
+<col style="width: 36%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rabbits in Australian Outback 1938</th>
+<th>Map of Rabbit proof Fence</th>
+<th>Rabbit Proof Fence in 2005</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a title="CSIRO, CC BY 3.0 <https://creativecommons.org/licenses/by/3.0>, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_1516_Rabbits_around_a_Water_Trough.jpg"><img width="512" alt="CSIRO ScienceImage 1516 Rabbits around a Water Trough" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/CSIRO_ScienceImage_1516_Rabbits_around_a_Water_Trough.jpg/512px-CSIRO_ScienceImage_1516_Rabbits_around_a_Water_Trough.jpg"></a></td>
+<td><a title="No machine-readable author provided. 17177 assumed (based on copyright claims)., CC BY-SA 3.0 <http://creativecommons.org/licenses/by-sa/3.0/>, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Rabbit_proof_fence_in_western_australia.jpg"><img width="256" alt="Rabbit proof fence in western australia" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Rabbit_proof_fence_in_western_australia.jpg/256px-Rabbit_proof_fence_in_western_australia.jpg"></a></td>
+<td><a title="Roguengineer, CC BY-SA 3.0 <http://creativecommons.org/licenses/by-sa/3.0/>, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Rabbit_proof_fence_in_2005.jpg"><img width="512" alt="Rabbit proof fence in 2005" src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Rabbit_proof_fence_in_2005.jpg"></a></td>
+</tr>
+</tbody>
+</table>
+<p><font size="-1">Image Credits <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>,<a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a></font></p>
+<section id="sec-07quest4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-07quest4">Question 4:</h2>
+<hr>
+<p>A population of rabbits changes over time <span class="math inline">\(t\)</span> (in years) according to the logistic model <span class="math display">\[ \frac{dP}{dt} = 3P-\frac{1}{20}P^2. \]</span></p>
+<section id="sec-07quest4a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest4a">Question 4a:</h3>
+<hr>
+<p>For what initial population sizes <span class="math inline">\(P_0\)</span> will the population grow at first?</p>
+<section id="solution-to-question-4a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4a">Solution to Question 4a:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-07quest4b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest4b">Question 4b:</h3>
+<hr>
+<p>For what initial population sizes <span class="math inline">\(P_0\)</span> will the population decrease at first?</p>
+<section id="solution-to-question-4b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4b">Solution to Question 4b:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-07quest4c" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest4c">Question 4c:</h3>
+<hr>
+<p>For what initial population sizes <span class="math inline">\(P_0\)</span> will the population never change?</p>
+<section id="solution-to-question-4c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4c">Solution to Question 4c:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-07quest4d" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest4d">Question 4d:</h3>
+<hr>
+<p>Explain, in practical terms, why answers in (a)-(c) makes sense.</p>
+<section id="solution-to-question-4d" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4d">Solution to Question 4d:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-07quest4e" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest4e">Question 4e:</h3>
+<hr>
+<p>If the initial rabbit population is <span class="math inline">\(P_0=P(0)=50\)</span>, find a solution to the initial value problem and find a formula for the population <span class="math inline">\(P\)</span> as a function of time <span class="math inline">\(t\)</span>.</p>
+<section id="solution-to-question-4e" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4e">Solution to Question 4e:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<mark>You may solve “by hand” without technology or feel free to play around with the code cells below to help with some of the computations. </mark> <br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Partial Fraction Decomposition </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sym  <span class="co"># import sympy</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># t, P are variables, B is constant of integration</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>t, P, B <span class="op">=</span> sym.symbols(<span class="st">'t, P, B'</span>)  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#################################</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace ?? with an expression</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#################################</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> ?? <span class="co"># Left side of the equation after separating ODE</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>leftsimp <span class="op">=</span> left.apart(P)  <span class="co"># Partial frac decomp left side</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(leftsimp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Integrate both sides after decomposing left side</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>leftint <span class="op">=</span> sym.integrate(leftsimp, P)  <span class="co"># integrate left</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>rightint <span class="op">=</span> sym.integrate(<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">20</span>, t) <span class="op">+</span> B  <span class="co"># integrate right with +B added</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Integral on the left side with respect to P is"</span>, leftint,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"</span><span class="ch">\n</span><span class="st"> </span><span class="ch">\n</span><span class="st"> Integral on the right side with respect to t is"</span>, rightint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy.solvers <span class="im">import</span> solve</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>solP <span class="op">=</span> solve(leftint <span class="op">-</span> rightint, P)  <span class="co"># finds explicit solution</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"P = "</span>, solP)  <span class="co"># Prints explicit solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="practice-chlorine-levels-in-pool" class="level1">
+<h1>Practice: Chlorine Levels in Pool</h1>
+<hr>
+<section id="sec-07quest5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-07quest5">Question 5:</h2>
+<hr>
+<p>A swimming pool whose volume is 10,000 gallons contains water that is <span class="math inline">\(0.01\)</span>% chlorine. Starting at <span class="math inline">\(t=0\)</span>, city water containing <span class="math inline">\(0.001\)</span>% chlorine is pumped into the pool at a rate of 5 gal/min. The pool water flows out at the same rate. Let <span class="math inline">\(x\)</span> denote the amount of chlorine (in pounds) in the pool <span class="math inline">\(t\)</span> minutes since water has begun being pumped into the pool.</p>
+<div class="callout.note">
+<p>A concentration of <span class="math inline">\(0.01\)</span>% chlorine solution means <span class="math inline">\(0.01\)</span> pounds of chlorine per 100 gallons of solution.</p>
+</div>
+<section id="sec-07quest5a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest5a">Question 5a:</h3>
+<hr>
+<p>Construct a differential equation for rate of change of the mass of chlorine (in pounds) <span class="math inline">\(x\)</span> in the pool at time <span class="math inline">\(t\)</span>.</p>
+<section id="solution-to-question-5a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-5a">Solution to Question 5a:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-07quest5b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest5b">Question 5b:</h3>
+<hr>
+<p>Solve the initial value problem using the differential equation in (a) and the given initial % concentration.</p>
+<section id="solution-to-question-5b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-5b">Solution to Question 5b:</h4>
+<hr>
+<p><br></p>
+</section>
+</section>
+<section id="sec-07quest5c" class="level3">
+<h3 class="anchored" data-anchor-id="sec-07quest5c">Question 5c:</h3>
+<hr>
+<p>When will the pool water be <span class="math inline">\(0.002\)</span>% chlorine?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try using the <code>solve</code> function imported from the <code>sympy.solvers</code> package.</p>
+<ul>
+<li>See <a href="https://docs.sympy.org/latest/modules/solvers/solvers.html">sympy.solvers</a> documentation.</li>
+</ul>
+</div>
+</div>
+<section id="solution-to-question-5c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-5c">Solution to Question 5c:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import sympy as sym  # already imported</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#from sympy solvers import solve  # already imported</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> sym.Symbol(<span class="st">'t'</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">###############################################</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace each ?? with an expression or value</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">###############################################</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>tsol <span class="op">=</span> solve(?? <span class="op">-</span> ??, t)  <span class="co"># solve for t</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tsol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="appendix-a-general-formula-for-solution-to-the-logistic-population-model" class="level1">
+<h1>Appendix: A General Formula for Solution to the Logistic Population Model</h1>
+<hr>
+<p>The Logistic Model in general has the form:</p>
+<p><span class="math display">\[\dfrac{dP}{dt} = -AP(P-L) \quad \mbox{with $A$ and $L$ denoting constants.}\]</span></p>
+<p>In <a href="#sec-07quest4">Question 4</a>, you found a solution to one such model using <font color="dodgerblue"><strong>partial fraction decomposition</strong></font>. Let’s generalize the solution to find a convenient formula for solutions to logistic models that we can refer to.</p>
+<p>One possible process could be:</p>
+<ol type="1">
+<li>Separate the differential equation:</li>
+</ol>
+<p><span class="math display">\[ \frac{1}{P(P-L)} \, dP = -A \, dt\]</span></p>
+<ol start="2" type="1">
+<li>Rewrite the fraction on the left side as a sum of two fractions with undetermined coefficients denoted <span class="math inline">\(\color{dodgerblue}{M}\)</span> and <span class="math inline">\(\color{dodgerblue}{N}\)</span> that we find.</li>
+</ol>
+<p><span class="math display">\[ \left(\frac{\color{dodgerblue}{M}}{P} + \frac{\color{dodgerblue}{N}}{P-L}\right) \, dP = -A \, dt\]</span></p>
+<ol start="3" type="1">
+<li><p>Integrate both sides with respect to the appropriate variable.</p></li>
+<li><p>Solve for <span class="math inline">\(P\)</span> to derive an explicit solution.</p></li>
+</ol>
+<p>We break these steps up in the code cells below.</p>
+<section id="partial-fraction-decomposition-with-sympy" class="level2">
+<h2 class="anchored" data-anchor-id="partial-fraction-decomposition-with-sympy">Partial Fraction Decomposition with <code>SymPy</code></h2>
+<hr>
+<p>The code below performs partial fraction decomposition on the left side of the differential equation (after separating).</p>
+<ul>
+<li><strong>The function <code>apart</code> in the <code>SymPy</code> library is very handy for this!</strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sym  <span class="co"># import sympy</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>t, P <span class="op">=</span> sym.symbols(<span class="st">'t, P'</span>)  <span class="co"># t and P are variables</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> sym.symbols(<span class="st">'L'</span>, real <span class="op">=</span> <span class="va">True</span>, constant <span class="op">=</span> <span class="va">True</span>)  <span class="co"># Constants</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(P <span class="op">*</span> (P<span class="op">-</span>L))  <span class="co"># Left side of the equation after separating</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>left.apart(P)  <span class="co"># Partial frac decomp left side</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="integrate-both-sides" class="level2">
+<h2 class="anchored" data-anchor-id="integrate-both-sides">Integrate Both Sides</h2>
+<hr>
+<p>The code cell below uses <code>sympy.integrate</code> to evaluate integrals.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>frac1 <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(L <span class="op">*</span> (P <span class="op">-</span> L))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>frac2 <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">/</span>(L <span class="op">*</span> P)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>A, B <span class="op">=</span> sym.symbols(<span class="st">'A, B'</span>, real <span class="op">=</span> <span class="va">True</span>, constant <span class="op">=</span> <span class="va">True</span>)  <span class="co"># Constants</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>leftint <span class="op">=</span> sym.integrate(frac1, P) <span class="op">+</span> sym.integrate(frac2, P)  <span class="co"># integrate left</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>rightint <span class="op">=</span> sym.integrate(<span class="op">-</span>A, t) <span class="op">+</span> B  <span class="co"># integrate right with +B added</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Integral on the left side with respect to P is"</span>, leftint,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">"</span><span class="ch">\n</span><span class="st"> </span><span class="ch">\n</span><span class="st"> Integral on the right side with respect to t is"</span>, rightint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="finding-an-explicit-form-solve-for-p" class="level2">
+<h2 class="anchored" data-anchor-id="finding-an-explicit-form-solve-for-p">Finding an Explicit Form: Solve for <span class="math inline">\(P\)</span></h2>
+<hr>
+<p>We use the <code>solve</code> function from the <code>solvers</code> library in <code>SymPy</code> to find an explicit solution for <span class="math inline">\(P\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy.solvers <span class="im">import</span> solve</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> solve(leftint <span class="op">-</span> rightint, P)  <span class="co"># finds explicit solution</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"P = "</span>, sol)  <span class="co"># Prints explicit solution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sym.latex(sol)  <span class="co"># convert solution to latex</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="simplifying-the-explicit-solution" class="level2">
+<h2 class="anchored" data-anchor-id="simplifying-the-explicit-solution">Simplifying the Explicit Solution</h2>
+<hr>
+<p>The output above gives LaTeX code for an explicit solution for <span class="math inline">\(P\)</span> in terms of <span class="math inline">\(t\)</span> (as well as constants <span class="math inline">\(A\)</span> and <span class="math inline">\(L\)</span>).</p>
+<ul>
+<li>The LaTeX in the output above uses a double backslash <code>\\</code> instead of a single backslash <code>\</code>.</li>
+<li>After replacing each <code>\\</code> in the LaTeX code from the output above with <code>\</code> we get the solution below.</li>
+<li>Then we simplify the right side.</li>
+</ul>
+<p><span class="math display">\[\begin{array}{lrc}
+P &amp;=&amp; \dfrac{L^{2} e^{L \left(A t - B\right)}}{L e^{L \left(A t - B\right)} - 1}\\
+&amp;=&amp; \dfrac{L}{1- e^{-L(At-B)}}\\
+&amp;=&amp; \dfrac{L}{1- e^{-ALt+LB}}\\
+&amp;=&amp; \dfrac{L}{1 {\color{tomato}{-e^{LB}}}e^{-{\color{dodgerblue}{AL}}t}}\\
+&amp;=&amp;\dfrac{L}{1+ {\color{tomato}{C}}e^{-{\color{dodgerblue}{k}}t}}
+\end{array}\]</span></p>
+<p>From the work above, we have the following solution for the Logistic model:</p>
+<p><span class="math display">\[\boxed{\large{P = \dfrac{L}{1+ {\color{tomato}{C}}e^{-{\color{dodgerblue}{k}}t}} \quad \mbox{with } {\color{dodgerblue}{k=AL}}}}.\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The constant <span class="math inline">\(\color{tomato}{C}\)</span> depends on the initial condition. Set <span class="math inline">\(t=0\)</span> and <span class="math inline">\(P=P_0\)</span>, and then solve for <span class="math inline">\(\color{tomato}{C}\)</span>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="creative-commons-license-information" class="level1">
+<h1>Creative Commons License Information</h1>
+<hr>
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><em>Exploring Differential Equations</em></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/CU-Denver-MathStats-OER/ODEs" property="cc:attributionName" rel="cc:attributionURL">Adam Spiegler</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/CU-Denver-MathStats-OER/ODEs" rel="dct:source">https://github.com/CU-Denver-MathStats-OER/ODEs</a> and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., &amp; Fortune, N. (2018). <em>Inquiry oriented differential equations: Course materials</em>. Available at <a href="https://iode.sdsu.edu">https://iode.sdsu.edu</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Chp1/06-Integrating-Factors.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.6: Solving Linear First Order Differential Equations</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Chp1/08-Application-Heating-and-Cooling.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">1.8: Applications to Heating and Cooling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Exploring Differential Equations by Adam Spiegler</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" class="img-fluid" alt="Creative Commons License"> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-N-SA 4.0</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

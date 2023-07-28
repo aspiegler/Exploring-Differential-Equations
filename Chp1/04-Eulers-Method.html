@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Exploring Differential Equations - 1.4: Numerically Approximations of Solutions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Chp1/05-Separable-Diff-Eqs.html" rel="next">
+<link href="../Chp1/03-Phase-Line.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Chp1/01-What-is-a-Differential-Equation.html">Chapter 1: First Order Differential Equations</a></li><li class="breadcrumb-item"><a href="../Chp1/04-Eulers-Method.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1.4: Numerically Approximations of Solutions</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Exploring Differential Equations</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Chapter 1: First Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/01-What-is-a-Differential-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1: Interpreting Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/02-Slope-Fields.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2: Slope Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/03-Phase-Line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3: The Phase Plane</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/04-Eulers-Method.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.4: Numerically Approximations of Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/05-Separable-Diff-Eqs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5: Separable Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/06-Integrating-Factors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6: Solving Linear First Order Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/07-Mixture-Applications.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7: Applications to Compartmental Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/08-Application-Heating-and-Cooling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8: Applications to Heating and Cooling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/ODE-Tools-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for First Order ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Chapter 2: Second Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/09-Intro-to-Second-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1: Second Order Linear Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/10-Homogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2: Homogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/11-Nonhomogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3: Nonhomogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/12-Superposition-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4: Superposition and General Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/13-Mass-Spring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/Mass-Spring-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Mass-Spring Systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Chapter 3: Systems of Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/14-Introduction-to-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1: Introduction to Systems of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/15-Phase-Plane-Portrait.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2: Phase Plane Portraits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/16-Phase-Plane-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3: Phase Plane Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/17-Linear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4: Population Dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/18-Stability-of-Equilibrium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5: Stability of Equilibria</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/19-Nonlinear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6: Dynamics of Non-Linear Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/Phase-Portraits-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Phase Planes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Chapter 4: Laplace Transforms</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1: Introduction to Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/21-Properties-of-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2: Properties of Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/22-Inverse-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3: Inverse Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/23-Solving-IVP-with-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4: Solving ODEs with Laplace Transforms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#a-rate-of-change-equation-for-limited-resources" id="toc-a-rate-of-change-equation-for-limited-resources" class="nav-link active" data-scroll-target="#a-rate-of-change-equation-for-limited-resources">A Rate of Change Equation for Limited Resources</a>
+  <ul class="collapse">
+  <li><a href="#sec-04quest1" id="toc-sec-04quest1" class="nav-link" data-scroll-target="#sec-04quest1">Question 1:</a>
+  <ul class="collapse">
+  <li><a href="#sec-04quest1a" id="toc-sec-04quest1a" class="nav-link" data-scroll-target="#sec-04quest1a">Question 1a:</a></li>
+  <li><a href="#sec-04quest1b" id="toc-sec-04quest1b" class="nav-link" data-scroll-target="#sec-04quest1b">Question 1b:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-04LoadModule" id="toc-sec-04LoadModule" class="nav-link" data-scroll-target="#sec-04LoadModule">Loading <code>ode_tools</code> from GitHub</a>
+  <ul class="collapse">
+  <li><a href="#sec-04quest2" id="toc-sec-04quest2" class="nav-link" data-scroll-target="#sec-04quest2">Question 2:</a>
+  <ul class="collapse">
+  <li><a href="#sec-04quest2a" id="toc-sec-04quest2a" class="nav-link" data-scroll-target="#sec-04quest2a">Question 2a:</a></li>
+  <li><a href="#sec-04quest2b" id="toc-sec-04quest2b" class="nav-link" data-scroll-target="#sec-04quest2b">Question 2b:</a></li>
+  <li><a href="#sec-04quest2c" id="toc-sec-04quest2c" class="nav-link" data-scroll-target="#sec-04quest2c">Question 2c:</a></li>
+  </ul></li>
+  <li><a href="#sec-04quest3" id="toc-sec-04quest3" class="nav-link" data-scroll-target="#sec-04quest3">Question 3:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-3" id="toc-solution-to-question-3" class="nav-link" data-scroll-target="#solution-to-question-3">Solution to Question 3:</a></li>
+  </ul></li>
+  <li><a href="#sec-04quest4" id="toc-sec-04quest4" class="nav-link" data-scroll-target="#sec-04quest4">Question 4:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-4" id="toc-solution-to-question-4" class="nav-link" data-scroll-target="#solution-to-question-4">Solution to Question 4:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#an-iterative-process-to-predict-future-fish-populations" id="toc-an-iterative-process-to-predict-future-fish-populations" class="nav-link" data-scroll-target="#an-iterative-process-to-predict-future-fish-populations">An Iterative Process to Predict Future Fish Populations</a>
+  <ul class="collapse">
+  <li><a href="#sec-04quest5" id="toc-sec-04quest5" class="nav-link" data-scroll-target="#sec-04quest5">Question 5:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-5" id="toc-solution-to-question-5" class="nav-link" data-scroll-target="#solution-to-question-5">Solution to Question 5:</a></li>
+  </ul></li>
+  <li><a href="#sec-04quest6" id="toc-sec-04quest6" class="nav-link" data-scroll-target="#sec-04quest6">Question 6:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-6" id="toc-solution-to-question-6" class="nav-link" data-scroll-target="#solution-to-question-6">Solution to Question 6:</a></li>
+  </ul></li>
+  <li><a href="#sec-04quest7" id="toc-sec-04quest7" class="nav-link" data-scroll-target="#sec-04quest7">Question 7:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-7" id="toc-solution-to-question-7" class="nav-link" data-scroll-target="#solution-to-question-7">Solution to Question 7:</a></li>
+  </ul></li>
+  <li><a href="#sec-04quest8" id="toc-sec-04quest8" class="nav-link" data-scroll-target="#sec-04quest8">Question 8:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-8" id="toc-solution-to-question-8" class="nav-link" data-scroll-target="#solution-to-question-8">Solution to Question 8:</a></li>
+  </ul></li>
+  <li><a href="#sec-04quest9" id="toc-sec-04quest9" class="nav-link" data-scroll-target="#sec-04quest9">Question 9:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-9" id="toc-solution-to-question-9" class="nav-link" data-scroll-target="#solution-to-question-9">Solution to Question 9:</a></li>
+  </ul></li>
+  <li><a href="#sec-04quest10" id="toc-sec-04quest10" class="nav-link" data-scroll-target="#sec-04quest10">Question 10:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-10" id="toc-solution-to-question-10" class="nav-link" data-scroll-target="#solution-to-question-10">Solution to Question 10:</a></li>
+  </ul></li>
+  <li><a href="#comparing-tail-to-tip-sketch-with-actual-solution" id="toc-comparing-tail-to-tip-sketch-with-actual-solution" class="nav-link" data-scroll-target="#comparing-tail-to-tip-sketch-with-actual-solution">Comparing Tail to Tip Sketch with Actual Solution</a></li>
+  </ul></li>
+  <li><a href="#writing-python-code-for-eulers-method" id="toc-writing-python-code-for-eulers-method" class="nav-link" data-scroll-target="#writing-python-code-for-eulers-method">Writing Python Code for Euler’s Method</a>
+  <ul class="collapse">
+  <li><a href="#sec-04quest11" id="toc-sec-04quest11" class="nav-link" data-scroll-target="#sec-04quest11">Question 11:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-11" id="toc-solution-to-question-11" class="nav-link" data-scroll-target="#solution-to-question-11">Solution to Question 11:</a></li>
+  </ul></li>
+  <li><a href="#computing-eulers-method-with-the-euler_method-function" id="toc-computing-eulers-method-with-the-euler_method-function" class="nav-link" data-scroll-target="#computing-eulers-method-with-the-euler_method-function">Computing Euler’s Method with the <code>euler_method</code> Function</a></li>
+  <li><a href="#sec-04quest12" id="toc-sec-04quest12" class="nav-link" data-scroll-target="#sec-04quest12">Question 12:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-12" id="toc-solution-to-question-12" class="nav-link" data-scroll-target="#solution-to-question-12">Solution to Question 12:</a></li>
+  </ul></li>
+  <li><a href="#sec-04quest13" id="toc-sec-04quest13" class="nav-link" data-scroll-target="#sec-04quest13">Question 13:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-13" id="toc-solution-to-question-13" class="nav-link" data-scroll-target="#solution-to-question-13">Solution to Question 13:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#creative-commons-license-information" id="toc-creative-commons-license-information" class="nav-link" data-scroll-target="#creative-commons-license-information">Creative Commons License Information</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">1.4: Numerically Approximations of Solutions</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/04-Eulers-Method.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><font color="dodgerblue">Reading: <em>Notes on Diffy Q’s</em> Section 1.7</font></p>
+<section id="a-rate-of-change-equation-for-limited-resources" class="level1">
+<h1>A Rate of Change Equation for Limited Resources</h1>
+<hr>
+<p>In a previous question we saw that the rate of change equation <span class="math inline">\(\dfrac{dP}{dt}=0.3P\)</span> can be used to model a situation where there is one species, continuous reproduction, and unlimited resources. In most situations, however, the resources are not unlimited, so to improve the model one has to modify the rate of change equation <span class="math inline">\(\dfrac{dP}{dt}=0.3P\)</span> to account for the fact that resources are limited.</p>
+<section id="sec-04quest1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest1">Question 1:</h2>
+<hr>
+<p>Consider a modified rate of change equation for the population given by</p>
+<p><span class="math display">\[\color{dodgerblue}{\dfrac{dP}{dt}=0.3P\left(1-\dfrac{P}{10}\right)}\]</span></p>
+<p>and answer the questions below.</p>
+<section id="sec-04quest1a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-04quest1a">Question 1a:</h3>
+<hr>
+<p>In what ways does the modified rate of change equation account for limited resources? (Think of 10 as scaled to mean 10,000 or 100,000.)</p>
+<section id="solution-to-question-1a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1a">Solution to Question 1a:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-04quest1b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-04quest1b">Question 1b:</h3>
+<hr>
+<p>How do you interpret the solution with initial condition <span class="math inline">\(P(0) = 10\)</span>?</p>
+<section id="solution-to-question-1b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1b">Solution to Question 1b:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+</section>
+<section id="sec-04LoadModule" class="level1">
+<h1>Loading <code>ode_tools</code> from GitHub</h1>
+<hr>
+<ul>
+<li>Run the code cell below to load the most up to date modules stored in GitHub.</li>
+<li>You will only need to run this code cell one time during an active session.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>CU<span class="op">-</span>Denver<span class="op">-</span>MathStats<span class="op">-</span>OER<span class="op">/</span>ODEs</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>clear_output()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="sec-04quest2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest2">Question 2:</h2>
+<hr>
+<p>The Python code cell below imports the <code>slope_field()</code> function from the <code>ode_tools</code> module. Recall we introduced this function in <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/02-Slope-Fields.ipynb">Lab 1.2 Slope Fields</a>. See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/ODE-Tools-Tutorial.ipynb">ODE Tools Tutorial</a> for a quick reference on how to use <code>slope_field()</code> and other functions for Chapter 1.</p>
+<section id="sec-04quest2a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-04quest2a">Question 2a:</h3>
+<hr>
+<p>Enter a formula for the differential equation</p>
+<p><span class="math display">\[\color{dodgerblue}{\frac{dP}{dt}=0.3P\left(1-\frac{P}{10}\right)}\]</span></p>
+<p>from <a href="#sec-04quest1">Question 1</a> in place of the <mark>??</mark> in line of code where the formula for the differential equation should be entered. Then run the code to use the <code>slope_field()</code> function to plot the slope field for the differential equation. - Be sure you have already loaded <code>ode_tools</code> from GitHub. See either <a href="#sec-04LoadModule">Loading from GitHub</a> instructions above.</p>
+<p><br></p>
+<section id="solution-to-question-2a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-2a">Solution to Question 2a:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<mark>Edit and run the code cell below.</mark> <br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.ode_tools <span class="im">import</span> slope_field</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define points where vectors will be plotted</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">8</span>)  <span class="co"># Independent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">15</span>, <span class="dv">20</span>)  <span class="co"># Dependent variable, np.linspace(initial, end, number_values)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the differential equation</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, p):  <span class="co"># t is independent variable and p is dependent variable</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ??  <span class="co"># enter the formula for dp/dt</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the slope field plotter</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>slope_field(t, p, diffeq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-04quest2b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-04quest2b">Question 2b:</h3>
+<hr>
+<p>In what ways are your responses to <a href="#sec-04quest1">Question 1</a> visible in the slope field you created in <a href="#sec-04quest2a">part 2a</a>?</p>
+<section id="solution-to-question-2b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-2b">Solution to Question 2b:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-04quest2c" class="level3">
+<h3 class="anchored" data-anchor-id="sec-04quest2c">Question 2c:</h3>
+<hr>
+<p>In this question, negative <span class="math inline">\(P\)</span> values do not make sense, but we can still mathematically make sense of the slope field for negative <span class="math inline">\(P\)</span> values. Explain why the slope field looks the way it does below the <span class="math inline">\(t\)</span>-axis.</p>
+<section id="solution-to-question-2c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-2c">Solution to Question 2c:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="sec-04quest3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest3">Question 3:</h2>
+<hr>
+<p>Using the differential equation from from <a href="#sec-04quest1">Question 1</a>,</p>
+<p><span class="math display">\[\color{dodgerblue}{\frac{dP}{dt}=0.3P\left(1-\frac{P}{10}\right)},\]</span></p>
+<p>and in addition we know there are initially <span class="math inline">\(P(0)=2\)</span> fish in the lake, approximately how many fish are in the lake at time <span class="math inline">\(t=2\)</span>? How did you arrive at your approximation?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Initially <span class="math inline">\(\dfrac{dP}{dt} = 0.48\)</span>, but what meaning does <span class="math inline">\(0.48\)</span> have? What are the units?</p>
+</div>
+</div>
+<section id="solution-to-question-3" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-3">Solution to Question 3:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-04quest4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest4">Question 4:</h2>
+<hr>
+<p>The Python code cell below imports the <code>plot_sol()</code> function from the module named <code>ode_tools</code>. Recall we introduced this function in <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/02-Slope-Fields.ipynb">Lab 1.2 Slope Fields</a>. See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/ODE-Tools-Tutorial.ipynb">ODE Tools Tutorial</a> for a quick reference on how to use <code>plot_sol()</code> and other functions for Chapter 1.</p>
+<p>Run the code cell below to use the <code>plot_sol()</code> function to check your previous answer by plotting the solution to the initial value problem</p>
+<p><span class="math display">\[\color{dodgerblue}{\frac{dP}{dt}=0.3P\left(1-\frac{P}{10}\right), \qquad P(0)=2}.\]</span></p>
+<section id="solution-to-question-4" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-4">Solution to Question 4:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<mark> Run the code cell below to check your previous answer. </mark> <br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.ode_tools <span class="im">import</span> plot_sol</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Note t, p, and diffeq have already been defined in Question 2</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter the initial values t0 and p0 </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>p0 <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the function to create a plot</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plot_sol(t, p, diffeq, t0, p0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="an-iterative-process-to-predict-future-fish-populations" class="level1">
+<h1>An Iterative Process to Predict Future Fish Populations</h1>
+<hr>
+<section id="sec-04quest5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest5">Question 5:</h2>
+<hr>
+<p>The population of fish in a lake is can be modeled with the differential equation from <a href="#sec-04quest1">Question 1</a></p>
+<p><span class="math display">\[\color{dodgerblue}{\frac{dP}{dt}=0.3P\left(1-\frac{P}{10}\right)}.\]</span></p>
+<p>Edit the code cell below to stitch together, in a <strong>tip to tail manner</strong>, several tangent vectors to produce a graph of the population versus time if at time <span class="math inline">\(t = 0\)</span> we know there are 8 fish in the lake (again, think of 8 as scaled for say, 8000 or 80,000 fish).</p>
+<section id="solution-to-question-5" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-5">Solution to Question 5:</h3>
+<hr>
+<p><br></p>
+<ul>
+<li><font color="tomato">The first part of the code cell below that creates the slope field does not need to be edited.</font></li>
+<li>For each of the three commented out <code>plt.quiver()</code> commands:
+<ul>
+<li>There are two <mark>??</mark> in each of the commented out commands that need to be replaced.</li>
+<li>Add a second vector where the tail of the first vector ends by replacing each <mark>??</mark> with an appropriate value.</li>
+<li>After adding a second vector, repeat this process to add a third vector.</li>
+<li>Repeat one more time to add a fourth vector.</li>
+<li><mark>You do not need to edit the code below beyond uncommenting out lines of code and replacing each ??’s.</mark></li>
+</ul></li>
+<li>Optional: Consider how to improve this method so the solution is more accurate.</li>
+</ul>
+<p><br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT EDIT: Set up gride for slope field</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">8</span>, <span class="dv">9</span>)  </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">15</span>, <span class="dv">20</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>T, P <span class="op">=</span> np.meshgrid(t, p)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT EDIT: Define Differential Equation</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, p):  <span class="co"># t is independent variable and p is dependent variable</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.3</span> <span class="op">*</span> p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p<span class="op">/</span><span class="dv">10</span>) <span class="co"># Use t and p for ind and dep variables</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>dp <span class="op">=</span> diffeq(T, P)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> np.ones(dp.shape)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT EDIT: normalize the line segments</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>dpu <span class="op">=</span> dp <span class="op">/</span> np.sqrt(dt<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> dp<span class="op">**</span><span class="dv">2</span>)  <span class="co"># normalize dp</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>dtu <span class="op">=</span> dt <span class="op">/</span> np.sqrt(dt<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> dp<span class="op">**</span><span class="dv">2</span>)  <span class="co"># normalize dt</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT EDIT: Plot Slope Field</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>plt.quiver(T, P, dtu, dpu,  <span class="co"># Plot a 2D field of arrows</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>            units <span class="op">=</span> <span class="st">'xy'</span>,  </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>            angles <span class="op">=</span> <span class="st">'xy'</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#######################################</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO: Add your own vectors</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace each ?? with an appropriate value</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#######################################</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot vectors</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">2</span><span class="op">*</span>diffeq(<span class="dv">0</span>, <span class="dv">8</span>), color <span class="op">=</span> <span class="st">'b'</span>, </span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>           angles <span class="op">=</span> <span class="st">'xy'</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>           scale <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>           scale_units <span class="op">=</span> <span class="st">'xy'</span>) </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.quiver(2, ??, 2, 2*diffeq(2, ??), color = 'b', </span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">#           angles = 'xy',</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">#           scale = 1,</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co">#           scale_units = 'x') </span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.quiver(4, ??, 2, 2*diffeq(4, ??), color = 'b', </span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co">#           angles = 'xy',</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">#           scale = 1,</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co">#           scale_units = 'xy') </span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.quiver(6, ??, 2, 2*diffeq(6, ??), color = 'b', </span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">#           angles = 'xy',</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">#           scale = 1,</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">#           scale_units = 'xy') </span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-04quest6" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest6">Question 6:</h2>
+<hr>
+<p><strong>Explain how you are thinking about rate of change in your method</strong>. For example, is the rate of change constant over some increment? If yes, over what increment? If no, is the rate of change always changing?</p>
+<section id="solution-to-question-6" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-6">Solution to Question 6:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-04quest7" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest7">Question 7:</h2>
+<hr>
+<p>Using the differential equation</p>
+<p><span class="math display">\[\color{dodgerblue}{\frac{dP}{dt}= P\left(1-\dfrac{P}{20}\right)}\]</span></p>
+<p>and initial condition <span class="math inline">\(P(0) = 10\)</span>, José and Julie started the table given in the solution below to numerically keep track of their tip-to-tail method for connecting tangent vectors. Explain José’s and Julie’s approach and complete their table. <strong>Round to two decimal places.</strong></p>
+<section id="solution-to-question-7" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-7">Solution to Question 7:</h3>
+<hr>
+<p><br><br>
+<br></p>
+<p><mark>Explain their approach:</mark></p>
+<p><br><br>
+<br></p>
+<p><mark>Complete table below.</mark></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may use Python to help with calculations.</p>
+</div>
+</div>
+<table class="table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\large t\)</span></th>
+<th><span class="math inline">\(\large P\)</span></th>
+<th><span class="math inline">\(\large \dfrac{dP}{dt}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>10</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>0.5</td>
+<td>12.5</td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="odd">
+<td>1.5</td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="even">
+<td>1.0</td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="odd">
+<td>1.5</td>
+<td><mark>??</mark></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-04quest8" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest8">Question 8:</h2>
+<hr>
+<p>Using the same differential equation and initial condition as José and Julie in <a href="#sec-04quest7">Question 7</a>,</p>
+<p><span class="math display">\[\frac{dP}{dt}=P\left( 1-\frac{P}{20}\right) \quad \mbox{with} \quad P(0)=10,\]</span></p>
+<p>Derrick and Delores started their table as shown in the solution below. Explain how Derrick and Delores’ approach is different from José and Julie’s and then complete their table. <strong>Round to two decimal places.</strong></p>
+<section id="solution-to-question-8" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-8">Solution to Question 8:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<mark>Explain how their approach is different:</mark></p>
+<p><br><br>
+<br></p>
+<p><mark>Complete table below.</mark></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may use Python to help with calculations.</p>
+</div>
+</div>
+<table class="table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(t\)</span></th>
+<th><span class="math inline">\(P\)</span></th>
+<th><span class="math inline">\(\dfrac{dP}{dt}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>10</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>0.25</td>
+<td>11.25</td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="odd">
+<td>0.5</td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="even">
+<td>0.75</td>
+<td><mark>??</mark></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import matplotlib.pyplot as plt</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT EDIT: Set up grid for slope field</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">13</span>)  </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">16</span>, <span class="dv">17</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>T, Y <span class="op">=</span> np.meshgrid(t, y)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT EDIT: Define Differential Equation</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, y):  <span class="co"># t is independent variable and y is dependent variable</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y <span class="op">+</span> t <span class="co"># Use t and y for ind and dep variables</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>dy <span class="op">=</span> diffeq(T, Y)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> np.ones(dy.shape)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT EDIT: normalize the line segments</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>dyu <span class="op">=</span> dy <span class="op">/</span> np.sqrt(dt<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> dy<span class="op">**</span><span class="dv">2</span>)  <span class="co"># normalize dy</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>dtu <span class="op">=</span> dt <span class="op">/</span> np.sqrt(dt<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> dy<span class="op">**</span><span class="dv">2</span>)  <span class="co"># normalize dt</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT EDIT: Plot Slope Field</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.quiver(T, Y, dtu, dyu,  <span class="co"># Plot a 2D field of arrows</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            units <span class="op">=</span> <span class="st">'xy'</span>, </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            angles <span class="op">=</span> <span class="st">'xy'</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">#######################################</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO: Add your own vectors</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace each ?? with an appropriate value</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">#######################################</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot vectors</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">0</span>, <span class="dv">4</span>, <span class="fl">0.5</span>, <span class="dv">2</span> , color <span class="op">=</span> <span class="st">'b'</span>, </span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>           angles <span class="op">=</span> <span class="st">'xy'</span>,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>           scale <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>           scale_units <span class="op">=</span> <span class="st">'xy'</span>) </span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="fl">0.5</span>, ??, <span class="fl">0.5</span>, ??, color <span class="op">=</span> <span class="st">'b'</span>, </span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>           angles <span class="op">=</span> <span class="st">'xy'</span>,</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>           scale <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>           scale_units <span class="op">=</span> <span class="st">'xy'</span>) </span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>plt.quiver(<span class="dv">1</span>, ??, <span class="fl">0.5</span>, ??, color <span class="op">=</span> <span class="st">'b'</span>, </span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>           angles <span class="op">=</span> <span class="st">'xy'</span>,</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>           scale <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>           scale_units <span class="op">=</span> <span class="st">'xy'</span>) </span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-04quest9" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest9">Question 9:</h2>
+<hr>
+<p>Consider the differential equation <span class="math inline">\(\color{dodgerblue}{\dfrac{dy}{dt}=y+t}\)</span> and initial condition <span class="math inline">\(\color{dodgerblue}{y(0) = 4}\)</span>.</p>
+<ol type="a">
+<li><p>Use José and Julie’s approach (using <span class="math inline">\(\Delta t = 0.5\)</span>) to find <span class="math inline">\(y(1.5)\)</span>. You may find the table below useful for organizing your work.</p></li>
+<li><p>Edit the code cell below to plot your answer to part (a).</p></li>
+</ol>
+<section id="solution-to-question-9" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-9">Solution to Question 9:</h3>
+<hr>
+<p><br></p>
+<ol type="a">
+<li><mark>Complete table below.</mark></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may use Python to help with calculations.</p>
+</div>
+</div>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 45%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(t\)</span></th>
+<th><span class="math inline">\(y\)</span></th>
+<th><span class="math inline">\(\dfrac{dy}{dt}\)</span></th>
+<th><span class="math inline">\(\Delta y\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>4</td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="even">
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="odd">
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="even">
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+</tbody>
+</table>
+<p><br><br>
+<br></p>
+<ol start="2" type="a">
+<li>In the code cell below, you need to replace each ?? in the last portion of the code.</li>
+</ol>
+<ul>
+<li>There are two <mark>??</mark> in lines of code that add the last two vectors to the plot.</li>
+<li>Add a second vector where the tail of the first vector ends by replacing each <mark>??</mark> with appropriate values.</li>
+<li>After adding a second vector, repeat this process to add a third vector.</li>
+<li><mark>You do not need to edit the code below beyond replacing each ??.</mark></li>
+</ul>
+</section>
+</section>
+<section id="sec-04quest10" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest10">Question 10:</h2>
+<hr>
+<ol type="a">
+<li>Is your value for <span class="math inline">\(y(1.5)\)</span> the exact value or an approximate value? Explain.</li>
+</ol>
+<p><br></p>
+<ol start="2" type="a">
+<li><strong>Generalizing your tip-to-tail approach:</strong> Create an equation-based procedure/algorithm that would allow you to predict future <span class="math inline">\(y\)</span>-values for any differential equation <span class="math inline">\(\dfrac{dy}{dt}\)</span>, any given initial condition, and any time increment.</li>
+</ol>
+<p><br></p>
+<section id="solution-to-question-10" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-10">Solution to Question 10:</h3>
+<hr>
+<p><br><br>
+a. <mark>Explain.</mark></p>
+<ol start="2" type="a">
+<li><mark>Write a formula.</mark></li>
+</ol>
+<p><br><br>
+<br></p>
+</section>
+</section>
+<section id="comparing-tail-to-tip-sketch-with-actual-solution" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-tail-to-tip-sketch-with-actual-solution">Comparing Tail to Tip Sketch with Actual Solution</h2>
+<hr>
+<p>Run the code below (no edits needed) to compare your approximation from <a href="#sec-04quest9">Question 9</a> with the actual solution.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The plot below is generated using the <code>plot_euler()</code> function is in the <code>ode_tools</code> module. See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/ODE-Tools-Tutorial.ipynb">ODE Tools Tutorial</a> for a quick reference on how to use <code>plot_euler()</code> and other functions for Chapter 1.</p>
+</div>
+</div>
+<ol type="1">
+<li><p>Input vectors of values for <code>t</code> and <code>x</code> (points where the vectors will be plotted) and define <code>diffeq</code>.</p></li>
+<li><p>Define an initial condition <span class="math inline">\((t_0, x_0) =\)</span>(<code>t0</code>, <code>x0</code>), step size <span class="math inline">\(\Delta t=\)</span> <code>dt</code>, and number of iterations <span class="math inline">\(n=\)</span> <code>n</code>.</p></li>
+<li><p>We import the <code>plot_euler()</code> function.</p>
+<ul>
+<li>Be sure you have already <a href="#sec-04LoadModule">loaded the module from GitHub</a>.</li>
+<li>Like packages, you only need to import a function one time after opening a notebook.</li>
+</ul></li>
+<li><p>We generate the plot by running the function with the command <code>plot_euler(t, x, diffeq, t0, x0, dt, n)</code>.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import plot_euler function from utils.ode_tools module.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.ode_tools <span class="im">import</span> plot_euler</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up gride for slope field</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="fl">1.5</span>, <span class="dv">7</span>)  </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">21</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define differential equation</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, y):</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y <span class="op">+</span> t </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define initial value, step size, and number of steps</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> <span class="dv">0</span>  <span class="co"># initial input value</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> <span class="dv">4</span>  <span class="co"># initial output value</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> <span class="fl">0.5</span>  <span class="co"># step size</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">3</span>  <span class="co"># number of steps</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>plot_euler(t, y, diffeq, t0, y0, dt, n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="writing-python-code-for-eulers-method" class="level1">
+<h1>Writing Python Code for Euler’s Method</h1>
+<hr>
+<section id="sec-04quest11" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest11">Question 11:</h2>
+<hr>
+<p>Consider the differential equation <span class="math inline">\(\color{dodgerblue}{\dfrac{dy}{dt}=y+t}\)</span> and initial condition <span class="math inline">\(\color{dodgerblue}{y(0) = 4}\)</span>.</p>
+<p>Using steps each size <span class="math inline">\(\Delta t = 0.5\)</span>, approximate <span class="math inline">\(y(1.5)\)</span> by completing the formulas in the code cell below.</p>
+<section id="solution-to-question-11" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-11">Solution to Question 11:</h3>
+<hr>
+<p><br> <br><br>
+<mark>Replace each ?? in the code below with an appropriate formula.</mark> <br><br>
+<br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import numpy as np</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.zeros(n<span class="op">+</span><span class="dv">1</span>)  <span class="co"># creates a vector of zeros where we'll store output</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> <span class="fl">0.5</span>  <span class="co"># define the step size</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define diffeq</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, y):  <span class="co"># t is independent variable and y is dependent variable</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y <span class="op">+</span> t  <span class="co"># Use t and y for ind and dep variables</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial value</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">4</span>  <span class="co"># initial condition is y_0 = 4</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Result after step 1</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">1</span>] <span class="op">=</span> ??</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Result after step 2</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">2</span>] <span class="op">=</span> ??</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Result after step 3</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">3</span>] <span class="op">=</span> ??</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After step 1, we have y(0.5) is approximately"</span>, v[<span class="dv">1</span>],</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>     <span class="st">"</span><span class="ch">\n</span><span class="st"> </span><span class="ch">\n</span><span class="st"> After step 2, we have y(1) is approximately"</span>, v[<span class="dv">2</span>],</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>     <span class="st">"</span><span class="ch">\n</span><span class="st"> </span><span class="ch">\n</span><span class="st"> After step 3, we have y(1.5) is approximately"</span>, v[<span class="dv">3</span>],)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="computing-eulers-method-with-the-euler_method-function" class="level2">
+<h2 class="anchored" data-anchor-id="computing-eulers-method-with-the-euler_method-function">Computing Euler’s Method with the <code>euler_method</code> Function</h2>
+<hr>
+<p>The step-by-step method derived above is called <font color="dodgerblue"><strong>Euler’s method</strong></font>. In the code cell below, we import a function called <code>euler_method()</code> from the <code>ode_tools</code> module that performs identical calculations as the code above. See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/ODE-Tools-Tutorial.ipynb">ODE Tools Tutorial</a> for a quick reference on how to use <code>euler_method()</code> and other functions for Chapter 1.</p>
+<ol type="1">
+<li><p>Define <code>diffeq</code>.</p></li>
+<li><p>Define the initial value <span class="math inline">\((t_0, x_0) =\)</span> (<code>t0</code>, <code>x0</code>).</p></li>
+<li><p>Define the step size <code>dt</code> and number of steps <code>n</code>.</p></li>
+<li><p>We import the <code>euler_method()</code> function.</p>
+<ul>
+<li>Be sure you have already <a href="#sec-04LoadModule">loaded the module from GitHub</a>.</li>
+<li>Like packages, you only need to import a function one time after opening a notebook.</li>
+</ul></li>
+<li><p>Calculate each step with the function <code>euler_method(diffeq, t0, x0, dt, n)</code>.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.ode_tools <span class="im">import</span> euler_method</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define diffeq</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, y):  <span class="co"># t is independent variable and y is dependent variable</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y <span class="op">+</span> t  <span class="co"># Use t and y for ind and dep variables</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial value</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> <span class="dv">0</span> <span class="co"># initial value of input</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> <span class="dv">4</span> <span class="co"># initial value output when t = t_0</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Step size and number of steps</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Euler's method</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>euler_method(diffeq, t0, y0, dt, n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sec-04quest12" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest12">Question 12:</h2>
+<hr>
+<p>Using the same differential equation from <a href="#sec-04quest11">Question 11</a>, experiment with the code below to estimate <span class="math inline">\(y(1.5)\)</span> accurate to one decimal place. How many steps did you use? What is the corresponding step size?</p>
+<section id="solution-to-question-12" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-12">Solution to Question 12:</h3>
+<hr>
+<p><br> <br><br>
+<mark>Replace each ?? to define appropriate values for <code>n</code> and <code>dt</code> in the code cell below.</mark></p>
+<p><br><br>
+<br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We are not changing the differential equation or initial conditions</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Thus we do not need to redefine diffeq, t0, or y0</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of steps and step size</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> ??</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> ??</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Euler's method</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>euler_method(diffeq, t0, y0, dt, n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-04quest13" class="level2">
+<h2 class="anchored" data-anchor-id="sec-04quest13">Question 13:</h2>
+<hr>
+<p>Consider the differential equation <span class="math inline">\(\dfrac{dy}{dt} = y+t\)</span>. Estimate the value of <span class="math inline">\(y(2)\)</span> on the solution that passes through the point <span class="math inline">\((1, 3)\)</span> using 10 steps. Use the <code>euler_method()</code> function in the <code>ode_tools</code> module to perform the calculations.</p>
+<section id="solution-to-question-13" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-13">Solution to Question 13:</h3>
+<hr>
+<p><br> <br><br>
+<mark>Replace each ?? to define appropriate values or expressions in the code cell below.</mark></p>
+<p><br><br>
+<br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define diffeq</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diffeq(t, y):  <span class="co"># t is independent variable and y is dependent variable</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ??  <span class="co"># Use t and y for ind and dep variables</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial value</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>t0 <span class="op">=</span> ?? <span class="co"># initial value of input</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> ?? <span class="co"># initial value output when t = t_0</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Step size and number of steps</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> ??</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> ??</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Euler's method</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>euler_method(diffeq, t0, y0, dt, n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="creative-commons-license-information" class="level1">
+<h1>Creative Commons License Information</h1>
+<hr>
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><em>Exploring Differential Equations</em></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/CU-Denver-MathStats-OER/ODEs" property="cc:attributionName" rel="cc:attributionURL">Adam Spiegler</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/CU-Denver-MathStats-OER/ODEs" rel="dct:source">https://github.com/CU-Denver-MathStats-OER/ODEs</a> and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., &amp; Fortune, N. (2018). <em>Inquiry oriented differential equations: Course materials</em>. Available at <a href="https://iode.sdsu.edu">https://iode.sdsu.edu</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Chp1/03-Phase-Line.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.3: The Phase Plane</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Chp1/05-Separable-Diff-Eqs.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">1.5: Separable Differential Equations</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Exploring Differential Equations by Adam Spiegler</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" class="img-fluid" alt="Creative Commons License"> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-N-SA 4.0</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

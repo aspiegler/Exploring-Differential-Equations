@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Exploring Differential Equations - 3.3: Phase Plane Equations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Chp3/17-Linear-Systems.html" rel="next">
+<link href="../Chp3/15-Phase-Plane-Portrait.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Chp3/14-Introduction-to-Systems.html">Chapter 3: Systems of Differential Equations</a></li><li class="breadcrumb-item"><a href="../Chp3/16-Phase-Plane-Equation.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">3.3: Phase Plane Equations</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Exploring Differential Equations</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Chapter 1: First Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/01-What-is-a-Differential-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1: Interpreting Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/02-Slope-Fields.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2: Slope Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/03-Phase-Line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3: The Phase Plane</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/04-Eulers-Method.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4: Numerically Approximations of Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/05-Separable-Diff-Eqs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5: Separable Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/06-Integrating-Factors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6: Solving Linear First Order Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/07-Mixture-Applications.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7: Applications to Compartmental Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/08-Application-Heating-and-Cooling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8: Applications to Heating and Cooling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/ODE-Tools-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for First Order ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Chapter 2: Second Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/09-Intro-to-Second-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1: Second Order Linear Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/10-Homogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2: Homogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/11-Nonhomogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3: Nonhomogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/12-Superposition-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4: Superposition and General Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/13-Mass-Spring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/Mass-Spring-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Mass-Spring Systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Chapter 3: Systems of Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/14-Introduction-to-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1: Introduction to Systems of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/15-Phase-Plane-Portrait.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2: Phase Plane Portraits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/16-Phase-Plane-Equation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">3.3: Phase Plane Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/17-Linear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4: Population Dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/18-Stability-of-Equilibrium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5: Stability of Equilibria</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/19-Nonlinear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6: Dynamics of Non-Linear Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/Phase-Portraits-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Phase Planes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Chapter 4: Laplace Transforms</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1: Introduction to Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/21-Properties-of-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2: Properties of Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/22-Inverse-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3: Inverse Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/23-Solving-IVP-with-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4: Solving ODEs with Laplace Transforms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-phase-plane-equation" id="toc-the-phase-plane-equation" class="nav-link active" data-scroll-target="#the-phase-plane-equation">The Phase Plane Equation</a>
+  <ul class="collapse">
+  <li><a href="#sec-16quest1" id="toc-sec-16quest1" class="nav-link" data-scroll-target="#sec-16quest1">Question 1:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-1" id="toc-solution-to-question-1" class="nav-link" data-scroll-target="#solution-to-question-1">Solution to Question 1:</a></li>
+  </ul></li>
+  <li><a href="#sec-16quest2" id="toc-sec-16quest2" class="nav-link" data-scroll-target="#sec-16quest2">Question 2:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-2" id="toc-solution-to-question-2" class="nav-link" data-scroll-target="#solution-to-question-2">Solution to Question 2:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#equilibrium-solutions" id="toc-equilibrium-solutions" class="nav-link" data-scroll-target="#equilibrium-solutions">Equilibrium Solutions</a>
+  <ul class="collapse">
+  <li><a href="#sec-16quest3" id="toc-sec-16quest3" class="nav-link" data-scroll-target="#sec-16quest3">Question 3:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-3" id="toc-solution-to-question-3" class="nav-link" data-scroll-target="#solution-to-question-3">Solution to Question 3:</a></li>
+  </ul></li>
+  <li><a href="#sec-16quest4" id="toc-sec-16quest4" class="nav-link" data-scroll-target="#sec-16quest4">Question 4:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-4" id="toc-solution-to-question-4" class="nav-link" data-scroll-target="#solution-to-question-4">Solution to Question 4:</a></li>
+  </ul></li>
+  <li><a href="#sec-16quest5" id="toc-sec-16quest5" class="nav-link" data-scroll-target="#sec-16quest5">Question 5:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-5" id="toc-solution-to-question-5" class="nav-link" data-scroll-target="#solution-to-question-5">Solution to Question 5:</a></li>
+  </ul></li>
+  <li><a href="#sec-16quest6" id="toc-sec-16quest6" class="nav-link" data-scroll-target="#sec-16quest6">Question 6:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-6" id="toc-solution-to-question-6" class="nav-link" data-scroll-target="#solution-to-question-6">Solution to Question 6:</a></li>
+  </ul></li>
+  <li><a href="#sec-16quest7" id="toc-sec-16quest7" class="nav-link" data-scroll-target="#sec-16quest7">Question 7:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-7" id="toc-solution-to-question-7" class="nav-link" data-scroll-target="#solution-to-question-7">Solution to Question 7:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#appendix-plotting-with-phase_portrait" id="toc-appendix-plotting-with-phase_portrait" class="nav-link" data-scroll-target="#appendix-plotting-with-phase_portrait">Appendix: Plotting with <code>phase_portrait</code></a>
+  <ul class="collapse">
+  <li><a href="#sec-LoadModule" id="toc-sec-LoadModule" class="nav-link" data-scroll-target="#sec-LoadModule">Loading <code>ode_tools</code> from GitHub</a></li>
+  <li><a href="#importing-the-phase_portrait-plotting-function" id="toc-importing-the-phase_portrait-plotting-function" class="nav-link" data-scroll-target="#importing-the-phase_portrait-plotting-function">Importing the <code>phase_portrait</code> Plotting Function</a></li>
+  <li><a href="#defining-the-system-of-differential-equations" id="toc-defining-the-system-of-differential-equations" class="nav-link" data-scroll-target="#defining-the-system-of-differential-equations">Defining the System of Differential Equations</a></li>
+  <li><a href="#plotting-with-phase_portrait" id="toc-plotting-with-phase_portrait" class="nav-link" data-scroll-target="#plotting-with-phase_portrait">Plotting with <code>phase_portrait</code></a></li>
+  </ul></li>
+  <li><a href="#creative-commons-license-information" id="toc-creative-commons-license-information" class="nav-link" data-scroll-target="#creative-commons-license-information">Creative Commons License Information</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">3.3: Phase Plane Equations</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp3/16-Phase-Plane.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<section id="the-phase-plane-equation" class="level1">
+<h1>The Phase Plane Equation</h1>
+<hr>
+<p>Consider a system of two differential equations:</p>
+<p><span class="math display">\[\begin{aligned}
+\frac{dx}{dt} &amp;=f(x,y) \\
+\frac{dy}{dt} &amp;=g(x,y)
+\end{aligned}\]</span></p>
+<p>Recall from the chain rule we have <span class="math display">\[ \frac{dy}{dx} \frac{dx}{dt} = \frac{dy}{dt},\]</span> which gives the <font color="dodgerblue"><strong>phase plane equation</strong></font> <span class="math display">\[\color{dodgerblue}{\boxed{\large \frac{dy}{dx} = \frac{ \frac{dy}{dt}}{\frac{dx}{dt}} = \frac{g(x,y)}{f(x,y)}}}.\]</span></p>
+<section id="sec-16quest1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-16quest1">Question 1:</h2>
+<hr>
+<p>Write and solve the corresponding phase plane equation for the system</p>
+<p><span class="math display">\[\begin{aligned}
+\frac{dx}{dt} &amp;=7y \\
+\frac{dy}{dt} &amp;=-2x
+\end{aligned}\]</span></p>
+<section id="solution-to-question-1" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-1">Solution to Question 1:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-16quest2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-16quest2">Question 2:</h2>
+<hr>
+<p>Make a sketch of several solutions in the phase plane, include arrows to indicate how solutions behave with respect to time.</p>
+<section id="solution-to-question-2" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-2">Solution to Question 2:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sym</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>sym.var(<span class="st">'x y'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plot1 <span class="op">=</span> sym.plot_implicit(x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">7</span><span class="op">/</span><span class="dv">2</span><span class="op">*</span>y<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">1</span>, show <span class="op">=</span> <span class="va">False</span>, line_color <span class="op">=</span> <span class="st">'b'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>plot2 <span class="op">=</span> sym.plot_implicit(x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">7</span><span class="op">/</span><span class="dv">2</span><span class="op">*</span>y<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">4</span>, show <span class="op">=</span> <span class="va">False</span>, line_color <span class="op">=</span> <span class="st">'r'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>plot3 <span class="op">=</span> sym.plot_implicit(x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">7</span><span class="op">/</span><span class="dv">2</span><span class="op">*</span>y<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">9</span>, show <span class="op">=</span> <span class="va">False</span>, line_color <span class="op">=</span> <span class="st">'g'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plot1.append(plot2[<span class="dv">0</span>])</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plot1.append(plot3[<span class="dv">0</span>])</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plot1.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="equilibrium-solutions" class="level1">
+<h1>Equilibrium Solutions</h1>
+<hr>
+<p>A point <span class="math inline">\((x_0,y_0)\)</span> is called an <font color="dodgerblue"><strong>equilibrium</strong></font> (or critical point) of the system</p>
+<p><span class="math display">\[\begin{aligned}
+\frac{dx}{dt} &amp;=f(x,y) \\
+\frac{dy}{dt} &amp;=g(x,y)
+\end{aligned}\]</span></p>
+<p>if both <span class="math inline">\(f(x_0,y_0)=0\)</span> and <span class="math inline">\(g(x_0,y_0)=0\)</span>.</p>
+<p>The corresponding solution <span class="math inline">\((x(t),y(t)) = (x_0,y_0)\)</span> is called an <font color="dodgerblue"><strong>equilibrium solution</strong></font>.</p>
+<section id="sec-16quest3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-16quest3">Question 3:</h2>
+<hr>
+<p>Find the equilibrium to the system</p>
+<p><span class="math display">\[\begin{array}{l}
+\dfrac{dx}{dt} =2x-y+8 \\
+\dfrac{dy}{dt} =3x+6
+\end{array}.\]</span></p>
+<section id="solution-to-question-3" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-3">Solution to Question 3:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-16quest4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-16quest4">Question 4:</h2>
+<hr>
+<p>Find the equilibrium to the system</p>
+<p><span class="math display">\[\begin{array}{l}
+\dfrac{dx}{dt} =y^2-xy \\
+\dfrac{dy}{dt} =2xy-4
+\end{array}.\]</span></p>
+<section id="solution-to-question-4" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-4">Solution to Question 4:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-16quest5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-16quest5">Question 5:</h2>
+<hr>
+<p>Find the equilibrium. Then find and solve the phase plane equation.</p>
+<p><span class="math display">\[\begin{array}{l}
+\dfrac{dx}{dt} =6x \\
+\dfrac{dy}{dt} =3y
+\end{array}\]</span></p>
+<section id="solution-to-question-5" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-5">Solution to Question 5:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-16quest6" class="level2">
+<h2 class="anchored" data-anchor-id="sec-16quest6">Question 6:</h2>
+<hr>
+<p>Find the equilibrium. Then find and solve the phase plane equation.</p>
+<p><span class="math display">\[\begin{array}{l}
+\dfrac{dx}{dt} =4-4y \\
+\dfrac{dy}{dt} =-4x
+\end{array}\]</span></p>
+<section id="solution-to-question-6" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-6">Solution to Question 6:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-16quest7" class="level2">
+<h2 class="anchored" data-anchor-id="sec-16quest7">Question 7:</h2>
+<hr>
+<p>Find the equilibrium. Then find and solve the phase plane equation.</p>
+<p><span class="math display">\[\begin{array}{l}
+\dfrac{dx}{dt} =2y^2-y \\
+\dfrac{dy}{dt} =x^2y
+\end{array}\]</span></p>
+<section id="solution-to-question-7" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-7">Solution to Question 7:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="appendix-plotting-with-phase_portrait" class="level1">
+<h1>Appendix: Plotting with <code>phase_portrait</code></h1>
+<hr>
+<p>As with slope fields, we typically rely on technology to plot phase plane portraits. The <code>ode_tools</code> module (same file as earlier) includes a function called <code>phase_portrait</code> that will be a nice tool for visualizing solutions to autonomous systems of differential equations.</p>
+<section id="sec-LoadModule" class="level2">
+<h2 class="anchored" data-anchor-id="sec-LoadModule">Loading <code>ode_tools</code> from GitHub</h2>
+<hr>
+<ul>
+<li>Run the code cell below to load the most up to date modules stored in GitHub.</li>
+<li>You will only need to run this code cell one time during an active session.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>CU<span class="op">-</span>Denver<span class="op">-</span>MathStats<span class="op">-</span>OER<span class="op">/</span>ODEs</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>clear_output()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importing-the-phase_portrait-plotting-function" class="level2">
+<h2 class="anchored" data-anchor-id="importing-the-phase_portrait-plotting-function">Importing the <code>phase_portrait</code> Plotting Function</h2>
+<hr>
+<p>After you followed the instructions above and imported the <code>ode_tools</code> module from GitHub, you are now ready to import the <code>phase_portrait</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.ode_tools <span class="im">import</span> phase_portrait  <span class="co"># Only need to import one time.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="defining-the-system-of-differential-equations" class="level2">
+<h2 class="anchored" data-anchor-id="defining-the-system-of-differential-equations">Defining the System of Differential Equations</h2>
+<hr>
+<p>We use <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> as the generic symbols for the two dependent variables.</p>
+<p><span class="math display">\[\begin{align}
+\frac{dx}{dt} &amp;= f_1(x, y)\\
+\frac{dy}{dt} &amp;= f_2(x, y)
+\end{align}\]</span></p>
+<p>Below, we enter the system we analyzed in <a href="#sec-16quest1">Question 1</a>.</p>
+<p><span class="math display">\[\begin{aligned}
+\frac{dx}{dt} &amp;=7y \\
+\frac{dy}{dt} &amp;=-2x
+\end{aligned}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set viewing window</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>, <span class="dv">20</span>)  <span class="co"># y1 is horizontal axis</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>, <span class="dv">20</span>)  <span class="co"># y2 is vertical axis</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(Y, t):</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    x, y <span class="op">=</span> Y</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [<span class="dv">7</span><span class="op">*</span>y , <span class="op">-</span><span class="dv">2</span><span class="op">*</span>x]  <span class="co"># enter f_1(y1, y2) and f_2(y1,y2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="plotting-with-phase_portrait" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-with-phase_portrait">Plotting with <code>phase_portrait</code></h2>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plots a phase portrait</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>phase_portrait(x, y, f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="creative-commons-license-information" class="level1">
+<h1>Creative Commons License Information</h1>
+<hr>
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><em>Exploring Differential Equations</em></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/CU-Denver-MathStats-OER/ODEs" property="cc:attributionName" rel="cc:attributionURL">Adam Spiegler</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/CU-Denver-MathStats-OER/ODEs" rel="dct:source">https://github.com/CU-Denver-MathStats-OER/ODEs</a> and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., &amp; Fortune, N. (2018). <em>Inquiry oriented differential equations: Course materials</em>. Available at <a href="https://iode.sdsu.edu">https://iode.sdsu.edu</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Chp3/15-Phase-Plane-Portrait.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">3.2: Phase Plane Portraits</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Chp3/17-Linear-Systems.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">3.4: Population Dynamics</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Exploring Differential Equations by Adam Spiegler</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" class="img-fluid" alt="Creative Commons License"> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-N-SA 4.0</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

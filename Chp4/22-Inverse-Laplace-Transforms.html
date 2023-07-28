@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Exploring Differential Equations - 4.3: Inverse Laplace Transforms</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Chp4/23-Solving-IVP-with-Laplace-Transforms.html" rel="next">
+<link href="../Chp4/21-Properties-of-Laplace-Transforms.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Chp4/20-Introduction-to-Laplace-Transforms.html">Chapter 4: Laplace Transforms</a></li><li class="breadcrumb-item"><a href="../Chp4/22-Inverse-Laplace-Transforms.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">4.3: Inverse Laplace Transforms</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Exploring Differential Equations</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Chapter 1: First Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/01-What-is-a-Differential-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1: Interpreting Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/02-Slope-Fields.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2: Slope Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/03-Phase-Line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3: The Phase Plane</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/04-Eulers-Method.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4: Numerically Approximations of Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/05-Separable-Diff-Eqs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5: Separable Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/06-Integrating-Factors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6: Solving Linear First Order Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/07-Mixture-Applications.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7: Applications to Compartmental Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/08-Application-Heating-and-Cooling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8: Applications to Heating and Cooling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/ODE-Tools-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for First Order ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Chapter 2: Second Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/09-Intro-to-Second-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1: Second Order Linear Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/10-Homogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2: Homogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/11-Nonhomogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3: Nonhomogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/12-Superposition-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4: Superposition and General Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/13-Mass-Spring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/Mass-Spring-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Mass-Spring Systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Chapter 3: Systems of Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/14-Introduction-to-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1: Introduction to Systems of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/15-Phase-Plane-Portrait.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2: Phase Plane Portraits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/16-Phase-Plane-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3: Phase Plane Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/17-Linear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4: Population Dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/18-Stability-of-Equilibrium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5: Stability of Equilibria</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/19-Nonlinear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6: Dynamics of Non-Linear Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/Phase-Portraits-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Phase Planes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Chapter 4: Laplace Transforms</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1: Introduction to Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/21-Properties-of-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2: Properties of Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/22-Inverse-Laplace-Transforms.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">4.3: Inverse Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/23-Solving-IVP-with-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4: Solving ODEs with Laplace Transforms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#inverse-operations" id="toc-inverse-operations" class="nav-link active" data-scroll-target="#inverse-operations">Inverse Operations</a></li>
+  <li><a href="#reviewing-the-laplace-transform" id="toc-reviewing-the-laplace-transform" class="nav-link" data-scroll-target="#reviewing-the-laplace-transform">Reviewing the Laplace Transform</a>
+  <ul class="collapse">
+  <li><a href="#sec-22quest1" id="toc-sec-22quest1" class="nav-link" data-scroll-target="#sec-22quest1">Question 1:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-1" id="toc-solution-to-question-1" class="nav-link" data-scroll-target="#solution-to-question-1">Solution to Question 1:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#solving-differential-equations-with-laplace-transforms" id="toc-solving-differential-equations-with-laplace-transforms" class="nav-link" data-scroll-target="#solving-differential-equations-with-laplace-transforms">Solving Differential Equations with Laplace Transforms</a>
+  <ul class="collapse">
+  <li><a href="#sec-22quest2" id="toc-sec-22quest2" class="nav-link" data-scroll-target="#sec-22quest2">Question 2:</a>
+  <ul class="collapse">
+  <li><a href="#sec-22quest2a" id="toc-sec-22quest2a" class="nav-link" data-scroll-target="#sec-22quest2a">Step 1: Apply the Laplace Transform to Both Sides</a></li>
+  <li><a href="#sec-22quest2b" id="toc-sec-22quest2b" class="nav-link" data-scroll-target="#sec-22quest2b">Step 2: Solve for <span class="math inline">\(Y(s) = \mathscr{L} \{ y(t) \}\)</span></a></li>
+  <li><a href="#sec-22quest2c" id="toc-sec-22quest2c" class="nav-link" data-scroll-target="#sec-22quest2c">Step 3: Apply the Inverse Laplace Transform</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#the-inverse-laplace-transform" id="toc-the-inverse-laplace-transform" class="nav-link" data-scroll-target="#the-inverse-laplace-transform">The Inverse Laplace Transform</a>
+  <ul class="collapse">
+  <li><a href="#sec-22quest3" id="toc-sec-22quest3" class="nav-link" data-scroll-target="#sec-22quest3">Question 3:</a>
+  <ul class="collapse">
+  <li><a href="#sec-22quest3a" id="toc-sec-22quest3a" class="nav-link" data-scroll-target="#sec-22quest3a">Question 3a:</a></li>
+  <li><a href="#sec-22quest3b" id="toc-sec-22quest3b" class="nav-link" data-scroll-target="#sec-22quest3b">Question 3b:</a></li>
+  <li><a href="#sec-22quest3c" id="toc-sec-22quest3c" class="nav-link" data-scroll-target="#sec-22quest3c">Question 3c:</a></li>
+  <li><a href="#sec-22quest3d" id="toc-sec-22quest3d" class="nav-link" data-scroll-target="#sec-22quest3d">Question 3d:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-22InvL" id="toc-sec-22InvL" class="nav-link" data-scroll-target="#sec-22InvL">Inverse Laplace Transforms with <code>SymPy</code></a>
+  <ul class="collapse">
+  <li><a href="#sec-22quest4" id="toc-sec-22quest4" class="nav-link" data-scroll-target="#sec-22quest4">Question 4:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-4" id="toc-solution-to-question-4" class="nav-link" data-scroll-target="#solution-to-question-4">Solution to Question 4:</a></li>
+  </ul></li>
+  <li><a href="#whats-the-deal-with-thetat" id="toc-whats-the-deal-with-thetat" class="nav-link" data-scroll-target="#whats-the-deal-with-thetat">What’s the Deal with <span class="math inline">\(\theta(t)\)</span>?</a></li>
+  <li><a href="#heaviside-function-and-inverse-laplace-transforms" id="toc-heaviside-function-and-inverse-laplace-transforms" class="nav-link" data-scroll-target="#heaviside-function-and-inverse-laplace-transforms">Heaviside Function and Inverse Laplace Transforms</a></li>
+  <li><a href="#sec-22quest5" id="toc-sec-22quest5" class="nav-link" data-scroll-target="#sec-22quest5">Question 5:</a>
+  <ul class="collapse">
+  <li><a href="#sec-22quest5a" id="toc-sec-22quest5a" class="nav-link" data-scroll-target="#sec-22quest5a">Question 5a:</a></li>
+  <li><a href="#sec-22quest5b" id="toc-sec-22quest5b" class="nav-link" data-scroll-target="#sec-22quest5b">Question 5b:</a></li>
+  </ul></li>
+  <li><a href="#sec-22quest6" id="toc-sec-22quest6" class="nav-link" data-scroll-target="#sec-22quest6">Question 6:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-6" id="toc-solution-to-question-6" class="nav-link" data-scroll-target="#solution-to-question-6">Solution to Question 6:</a></li>
+  </ul></li>
+  <li><a href="#sec-22quest7" id="toc-sec-22quest7" class="nav-link" data-scroll-target="#sec-22quest7">Question 7:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-7" id="toc-solution-to-question-7" class="nav-link" data-scroll-target="#solution-to-question-7">Solution to Question 7:</a></li>
+  </ul></li>
+  <li><a href="#sec-22quest8" id="toc-sec-22quest8" class="nav-link" data-scroll-target="#sec-22quest8">Question 8:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-8" id="toc-solution-to-question-8" class="nav-link" data-scroll-target="#solution-to-question-8">Solution to Question 8:</a></li>
+  </ul></li>
+  <li><a href="#sec-22quest9" id="toc-sec-22quest9" class="nav-link" data-scroll-target="#sec-22quest9">Question 9:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-9" id="toc-solution-to-question-9" class="nav-link" data-scroll-target="#solution-to-question-9">Solution to Question 9:</a></li>
+  </ul></li>
+  <li><a href="#sec-22quest10" id="toc-sec-22quest10" class="nav-link" data-scroll-target="#sec-22quest10">Question 10:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-10" id="toc-solution-to-question-10" class="nav-link" data-scroll-target="#solution-to-question-10">Solution to Question 10:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-22LaplaceTable" id="toc-sec-22LaplaceTable" class="nav-link" data-scroll-target="#sec-22LaplaceTable">Appendix A: Common Laplace Transforms</a></li>
+  <li><a href="#sec-22PropTable" id="toc-sec-22PropTable" class="nav-link" data-scroll-target="#sec-22PropTable">Appendix B: Properties of Laplace Transforms</a></li>
+  <li><a href="#creative-commons-license-information" id="toc-creative-commons-license-information" class="nav-link" data-scroll-target="#creative-commons-license-information">Creative Commons License Information</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">4.3: Inverse Laplace Transforms</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/22-Inverse-Laplace-Transforms.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><font color="dodgerblue">Reading: <em>Notes on Diffy Q’s</em> Section 6.1 Part B</font></p>
+<section id="inverse-operations" class="level1">
+<h1>Inverse Operations</h1>
+<hr>
+<p>When analyzing a differential equation, it is important to <em>read</em> and <em>interpret</em> the differential equation in practical terms when the variables represent physical quantities. For example, let <span class="math inline">\(s(t)\)</span> denotes the position (measured in cm. from its initial position) of a particle <span class="math inline">\(t\)</span> seconds from now. If the particle’s position is modeled by the differential equation</p>
+<p><span class="math display">\[s' - 200\sin{t} = 0 \qquad s(0) = 0,\]</span></p>
+<p>then we know the particle’s velocity is oscillating over time.</p>
+<ul>
+<li>Initially the particle is at rest (<span class="math inline">\(s'(0)=0\)</span>).</li>
+<li>Then the particle moves to the right (<span class="math inline">\(s'(t) &gt; 0\)</span>).</li>
+<li>The particle stops at <span class="math inline">\(t=\frac{\pi}{2}\)</span> seconds, and turns around.</li>
+<li>The particle then moves to the left (when <span class="math inline">\(s'(t) &lt; 0\)</span>) for a bit before turning around at <span class="math inline">\(t=\pi\)</span> seconds</li>
+<li>And so on.</li>
+</ul>
+<p>Let <span class="math inline">\(y=s(t)\)</span> denote the position of a particle at time <span class="math inline">\(t\)</span>. We can find its velocity by applying the derivative, which maps a function to its rate of change.</p>
+<p>In the case of the differential equation above, we would like to go in the opposite direction. Given a formula for the derivative <span class="math inline">\(s'\)</span>, we would like to find its corresponding position <span class="math inline">\(s(t)\)</span>. To solve the differential equation, we can:</p>
+<ol type="1">
+<li>Apply the <strong>inverse operation (integration)</strong> to both sides.</li>
+</ol>
+<p><span class="math display">\[ \int (s'(t) - 200\sin{t}) \, dt  = \int 0 \, dt \quad \longrightarrow \quad s(t) + 200 \cos{t} = C\]</span></p>
+<ol start="2" type="1">
+<li>Then solve for <span class="math inline">\(s(t)\)</span> using the initial position and algebra.</li>
+</ol>
+<p><span class="math display">\[s(t) = -200 \cos{t} + 200\]</span></p>
+<p>Similar to the derivative, the Laplace transform is a mapping of one function <span class="math inline">\(f(t)\)</span> to another function, its Laplace transform <span class="math inline">\(\color{dodgerblue}{F(s)= \mathscr{L} \left\{ f \right\}}\)</span>. In <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/23-Solving-IVP-with-Laplace-Transforms.ipynb">Worksheet 23 (the next worksheet)</a>, we will explore how Laplace transforms help us solve differential equations. Before focusing our efforts back on differential equations, in this notebook we will practice transforming functions in the opposite direction with the <font color="dodgerblue"><strong>inverse Laplace transform</strong></font>.</p>
+</section>
+<section id="reviewing-the-laplace-transform" class="level1">
+<h1>Reviewing the Laplace Transform</h1>
+<hr>
+<p>So far we have explored Laplace transforms in <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/20-Introduction-to-Laplace-Transforms.ipynb">Worksheet 20</a> and some useful properties of Laplace transforms in <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/21-Properties-of-Laplace-Transforms.ipynb">Worksheet 21</a>. The main results of these investigations are summarized in <a href="#sec-22LaplaceTable">Appendix A</a> and <a href="#sec-22PropTable">Appendix B</a>.</p>
+<p>Before defining the inverse Laplace transform and applying this concept to solve differential equations, let’s first refresh ourselves of key properties of the Laplace transform that will be particularly useful when solving differential equations.</p>
+<p>For example, <a href="#22Prop1">Property 1</a> and <a href="#22Prop2">Property 2</a> tell us that the Laplace transform is a <font color="dodgerblue"><strong>linear operator</strong></font>,</p>
+<p><span class="math display">\[\color{dodgerblue}{\mathscr{L} \left\{ c_1 f_1(t) + c_2 f_2(t) \right\} = c_1 \mathscr{L} \left\{ f_1(t) \right\} + c_2 \mathscr{L} \left\{ f_2(t) \right\}}.\]</span></p>
+<section id="sec-22quest1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-22quest1">Question 1:</h2>
+<hr>
+<p>Describe properties <a href="#22Prop3">3</a> and <a href="#22Prop5">5</a> in practical terms.</p>
+<section id="solution-to-question-1" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-1">Solution to Question 1:</h3>
+<hr>
+<p><a href="#22Prop3">Property 3</a> : Multiplying <span class="math inline">\(f(t)\)</span> by <span class="math inline">\(e^{at}\)</span> and then taking the Laplace transform has what kind of effect on <span class="math inline">\(\mathscr{L} \left\{ f(t) \right\}\)</span>?</p>
+<p><br> <br> <mark>Explain in practicel terms. For example, <span class="math inline">\(\mathscr{L} \left\{ e^{at} f(t) \right\}\)</span> can be described as a transformation (shift, compression, and/or reflection) of <span class="math inline">\(F(s)=\mathscr{L} \left\{ f(t) \right\}\)</span>.</mark> <br> <br> <br> <br></p>
+<p><a href="#22Prop5">Property 5</a> : Multiplying <span class="math inline">\(f(t)\)</span> by <span class="math inline">\(t^n\)</span> and then taking the Laplace transform has what kind of effect on <span class="math inline">\(\mathscr{L} \left\{ f(t) \right\}\)</span>?</p>
+<p><br><br>
+<br><br>
+<mark>Explain in practicel terms. For example, <span class="math inline">\(\mathscr{L} \left\{ t^n f(t) \right\}\)</span> is equal to applying what operation(s) to <span class="math inline">\(F(s)=\mathscr{L} \left\{ f(t) \right\}\)</span>.</mark> <br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="solving-differential-equations-with-laplace-transforms" class="level1">
+<h1>Solving Differential Equations with Laplace Transforms</h1>
+<hr>
+<p>One useful problem solving technique in mathematics is to:</p>
+<ul>
+<li><font color="dodgerblue">transform a difficult problem into an easier one,</font></li>
+<li><font color="tomato">solve the easier problem,</font> and</li>
+<li><font color="mediumseagreen">then use its solution to obtain a solution of the original problem.</font></li>
+</ul>
+<p>Let’s apply this technique to differential equations by applying the following steps:</p>
+<p><font color="dodgerblue">Step 1: Apply the Laplace transform of both sides of the differential equation.</font></p>
+<ul>
+<li>This transforms the differential equation to an algebraic equation.</li>
+</ul>
+<p><font color="tomato">Step 2: Rearrange and group like terms to solve for <span class="math inline">\(\mathscr{L}\{y(t)\}=Y(s)\)</span>.</font></p>
+<ul>
+<li>Solving an algebraic equation is generally easier than a differential equation.</li>
+</ul>
+<p><font color="mediumseagreen">Step 3: Take the inverse Laplace transform and solve for <span class="math inline">\(y(t) = \mathscr{L}^{-1}\{Y(x) \}\)</span>.</font></p>
+<ul>
+<li>Undo the first step by applying the inverse Laplace transform to obtain a solution to the original differential equation.</li>
+</ul>
+<p><mark>Before we focus our attention on the inverse Laplace transform in Step 3, let’s first demonstrate how this three step process can be put into practice with the example in <a href="#sec-22quest2">Question 2</a> below.</mark></p>
+<section id="sec-22quest2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-22quest2">Question 2:</h2>
+<hr>
+<p>Solve <span class="math inline">\(y''-y=-t\)</span> with <span class="math inline">\(y(0)=0\)</span> and <span class="math inline">\(y'(0)=1\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In <a href="#sec-22quest2c">Step 3</a>, we will apply the <strong>inverse Laplace transform</strong> to <span class="math inline">\(Y(s)\)</span> in order to identify <span class="math inline">\(y(t) = \mathscr{L}^{-1} \{ Y(s) \}\)</span>.</p>
+</div>
+</div>
+<section id="sec-22quest2a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-22quest2a">Step 1: Apply the Laplace Transform to Both Sides</h3>
+<hr>
+<p>Using the <a href="#sec-22PropTable">properties</a>, apply the Laplace transform to both sides:</p>
+<p><span class="math display">\[ \mathscr{L} \{ y'' -y \} = \mathscr{L} \{ -t \} .\]</span></p>
+<section id="solution-to-question-2-step-1" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-2-step-1">Solution to Question 2 Step 1:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-22quest2b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-22quest2b">Step 2: Solve for <span class="math inline">\(Y(s) = \mathscr{L} \{ y(t) \}\)</span></h3>
+<hr>
+<p>Using your result from <a href="#sec-22quest2a">Step 1</a>, solve for <span class="math inline">\(\mathscr{L} \{ y(t) \}=Y(s)\)</span>.</p>
+<section id="solution-to-question-2-step-2" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-2-step-2">Solution to Question 2 Step 2:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-22quest2c" class="level3">
+<h3 class="anchored" data-anchor-id="sec-22quest2c">Step 3: Apply the Inverse Laplace Transform</h3>
+<hr>
+<p>Use the <a href="#sec-22LaplaceTable">table of common Laplace transforms</a> to identify a function <span class="math inline">\(y(t)\)</span> that has <span class="math inline">\(\mathscr{L} \{ y(t) \}=Y(s)\)</span>.</p>
+<section id="solution-to-question-2-step-3" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-2-step-3">Solution to Question 2 Step 3:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+</section>
+<section id="the-inverse-laplace-transform" class="level1">
+<h1>The Inverse Laplace Transform</h1>
+<hr>
+<p>Given <span class="math inline">\(F(s)\)</span>, if there is a function <span class="math inline">\(f(t)\)</span> that is continuous on <span class="math inline">\(\lbrack 0 , \infty )\)</span> and satisfies <span class="math inline">\(\mathscr{L} \{ f \} = F(s)\)</span>, then we say <span class="math inline">\(f(t)\)</span> is the <font color="dodgerblue"><strong>inverse Laplace transform</strong></font> of <span class="math inline">\(F(s)\)</span> which is denoted by</p>
+<p><span class="math display">\[\color{dodgerblue}{\large f(t) = \mathscr{L}^{-1} \{ F(s) \} }.\]</span></p>
+<section id="sec-22quest3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-22quest3">Question 3:</h2>
+<hr>
+<p>In parts (a)-(d), find the inverse Laplace transform of the function <span class="math inline">\(F(s)\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>First decide whether <span class="math inline">\(f(t)\)</span> is of the form <span class="math inline">\(t^n\)</span>, <span class="math inline">\(\cos{(bt)}\)</span>, <span class="math inline">\(\sin{(bt)}\)</span>, or <span class="math inline">\(e^{at}\)</span>.</p>
+</div>
+</div>
+<section id="sec-22quest3a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-22quest3a">Question 3a:</h3>
+<hr>
+<p><span class="math inline">\(\displaystyle F(s) = \frac{1}{s^2}\)</span></p>
+<section id="solution-to-question-3a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-3a">Solution to Question 3a:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-22quest3b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-22quest3b">Question 3b:</h3>
+<hr>
+<p><span class="math inline">\(\displaystyle F(s) = \frac{2}{s^2+4}\)</span></p>
+<section id="solution-to-question-3b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-3b">Solution to Question 3b:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-22quest3c" class="level3">
+<h3 class="anchored" data-anchor-id="sec-22quest3c">Question 3c:</h3>
+<hr>
+<p><span class="math inline">\(\displaystyle F(s) = \frac{4s}{s^2+9}\)</span></p>
+<section id="solution-to-question-3c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-3c">Solution to Question 3c:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-22quest3d" class="level3">
+<h3 class="anchored" data-anchor-id="sec-22quest3d">Question 3d:</h3>
+<hr>
+<p><span class="math inline">\(\displaystyle F(s) = \frac{2}{s+6}\)</span></p>
+<section id="solution-to-question-3d" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-3d">Solution to Question 3d:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+</section>
+<section id="sec-22InvL" class="level1">
+<h1>Inverse Laplace Transforms with <code>SymPy</code></h1>
+<hr>
+<p>We can use the <code>sympy.inverse_laplace_transform(F,s,t)</code> function from the <code>SymPy</code> library to check our work.</p>
+<ul>
+<li><code>sympy.laplace_transform_(F,s,t)</code>.
+<ul>
+<li>We use <code>s</code> as the variable in the resulting transform <span class="math inline">\(F(s)\)</span>.</li>
+<li>We use <code>t</code> as the variable in <span class="math inline">\(f(t)\)</span>.</li>
+<li>The function will return the inverse Laplace transform (if it exists) <span class="math inline">\(f(t)\)</span>.</li>
+</ul></li>
+<li>For a review of Laplace transforms using <code>sympy.laplace_transform()</code>, see the section on <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html#20LaplacePython">Computing Laplace Transforms in Python</a> from Worksheet 20.</li>
+</ul>
+<p>Below are a couple of additional resources for help with Laplace transforms with <code>SymPy</code>.</p>
+<ul>
+<li>For more examples with <code>sympy.inverse_laplace_transform_()</code>, <a href="https://dynamics-and-control.readthedocs.io/en/latest/1_Dynamics/3_Linear_systems/Laplace%20transforms.html">here’s a good resource</a></li>
+<li>For official documentation, see <a href="https://docs.sympy.org/latest/modules/integrals/integrals.html">SymPy Doc</a></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sym</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy.abc <span class="im">import</span> s,t</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Just run this code cell. Do Not Edit.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the Laplace transform function</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> L(f):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sym.laplace_transform(f, t, s)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the inverse Laplace transform function</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> invL(F):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sym.inverse_laplace_transform(F, s, t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="sec-22quest4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-22quest4">Question 4:</h2>
+<hr>
+<p>Using the inverse Laplace transform function <code>invL(F)</code> to verify your answers in <a href="#sec-22quest3">Question 3</a>. Below are the formulas from parts (a)-(d) from <a href="#sec-22quest3">Question 3</a></p>
+<ol type="a">
+<li><p><span class="math inline">\(\displaystyle F(s) = \frac{1}{s^2}\)</span></p></li>
+<li><p><span class="math inline">\(\displaystyle F(s) = \frac{2}{s^2+4}\)</span></p></li>
+<li><p><span class="math inline">\(\displaystyle F(s) = \frac{4s}{s^2+9}\)</span></p></li>
+<li><p><span class="math inline">\(\displaystyle F(s) = \frac{2}{s+6}\)</span></p></li>
+</ol>
+<p><br></p>
+<section id="solution-to-question-4" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-4">Solution to Question 4:</h3>
+<hr>
+<p><mark> In each of the four code cells below, replace the <code>??</code> in the code cell below with an appropriate expression to verify your each of your four answers to each part of <a href="#sec-22quest3">Question 3</a>. Be sure you have run the previous code cell to define <code>invL(F)</code> before trying to run the code cells below.</mark> <br><br>
+<br></p>
+<section id="solution-to-question-4a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4a">Solution to Question 4a:</h4>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO: </span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the ?? with an approrpriate expression</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> ??  <span class="co"># define your function with respect to s</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>invL(F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solution-to-question-4b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4b">Solution to Question 4b:</h4>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO: </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the ?? with an approrpriate expression</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> ??  <span class="co"># define your function with respect to s</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>invL(F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solution-to-question-4c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4c">Solution to Question 4c:</h4>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO: </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the ?? with an approrpriate expression</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> ??  <span class="co"># define your function with respect to s</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>invL(F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solution-to-question-4d" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4d">Solution to Question 4d:</h4>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO: </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the ?? with an approrpriate expression</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> ??  <span class="co"># define your function with respect to s</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>invL(F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="whats-the-deal-with-thetat" class="level2">
+<h2 class="anchored" data-anchor-id="whats-the-deal-with-thetat">What’s the Deal with <span class="math inline">\(\theta(t)\)</span>?</h2>
+<hr>
+<p>The <font color="dodgerblue"><strong>Heaviside function</strong></font> is denoted by <span class="math inline">\(\theta(t)\)</span> in the output above. The Heaviside function is defined by</p>
+<p><span class="math display">\[\color{dodgerblue}{\large \theta(t) = \left\{ \begin{array}{ll}
+0, &amp; t &lt; 0 \\
+1, &amp; t \geq 0
+\end{array} \right.}\]</span></p>
+<p>Run the code cell below to plot the graph of the Heaviside funtion.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sym.plot(sym.Heaviside(t))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="heaviside-function-and-inverse-laplace-transforms" class="level2">
+<h2 class="anchored" data-anchor-id="heaviside-function-and-inverse-laplace-transforms">Heaviside Function and Inverse Laplace Transforms</h2>
+<hr>
+<p>The Heaviside function can be thought of as a signal that switches a function on by default at time <span class="math inline">\(t=0\)</span>. <span class="math inline">\(\theta(t)\)</span> is useful when expressing inverse Laplace transforms since we only consider the (forward) Laplace transform of <span class="math inline">\(f(t)\)</span> on the domain <span class="math inline">\(t \geq 0\)</span>.</p>
+<p>For conciseness, we typically write <span class="math inline">\(\mathscr{L}^{-1} \left\{ \frac{2}{s+6} \right\} = 2e^{-6t}\)</span> which has domain <span class="math inline">\((-\infty, \infty)\)</span>.</p>
+<ul>
+<li>However, we only consider <span class="math inline">\(\mathscr{L} \left\{ 2e^{-6t} \right\}\)</span> on the interval <span class="math inline">\(t \leq 0\)</span>.</li>
+<li>Thus, <span class="math inline">\(f(t) = \mathscr{L}^{-1} \left\{ F(s) \right\}\)</span> should only be considered over the interval <span class="math inline">\(t \geq 0\)</span>.</li>
+<li>We can mulitply by the Heaviside function to “turn the function on” at <span class="math inline">\(t=0\)</span>.</li>
+</ul>
+<p><span class="math display">\[\color{dodgerblue}{\large f(t) \theta(t) = \left\{ \begin{array}{ll}
+0, &amp; t &lt; 0 \\
+2e^{-6t}, &amp; t \geq 0
+\end{array} \right.}\]</span></p>
+<p><strong>For conciseness, when typing or writing inverse Laplace transform we simply write <span class="math inline">\(\mathbf{f(t) = 2e^{-6t}}\)</span>, and do not also write that the function is <span class="math inline">\(0\)</span> when <span class="math inline">\(t &lt;0\)</span>.</strong></p>
+<p><mark>Run the code cell below to plot the graph of <span class="math inline">\(y=2e^{-6t}\theta(t)\)</span>.</mark></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modified from </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># https://dynamics-and-control.readthedocs.io/en/latest/1_Dynamics/3_Linear_systems/Laplace%20transforms.html</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> sym.symbols(<span class="st">'a'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> <span class="dv">2</span><span class="op">/</span>(s <span class="op">+</span> <span class="dv">6</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>sym.exp(<span class="op">-</span><span class="dv">6</span><span class="op">*</span>t)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> sym.plot(f.subs({a: <span class="dv">0</span>}), invL(F).subs({a: <span class="dv">0</span>}),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>               xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="dv">1</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">3</span>), show<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>p[<span class="dv">1</span>].line_color <span class="op">=</span> <span class="st">'red'</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>p.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sec-22quest5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-22quest5">Question 5:</h2>
+<hr>
+<p>Find the inverse Laplace transform of <span class="math inline">\(\displaystyle F(s) = \frac{s+2}{s^2+4s+11}\)</span> by answering the questions below.</p>
+<section id="sec-22quest5a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-22quest5a">Question 5a:</h3>
+<hr>
+<p>Complete the square for the expression in the denominator of <span class="math inline">\(F(s)\)</span> to find possible values for <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> such that <span class="math inline">\(s^2+4s+11=(s-a)^2+b\)</span>.</p>
+<section id="solution-to-question-5a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-5a">Solution to Question 5a:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-22quest5b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-22quest5b">Question 5b:</h3>
+<hr>
+<p>Use the <a href="#sec-22LaplaceTable">table of common Laplace transforms</a> to identify <span class="math inline">\(\mathscr{L}^{-1} \{ F(s)\}\)</span>.</p>
+<section id="solution-to-question-5b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-5b">Solution to Question 5b:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="sec-22quest6" class="level2">
+<h2 class="anchored" data-anchor-id="sec-22quest6">Question 6:</h2>
+<hr>
+<p>Using the inverse Laplace transform function <code>invL(F)</code> to verify your answer in <a href="#sec-22quest5">Question 5</a>.</p>
+<section id="solution-to-question-6" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-6">Solution to Question 6:</h3>
+<hr>
+<p><br></p>
+<p><mark>Replace the <code>??</code> in the code cell below with an appropriate expression to check your previous answer. </mark></p>
+<p><br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO: </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the ?? with an approrpriate expression</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> ??  <span class="co"># define your function with respect to s</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>invL(F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-22quest7" class="level2">
+<h2 class="anchored" data-anchor-id="sec-22quest7">Question 7:</h2>
+<hr>
+<p>Find the inverse Laplace transform of <span class="math inline">\(\displaystyle F(s) = \frac{5s-10}{s^2-3s-4}\)</span>.</p>
+<section id="solution-to-question-7" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-7">Solution to Question 7:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-22quest8" class="level2">
+<h2 class="anchored" data-anchor-id="sec-22quest8">Question 8:</h2>
+<hr>
+<p>Find the inverse Laplace transform of <span class="math inline">\(\displaystyle F(s) = \frac{3s-15}{2s^2-4s+10}\)</span>.</p>
+<section id="solution-to-question-8" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-8">Solution to Question 8:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-22quest9" class="level2">
+<h2 class="anchored" data-anchor-id="sec-22quest9">Question 9:</h2>
+<hr>
+<p>Find the inverse Laplace transform of <span class="math inline">\(\displaystyle F(s) = \frac{-5s-36}{(s+2)(s^2+9)}\)</span>.</p>
+<section id="solution-to-question-9" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-9">Solution to Question 9:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-22quest10" class="level2">
+<h2 class="anchored" data-anchor-id="sec-22quest10">Question 10:</h2>
+<hr>
+<p>Using the inverse Laplace transform function <code>invL(F)</code> to verify your answers in <a href="#sec-22quest7">Question 7</a>, <a href="#sec-22quest8">Question 8</a>, and <a href="#sec-22quest9">Question 9</a>.</p>
+<section id="solution-to-question-10" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-10">Solution to Question 10:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<mark>Replace the <code>??</code> in each of the three code cells below with an appropriate expression to check your previous answers. </mark> <br><br>
+<br></p>
+<section id="solution-to-question-10a-checking-solution-to-question-7" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-10a-checking-solution-to-question-7">Solution to Question 10a: Checking Solution to Question 7</h4>
+<hr>
+<p>Find the inverse Laplace transform of <span class="math inline">\(\displaystyle F(s) = \frac{5s-10}{s^2-3s-4}\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO: </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the ?? with an approrpriate expression</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> ??  <span class="co"># define your function with respect to s</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>invL(F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solution-to-question-10b-checking-solution-to-question-8" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-10b-checking-solution-to-question-8">Solution to Question 10b: Checking Solution to Question 8</h4>
+<hr>
+<p>Find the inverse Laplace transform of <span class="math inline">\(\displaystyle F(s) = \frac{3s-15}{2s^2-4s+10}\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO: </span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the ?? with an approrpriate expression</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> ??  <span class="co"># define your function with respect to s</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>invL(F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solution-to-question-10c-checking-solution-to-question-9" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-10c-checking-solution-to-question-9">Solution to Question 10c: Checking Solution to Question 9</h4>
+<hr>
+<p>Find the inverse Laplace transform of <span class="math inline">\(\displaystyle F(s) = \frac{-5s-36}{(s+2)(s^2+9)}\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># STUDENT TO DO: </span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the ?? with an approrpriate expression</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#############################################################</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> ??  <span class="co"># define your function with respect to s</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>invL(F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="sec-22LaplaceTable" class="level1">
+<h1>Appendix A: Common Laplace Transforms</h1>
+<hr>
+<table class="table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 69%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\displaystyle \large f(t)\)</span></th>
+<th><span class="math inline">\(\displaystyle \large F(s) = \mathscr{L} \left\{ f(t) \right\}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\displaystyle \large f(t)=1\)</span></td>
+<td><span class="math inline">\(\displaystyle \large F(s)=\frac{1}{s}, \ s &gt; 0\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\displaystyle\large f(t)=e^{at}\)</span></td>
+<td><span class="math inline">\(\displaystyle \large F(s) = \frac{1}{s-a}, \ s &gt; a\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\displaystyle \large f(t)=t^n, \ n=1,2, \ldots\)</span></td>
+<td><span class="math inline">\(\displaystyle \large F(s) = \frac{n!}{s^{n+1}}, \ s &gt; 0\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\displaystyle \large f(t)=\sin{(bt)}\)</span></td>
+<td><span class="math inline">\(\displaystyle \large F(s) = \frac{b}{s^2+b^2}, \ s &gt; 0\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\displaystyle \large f(t)=\cos{(bt)}\)</span></td>
+<td><span class="math inline">\(\displaystyle \large F(s) = \frac{s}{s^2+b^2}, \ s &gt; 0\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\displaystyle \large e^{at}t^n, \ n=1,2, \ldots\)</span></td>
+<td><span class="math inline">\(\displaystyle \large F(s) = \frac{n!}{(s-a)^{n+1}}, \ s &gt; a\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\displaystyle \large e^{at}\sin{(bt)}\)</span></td>
+<td><span class="math inline">\(\displaystyle \large F(s) = \frac{b}{(s-a)^2+b^2}, \ s &gt; a\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\displaystyle \large e^{at}\cos{(bt)}\)</span></td>
+<td><span class="math inline">\(\displaystyle \large F(s) = \frac{s-a}{(s-a)^2+b^2}, \ s &gt; a\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sec-22PropTable" class="level1">
+<h1>Appendix B: Properties of Laplace Transforms</h1>
+<hr>
+<p><a id="22Prop1">1.</a> <span class="math inline">\(\color{dodgerblue}{\mathscr{L} \left\{ cf(t) \right\} = c \mathscr{L} \left\{ f(t) \right\}}\)</span>, where <span class="math inline">\(c\)</span> is a constant.</p>
+<p><a id="22Prop2">2.</a> <span class="math inline">\(\color{dodgerblue}{\mathscr{L} \left\{ f_1(t) + f_2(t) \right\} = \mathscr{L} \left\{ f_1(t) \right\} + \mathscr{L} \left\{ f_2(t)\right\}}\)</span>.</p>
+<p><a id="22Prop3">3.</a> If <span class="math inline">\(F(s) = \mathscr{L} \left\{ f(t) \right\}\)</span> exists for all <span class="math inline">\(s &gt; \alpha\)</span>, then <span class="math inline">\(\color{dodgerblue}{\displaystyle \mathscr{L} \left\{ e^{at} f(t) \right\} = F(s-a)}\)</span> for all <span class="math inline">\(s&gt;\alpha + a\)</span>.</p>
+<p><a id="22Prop4">4.</a> If <span class="math inline">\(F(s) =\mathscr{L} \left\{ f(t) \right\}\)</span> exists for all <span class="math inline">\(s &gt; \alpha\)</span>, then for all <span class="math inline">\(s&gt;\alpha\)</span>,</p>
+<p><span class="math display">\[\color{dodgerblue}{\mathscr{L} \left\{ f^{(n)}(t) \right\} = s^n \mathscr{L} \{ f(t) \}-s^{n-1} f(0)- s^{n-2} f'(0) - \ldots - f^{(n-1)}(0)}.\]</span></p>
+<p><a id="22Prop5">5.</a> If <span class="math inline">\(F(s) =\mathscr{L} \left\{ f(t) \right\}\)</span> exists for all <span class="math inline">\(s &gt; \alpha\)</span>, then</p>
+<p><span class="math display">\[\color{dodgerblue}{\mathscr{L} \left\{ t^n f(t) \right\} = (-1)^n \frac{d^nF}{ds^n} \mbox{ for all } s &gt; \alpha}.\]</span></p>
+</section>
+<section id="creative-commons-license-information" class="level1">
+<h1>Creative Commons License Information</h1>
+<hr>
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><em>Exploring Differential Equations</em></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/CU-Denver-MathStats-OER/ODEs" property="cc:attributionName" rel="cc:attributionURL">Adam Spiegler</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/CU-Denver-MathStats-OER/ODEs" rel="dct:source">https://github.com/CU-Denver-MathStats-OER/ODEs</a> and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., &amp; Fortune, N. (2018). <em>Inquiry oriented differential equations: Course materials</em>. Available at <a href="https://iode.sdsu.edu">https://iode.sdsu.edu</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Chp4/21-Properties-of-Laplace-Transforms.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">4.2: Properties of Laplace Transforms</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Chp4/23-Solving-IVP-with-Laplace-Transforms.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">4.4: Solving ODEs with Laplace Transforms</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Exploring Differential Equations by Adam Spiegler</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" class="img-fluid" alt="Creative Commons License"> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-N-SA 4.0</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

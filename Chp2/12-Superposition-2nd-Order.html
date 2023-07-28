@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Exploring Differential Equations - 2.4: Superposition and General Solutions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Chp2/13-Mass-Spring.html" rel="next">
+<link href="../Chp2/11-Nonhomogeneous-2nd-Order.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Chp2/09-Intro-to-Second-Order.html">Chapter 2: Second Order Differential Equations</a></li><li class="breadcrumb-item"><a href="../Chp2/12-Superposition-2nd-Order.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">2.4: Superposition and General Solutions</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Exploring Differential Equations</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Chapter 1: First Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/01-What-is-a-Differential-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1: Interpreting Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/02-Slope-Fields.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2: Slope Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/03-Phase-Line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3: The Phase Plane</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/04-Eulers-Method.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4: Numerically Approximations of Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/05-Separable-Diff-Eqs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5: Separable Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/06-Integrating-Factors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6: Solving Linear First Order Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/07-Mixture-Applications.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7: Applications to Compartmental Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/08-Application-Heating-and-Cooling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8: Applications to Heating and Cooling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/ODE-Tools-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for First Order ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Chapter 2: Second Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/09-Intro-to-Second-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1: Second Order Linear Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/10-Homogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2: Homogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/11-Nonhomogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3: Nonhomogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/12-Superposition-2nd-Order.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">2.4: Superposition and General Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/13-Mass-Spring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/Mass-Spring-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Mass-Spring Systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Chapter 3: Systems of Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/14-Introduction-to-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1: Introduction to Systems of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/15-Phase-Plane-Portrait.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2: Phase Plane Portraits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/16-Phase-Plane-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3: Phase Plane Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/17-Linear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4: Population Dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/18-Stability-of-Equilibrium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5: Stability of Equilibria</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/19-Nonlinear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6: Dynamics of Non-Linear Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/Phase-Portraits-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Phase Planes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Chapter 4: Laplace Transforms</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1: Introduction to Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/21-Properties-of-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2: Properties of Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/22-Inverse-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3: Inverse Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/23-Solving-IVP-with-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4: Solving ODEs with Laplace Transforms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#a-recap-of-solution-methods" id="toc-a-recap-of-solution-methods" class="nav-link active" data-scroll-target="#a-recap-of-solution-methods">A Recap of Solution Methods</a>
+  <ul class="collapse">
+  <li><a href="#finding-a-homogeneous-solution" id="toc-finding-a-homogeneous-solution" class="nav-link" data-scroll-target="#finding-a-homogeneous-solution">Finding a Homogeneous Solution</a></li>
+  <li><a href="#finding-a-particular-solution" id="toc-finding-a-particular-solution" class="nav-link" data-scroll-target="#finding-a-particular-solution">Finding a Particular Solution</a>
+  <ul class="collapse">
+  <li><a href="#sec-12table" id="toc-sec-12table" class="nav-link" data-scroll-target="#sec-12table">Table of Common Forcing Functions</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#finding-the-general-solution-to-the-nonhomogeneous-case" id="toc-finding-the-general-solution-to-the-nonhomogeneous-case" class="nav-link" data-scroll-target="#finding-the-general-solution-to-the-nonhomogeneous-case">Finding the General Solution to the Nonhomogeneous Case</a>
+  <ul class="collapse">
+  <li><a href="#sec-12quest1" id="toc-sec-12quest1" class="nav-link" data-scroll-target="#sec-12quest1">Question 1:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-1" id="toc-solution-to-question-1" class="nav-link" data-scroll-target="#solution-to-question-1">Solution to Question 1:</a></li>
+  </ul></li>
+  <li><a href="#sec-12quest2" id="toc-sec-12quest2" class="nav-link" data-scroll-target="#sec-12quest2">Question 2:</a>
+  <ul class="collapse">
+  <li><a href="#question-2a" id="toc-question-2a" class="nav-link" data-scroll-target="#question-2a">Question 2a:</a></li>
+  <li><a href="#question-2b" id="toc-question-2b" class="nav-link" data-scroll-target="#question-2b">Question 2b:</a></li>
+  <li><a href="#question-2c" id="toc-question-2c" class="nav-link" data-scroll-target="#question-2c">Question 2c:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sums-of-different-types-of-forcing-functions" id="toc-sums-of-different-types-of-forcing-functions" class="nav-link" data-scroll-target="#sums-of-different-types-of-forcing-functions">Sums of Different Types of Forcing Functions</a>
+  <ul class="collapse">
+  <li><a href="#sec-12quest3" id="toc-sec-12quest3" class="nav-link" data-scroll-target="#sec-12quest3">Question 3:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-3" id="toc-solution-to-question-3" class="nav-link" data-scroll-target="#solution-to-question-3">Solution to Question 3:</a></li>
+  </ul></li>
+  <li><a href="#sec-12quest4" id="toc-sec-12quest4" class="nav-link" data-scroll-target="#sec-12quest4">Question 4:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-4" id="toc-solution-to-question-4" class="nav-link" data-scroll-target="#solution-to-question-4">Solution to Question 4:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#products-of-different-types-of-forcing-functions" id="toc-products-of-different-types-of-forcing-functions" class="nav-link" data-scroll-target="#products-of-different-types-of-forcing-functions">Products of Different Types of Forcing Functions</a>
+  <ul class="collapse">
+  <li><a href="#product-of-power-and-exponential-functions" id="toc-product-of-power-and-exponential-functions" class="nav-link" data-scroll-target="#product-of-power-and-exponential-functions">Product of Power and Exponential Functions</a></li>
+  <li><a href="#sec-12quest5" id="toc-sec-12quest5" class="nav-link" data-scroll-target="#sec-12quest5">Question 5:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-5" id="toc-solution-to-question-5" class="nav-link" data-scroll-target="#solution-to-question-5">Solution to Question 5:</a></li>
+  </ul></li>
+  <li><a href="#products-of-power-exponential-and-sine-or-cosine-functions" id="toc-products-of-power-exponential-and-sine-or-cosine-functions" class="nav-link" data-scroll-target="#products-of-power-exponential-and-sine-or-cosine-functions">Products of Power, Exponential, and Sine (or Cosine) Functions</a></li>
+  <li><a href="#sec-12quest6" id="toc-sec-12quest6" class="nav-link" data-scroll-target="#sec-12quest6">Question 6:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-6" id="toc-solution-to-question-6" class="nav-link" data-scroll-target="#solution-to-question-6">Solution to Question 6:</a></li>
+  </ul></li>
+  <li><a href="#sec-12quest7" id="toc-sec-12quest7" class="nav-link" data-scroll-target="#sec-12quest7">Question 7:</a>
+  <ul class="collapse">
+  <li><a href="#question-7a" id="toc-question-7a" class="nav-link" data-scroll-target="#question-7a">Question 7a:</a></li>
+  <li><a href="#question-7b" id="toc-question-7b" class="nav-link" data-scroll-target="#question-7b">Question 7b:</a></li>
+  <li><a href="#question-7c" id="toc-question-7c" class="nav-link" data-scroll-target="#question-7c">Question 7c:</a></li>
+  <li><a href="#question-7d" id="toc-question-7d" class="nav-link" data-scroll-target="#question-7d">Question 7d:</a></li>
+  <li><a href="#question-7e" id="toc-question-7e" class="nav-link" data-scroll-target="#question-7e">Question 7e:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#creative-commons-license-information" id="toc-creative-commons-license-information" class="nav-link" data-scroll-target="#creative-commons-license-information">Creative Commons License Information</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">2.4: Superposition and General Solutions</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/12-Superposition-2nd-Order.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><font color="dodgerblue">Reading: <em>Notes on Diffy Q’s</em> Section 2.1 and Section 2.5</font></p>
+<section id="a-recap-of-solution-methods" class="level1">
+<h1>A Recap of Solution Methods</h1>
+<hr>
+<section id="finding-a-homogeneous-solution" class="level2">
+<h2 class="anchored" data-anchor-id="finding-a-homogeneous-solution">Finding a Homogeneous Solution</h2>
+<hr>
+<p>We have developed methods for finding the general homogeneous solution, <span class="math inline">\(y_h(t)\)</span>, to a second order differential equation of the form</p>
+<p><span class="math display">\[ ay'' + b y' + cy =0 , \qquad \mbox{for constants $a$, $b$, and $c$:}\]</span></p>
+<ol type="1">
+<li><p>Write the differential equation in standard form, <span class="math inline">\(ay'' + b y' + cy =0\)</span></p></li>
+<li><p>Find the roots of the <font color="dodgerblue"><strong>characteristic equation</strong></font> <span class="math inline">\(ar^2+br+c=0\)</span>.</p></li>
+</ol>
+<ul>
+<li>If there are two distinct real roots <span class="math inline">\(r_1\)</span> and <span class="math inline">\(r_2\)</span>, the general solution is <span class="math inline">\(y_h(t) = C_1e^{r_1t} + C_2e^{r_2t}\)</span>.</li>
+<li>If there is one repeated real root <span class="math inline">\(r_1\)</span>, the general solution is <span class="math inline">\(y_h(t) = C_1e^{r_1t} + C_2te^{r_1t}\)</span>.</li>
+<li>If there are two complex-cojugate solutions <span class="math inline">\(r=\alpha \pm i \beta\)</span>, the general solution is <span class="math inline">\(y_h(t) = C_1e^{\alpha t} \cos{(\beta t)} + C_2e^{\alpha t} \sin{(\beta t)}\)</span>.</li>
+</ul>
+</section>
+<section id="finding-a-particular-solution" class="level2">
+<h2 class="anchored" data-anchor-id="finding-a-particular-solution">Finding a Particular Solution</h2>
+<hr>
+<p>We have also discussed how to find the particular solution, <span class="math inline">\(y_p(t)\)</span> to a nonhomogeneous second order differential equation of the form</p>
+<p><span class="math display">\[ay'' + b y' + cy =f(t).\]</span></p>
+<p>Based on the form of <span class="math inline">\(f(t)\)</span>, we guess <span class="math inline">\(y_p(t)\)</span> will have a similar form.</p>
+<section id="sec-12table" class="level3">
+<h3 class="anchored" data-anchor-id="sec-12table">Table of Common Forcing Functions</h3>
+<hr>
+<table class="table">
+<colgroup>
+<col style="width: 46%">
+<col style="width: 53%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\large f(t)\)</span></th>
+<th><span class="math inline">\(\large y_p(t)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\displaystyle {\large Ct^n} \quad \mbox{ (for } n = 0, 1, 2, \dots \mbox{)}\)</span></td>
+<td><span class="math inline">\(\displaystyle \large A_nt^n + A_{n-1}t^{n-1}+\ldots + A_0\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\displaystyle \large Ce^{rt}\)</span></td>
+<td><span class="math inline">\(\displaystyle \large Ae^{rt}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\displaystyle \large Ce^{\alpha t} \cos{(\beta t)}\)</span></td>
+<td><span class="math inline">\(\displaystyle \large A e^{\alpha t}\cos{(\beta t)} + B e^{\alpha t}\sin{(\beta t)}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\displaystyle \large Ce^{\alpha t} \sin{(\beta t)}\)</span></td>
+<td><span class="math inline">\(\displaystyle \large Ae^{\alpha t} \cos{(\beta t)} + B e^{\alpha t}\sin{(\beta t)}\)</span></td>
+</tr>
+</tbody>
+</table>
+<section id="identifying-and-adjusting-for-rseonance" class="level4">
+<h4 class="anchored" data-anchor-id="identifying-and-adjusting-for-rseonance">Identifying and Adjusting for Rseonance</h4>
+<hr>
+<ul>
+<li>You have <font color="dodgerblue"><strong>resonance</strong></font> when your initial guess for the particular solution is a homogeneous solution.</li>
+<li><font color="dodgerblue">When there is resonance, multiply the guess by a multiple of <span class="math inline">\(t\)</span> (until the guess is no longer a homogeneous solution)</font>.</li>
+<li>After adjusting your guess for <span class="math inline">\(y_p(t)\)</span>, plug into the differential equation and solve for the undetermined coefficients.</li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="finding-the-general-solution-to-the-nonhomogeneous-case" class="level1">
+<h1>Finding the General Solution to the Nonhomogeneous Case</h1>
+<hr>
+<p>Consider a nonhomogeneous differential equation of the form</p>
+<p><span class="math display">\[ a y''+by'+cy=f(t). \]</span></p>
+<p>Let <font color="dodgerblue"><span class="math inline">\(y_h(t)\)</span> denote a general solution to corresponding homogeneous equation</font> <span class="math inline">\(a y''+by'+cy=0\)</span>, and let <font color="tomato"><span class="math inline">\(y_p(t)\)</span> denote a particular solution for the nonhomogeneous equation</font> (when <span class="math inline">\(f(t) \ne 0\)</span>).</p>
+<p><strong>Let’s explore how we can use both of these solutions to construct a general solution to nonhomogeneous differential equation.</strong></p>
+<section id="sec-12quest1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-12quest1">Question 1:</h2>
+<hr>
+<p>Let <span class="math inline">\(y_h(t)\)</span> and <span class="math inline">\(y_p(t)\)</span> denote homogeneous and particular solutions, respectively, to the differential equation <span class="math inline">\(ay''+by'+cy=f(t)\)</span>. <strong>Show that their sum <span class="math inline">\(y(t)=y_h(t)+y_p(t)\)</span> is a general solution to the nonhomogeneous differential equation.</strong></p>
+<section id="solution-to-question-1" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-1">Solution to Question 1:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-12quest2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-12quest2">Question 2:</h2>
+<hr>
+<p>Consider the differential equation <span class="math display">\[ \frac{d^2x}{dt^2}-\frac{dx}{dt}-12x=e^{4t}.\]</span></p>
+<section id="question-2a" class="level3">
+<h3 class="anchored" data-anchor-id="question-2a">Question 2a:</h3>
+<hr>
+<p>Find a general solution to the homogeneous equation.</p>
+<section id="solution-to-question-2a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-2a">Solution to Question 2a:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="question-2b" class="level3">
+<h3 class="anchored" data-anchor-id="question-2b">Question 2b:</h3>
+<hr>
+<p>Find a particular solution to the nonhomogeneous differential equation.</p>
+<section id="solution-to-question-2b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-2b">Solution to Question 2b:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="question-2c" class="level3">
+<h3 class="anchored" data-anchor-id="question-2c">Question 2c:</h3>
+<hr>
+<p>Use your previous answers to give a general solution to nonhomogeneous differential equation.</p>
+<section id="solution-to-question-2c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-2c">Solution to Question 2c:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+</section>
+<section id="sums-of-different-types-of-forcing-functions" class="level1">
+<h1>Sums of Different Types of Forcing Functions</h1>
+<hr>
+<p>To find the general solution to a nonhomogeneous differential equation you simply add a particular solution to a general solution to the corresponding homogeneous equation. This 3-step strategy:</p>
+<ol type="1">
+<li><p>Find a general solution to the corresponding homogeneous equation</p></li>
+<li><p>Find a particular solution for each part of the nonhomgeneous forcing function.</p></li>
+<li><p>Add the previous results.</p></li>
+</ol>
+<p>This process is often called the <font color="dodgerblue"><strong>Method of Undetermined Coefficients</strong></font>.</p>
+<section id="sec-12quest3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-12quest3">Question 3:</h2>
+<hr>
+<p>Let <span class="math inline">\(y_1(t)\)</span> denote a particular solution to <span class="math inline">\(ay''+by'+cy=f_1(t)\)</span> and <span class="math inline">\(y_2(t)\)</span> denote a particular solution to <span class="math inline">\(ay''+by'+cy=f_2(t)\)</span>. Show that <span class="math inline">\(y_p(t) = y_1(t) + y_2(t)\)</span> is a particular solution to <span class="math inline">\(ay''+by'+cy=f_1(t)+f_2(t)\)</span>.</p>
+<section id="solution-to-question-3" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-3">Solution to Question 3:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-12quest4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-12quest4">Question 4:</h2>
+<hr>
+<p>Consider the differential equation</p>
+<p><span class="math display">\[ \frac{d^2x}{dt^2}+10\frac{dx}{dt}+9x=85\sin(2t)+18.\]</span></p>
+<p>Recall that we have already worked on parts of this question. We have found that <span class="math inline">\(x_h (t) = C_1e^{-9t}+C_2e^{-t}\)</span> and the particular solution corresponding to <span class="math inline">\(f_1(t) = 85\sin(2t)\)</span> is <span class="math inline">\(x_{1}(t) = -4\cos{(2t)}+\sin{(2t)}\)</span>. Using these results, finish solving the differential equation and give the general solution.</p>
+<section id="solution-to-question-4" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-4">Solution to Question 4:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="products-of-different-types-of-forcing-functions" class="level1">
+<h1>Products of Different Types of Forcing Functions</h1>
+<hr>
+<p>We can use the method of undetermined coefficients when the forcing function <span class="math inline">\(f(t)\)</span> is:</p>
+<ul>
+<li>A power function, <span class="math inline">\(f(t) = Ct^n\)</span> (for <span class="math inline">\(n\)</span> a nonnegative integer).</li>
+<li>A function of the form <span class="math inline">\(f(t) = Ce^{\alpha t}\cos{(\beta t)}\)</span> or <span class="math inline">\(f(t) = Ce^{\alpha t}\sin{(\beta t)}\)</span>.</li>
+</ul>
+<section id="product-of-power-and-exponential-functions" class="level2">
+<h2 class="anchored" data-anchor-id="product-of-power-and-exponential-functions">Product of Power and Exponential Functions</h2>
+<hr>
+<p>For a product of a power function <span class="math inline">\(t^n\)</span> and an exponential such as <span class="math inline">\(f(t) = Ct^ne^{rt}\)</span>, we guess</p>
+<p><span class="math display">\[\color{dodgerblue}{ y_p(t) = \big( A_n t^n + A_{n_1} t^{n-1} + \ldots A_1 t + A_0 \big) e^{rt} }.\]</span></p>
+<ul>
+<li>Multiply by <span class="math inline">\(t\)</span> if there is resonance (<span class="math inline">\(r\)</span> is a real root (not repeated) of the the characteristic equation.)</li>
+<li>Multiply by <span class="math inline">\(t^2\)</span> if there is still resonance (<span class="math inline">\(r\)</span> is a repeated real root of the the characteristic equation).</li>
+</ul>
+</section>
+<section id="sec-12quest5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-12quest5">Question 5:</h2>
+<hr>
+<p>Give a guess for the particular solution to <span class="math display">\[ y'' - 5y' -6y = 4t^2e^{6t}.\]</span></p>
+<section id="solution-to-question-5" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-5">Solution to Question 5:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="products-of-power-exponential-and-sine-or-cosine-functions" class="level2">
+<h2 class="anchored" data-anchor-id="products-of-power-exponential-and-sine-or-cosine-functions">Products of Power, Exponential, and Sine (or Cosine) Functions</h2>
+<hr>
+<p>For a product of a power function, an exponential, and either a sine or cosine such as</p>
+<p><span class="math inline">\(f(t) = Ct^ne^{\alpha t}\cos{(\beta t)}\)</span> or <span class="math inline">\(f(t) = Ct^ne^{\alpha t}\sin{(\beta t)}\)</span>, a similar strategy works if our guess has the form:</p>
+<p><span class="math display">\[\color{dodgerblue}{y_p(t) = \big( A_n t^n + A_{n-1} t^{n-1} + \ldots A_1 t + A_0 \big) e^{\alpha t}\cos{(\beta t)} + \big( B_n t^n + B_{n-1} t^{n-1} + \ldots B_1 t + B_0 \big) e^{\alpha t}\sin{(\beta t)}}.\]</span></p>
+<ul>
+<li>Multiply by <span class="math inline">\(t\)</span> if there is resonance (if <span class="math inline">\(\alpha \pm i \beta\)</span> are the complex roots of the the characteristic equation).</li>
+</ul>
+</section>
+<section id="sec-12quest6" class="level2">
+<h2 class="anchored" data-anchor-id="sec-12quest6">Question 6:</h2>
+<hr>
+<p>Give a guess for the particular solution to <span class="math display">\[ y'' - 5y' -6y = 4t^2e^{6t}\sin{t}.\]</span></p>
+<section id="solution-to-question-6" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-6">Solution to Question 6:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-12quest7" class="level2">
+<h2 class="anchored" data-anchor-id="sec-12quest7">Question 7:</h2>
+<hr>
+<p>Consider the differential equation <span class="math inline">\(x''-8x'+12x=f(t)\)</span>. For each <span class="math inline">\(f(t)\)</span>, what would be your guess for the particular solution? Do not solve for the undetermined coefficients. If the method of undetermined coefficients cannot be applied, explain why not.</p>
+<section id="question-7a" class="level3">
+<h3 class="anchored" data-anchor-id="question-7a">Question 7a:</h3>
+<hr>
+<p><span class="math inline">\(f(t) = 10\sin{(2t)}\)</span></p>
+<section id="solution-to-question-7a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-7a">Solution to Question 7a:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="question-7b" class="level3">
+<h3 class="anchored" data-anchor-id="question-7b">Question 7b:</h3>
+<hr>
+<p><span class="math inline">\(f(t) = 10e^{6t}\sin{(2t)}\)</span></p>
+<section id="solution-to-question-7b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-7b">Solution to Question 7b:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="question-7c" class="level3">
+<h3 class="anchored" data-anchor-id="question-7c">Question 7c:</h3>
+<hr>
+<p><span class="math inline">\(f(t) = 10\tan{(2t)}\)</span></p>
+<section id="solution-to-question-7c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-7c">Solution to Question 7c:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="question-7d" class="level3">
+<h3 class="anchored" data-anchor-id="question-7d">Question 7d:</h3>
+<hr>
+<p><span class="math inline">\(f(t) = 10te^{2t}\)</span></p>
+<section id="solution-to-question-7d" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-7d">Solution to Question 7d:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="question-7e" class="level3">
+<h3 class="anchored" data-anchor-id="question-7e">Question 7e:</h3>
+<hr>
+<p><span class="math inline">\(f(t) = 8t^{-2}\)</span></p>
+<section id="solution-to-question-7e" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-7e">Solution to Question 7e:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+</section>
+<section id="creative-commons-license-information" class="level1">
+<h1>Creative Commons License Information</h1>
+<hr>
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><em>Exploring Differential Equations</em></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/CU-Denver-MathStats-OER/ODEs" property="cc:attributionName" rel="cc:attributionURL">Adam Spiegler</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/CU-Denver-MathStats-OER/ODEs" rel="dct:source">https://github.com/CU-Denver-MathStats-OER/ODEs</a> and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., &amp; Fortune, N. (2018). <em>Inquiry oriented differential equations: Course materials</em>. Available at <a href="https://iode.sdsu.edu">https://iode.sdsu.edu</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Chp2/11-Nonhomogeneous-2nd-Order.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">2.3: Nonhomogeneous Equations</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Chp2/13-Mass-Spring.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Exploring Differential Equations by Adam Spiegler</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" class="img-fluid" alt="Creative Commons License"> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-N-SA 4.0</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

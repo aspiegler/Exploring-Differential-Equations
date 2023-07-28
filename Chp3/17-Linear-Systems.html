@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Exploring Differential Equations - 3.4: Population Dynamics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Chp3/18-Stability-of-Equilibrium.html" rel="next">
+<link href="../Chp3/16-Phase-Plane-Equation.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Chp3/14-Introduction-to-Systems.html">Chapter 3: Systems of Differential Equations</a></li><li class="breadcrumb-item"><a href="../Chp3/17-Linear-Systems.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">3.4: Population Dynamics</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Exploring Differential Equations</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Chapter 1: First Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/01-What-is-a-Differential-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1: Interpreting Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/02-Slope-Fields.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2: Slope Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/03-Phase-Line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3: The Phase Plane</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/04-Eulers-Method.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4: Numerically Approximations of Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/05-Separable-Diff-Eqs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5: Separable Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/06-Integrating-Factors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6: Solving Linear First Order Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/07-Mixture-Applications.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7: Applications to Compartmental Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/08-Application-Heating-and-Cooling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8: Applications to Heating and Cooling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/ODE-Tools-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for First Order ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Chapter 2: Second Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/09-Intro-to-Second-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1: Second Order Linear Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/10-Homogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2: Homogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/11-Nonhomogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3: Nonhomogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/12-Superposition-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4: Superposition and General Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/13-Mass-Spring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/Mass-Spring-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Mass-Spring Systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Chapter 3: Systems of Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/14-Introduction-to-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1: Introduction to Systems of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/15-Phase-Plane-Portrait.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2: Phase Plane Portraits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/16-Phase-Plane-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3: Phase Plane Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/17-Linear-Systems.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">3.4: Population Dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/18-Stability-of-Equilibrium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5: Stability of Equilibria</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/19-Nonlinear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6: Dynamics of Non-Linear Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/Phase-Portraits-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Phase Planes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Chapter 4: Laplace Transforms</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1: Introduction to Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/21-Properties-of-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2: Properties of Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/22-Inverse-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3: Inverse Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/23-Solving-IVP-with-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4: Solving ODEs with Laplace Transforms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#an-initial-model" id="toc-an-initial-model" class="nav-link active" data-scroll-target="#an-initial-model">An Initial Model</a>
+  <ul class="collapse">
+  <li><a href="#sec-17quest1" id="toc-sec-17quest1" class="nav-link" data-scroll-target="#sec-17quest1">Question 1:</a>
+  <ul class="collapse">
+  <li><a href="#sec-17quest1a" id="toc-sec-17quest1a" class="nav-link" data-scroll-target="#sec-17quest1a">Question 1a:</a></li>
+  <li><a href="#sec-17quest1b" id="toc-sec-17quest1b" class="nav-link" data-scroll-target="#sec-17quest1b">Question 1b:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#modeling-interacting-populations" id="toc-modeling-interacting-populations" class="nav-link" data-scroll-target="#modeling-interacting-populations">Modeling Interacting Populations</a>
+  <ul class="collapse">
+  <li><a href="#sec-17quest2" id="toc-sec-17quest2" class="nav-link" data-scroll-target="#sec-17quest2">Question 2:</a>
+  <ul class="collapse">
+  <li><a href="#sec-17quest2a" id="toc-sec-17quest2a" class="nav-link" data-scroll-target="#sec-17quest2a">Question 2a:</a></li>
+  <li><a href="#sec-17quest2b" id="toc-sec-17quest2b" class="nav-link" data-scroll-target="#sec-17quest2b">Question 2b:</a></li>
+  <li><a href="#sec-17quest2c" id="toc-sec-17quest2c" class="nav-link" data-scroll-target="#sec-17quest2c">Question 2c:</a></li>
+  <li><a href="#solution-to-question-2c" id="toc-solution-to-question-2c" class="nav-link" data-scroll-target="#solution-to-question-2c">Solution to Question 2c:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#linear-systems-of-differential-equations" id="toc-linear-systems-of-differential-equations" class="nav-link" data-scroll-target="#linear-systems-of-differential-equations">Linear Systems of Differential Equations</a>
+  <ul class="collapse">
+  <li><a href="#sec-17quest3" id="toc-sec-17quest3" class="nav-link" data-scroll-target="#sec-17quest3">Question 3:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-3" id="toc-solution-to-question-3" class="nav-link" data-scroll-target="#solution-to-question-3">Solution to Question 3:</a></li>
+  </ul></li>
+  <li><a href="#sec-17quest4" id="toc-sec-17quest4" class="nav-link" data-scroll-target="#sec-17quest4">Question 4:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-4" id="toc-solution-to-question-4" class="nav-link" data-scroll-target="#solution-to-question-4">Solution to Question 4:</a></li>
+  </ul></li>
+  <li><a href="#sec-17quest5" id="toc-sec-17quest5" class="nav-link" data-scroll-target="#sec-17quest5">Question 5:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-5" id="toc-solution-to-question-5" class="nav-link" data-scroll-target="#solution-to-question-5">Solution to Question 5:</a></li>
+  </ul></li>
+  <li><a href="#sec-17quest6" id="toc-sec-17quest6" class="nav-link" data-scroll-target="#sec-17quest6">Question 6:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-6" id="toc-solution-to-question-6" class="nav-link" data-scroll-target="#solution-to-question-6">Solution to Question 6:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#essentials-of-linear-algebra" id="toc-essentials-of-linear-algebra" class="nav-link" data-scroll-target="#essentials-of-linear-algebra">Essentials of Linear Algebra</a>
+  <ul class="collapse">
+  <li><a href="#multiplication-of-a-matrix-by-a-scalar" id="toc-multiplication-of-a-matrix-by-a-scalar" class="nav-link" data-scroll-target="#multiplication-of-a-matrix-by-a-scalar">Multiplication of a Matrix by a Scalar</a></li>
+  <li><a href="#adding-matrices" id="toc-adding-matrices" class="nav-link" data-scroll-target="#adding-matrices">Adding Matrices</a></li>
+  <li><a href="#multiplication-of-matrices" id="toc-multiplication-of-matrices" class="nav-link" data-scroll-target="#multiplication-of-matrices">Multiplication of Matrices</a></li>
+  <li><a href="#matrix-arithmetic-in-python-using-sympy" id="toc-matrix-arithmetic-in-python-using-sympy" class="nav-link" data-scroll-target="#matrix-arithmetic-in-python-using-sympy">Matrix Arithmetic in Python Using Sympy</a>
+  <ul class="collapse">
+  <li><a href="#creating-matrices" id="toc-creating-matrices" class="nav-link" data-scroll-target="#creating-matrices">Creating Matrices</a></li>
+  <li><a href="#scalar-multiplication" id="toc-scalar-multiplication" class="nav-link" data-scroll-target="#scalar-multiplication">Scalar Multiplication</a></li>
+  <li><a href="#adding-matrices-1" id="toc-adding-matrices-1" class="nav-link" data-scroll-target="#adding-matrices-1">Adding Matrices</a></li>
+  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication">Matrix Multiplication</a></li>
+  </ul></li>
+  <li><a href="#sec-17quest7" id="toc-sec-17quest7" class="nav-link" data-scroll-target="#sec-17quest7">Question 7:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-7" id="toc-solution-to-question-7" class="nav-link" data-scroll-target="#solution-to-question-7">Solution to Question 7:</a></li>
+  </ul></li>
+  <li><a href="#sec-17quest8" id="toc-sec-17quest8" class="nav-link" data-scroll-target="#sec-17quest8">Question 8:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-8" id="toc-solution-to-question-8" class="nav-link" data-scroll-target="#solution-to-question-8">Solution to Question 8:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#matrix-terminology" id="toc-matrix-terminology" class="nav-link" data-scroll-target="#matrix-terminology">Matrix Terminology</a>
+  <ul class="collapse">
+  <li><a href="#sec-17quest9" id="toc-sec-17quest9" class="nav-link" data-scroll-target="#sec-17quest9">Question 9:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-9" id="toc-solution-to-question-9" class="nav-link" data-scroll-target="#solution-to-question-9">Solution to Question 9:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#expressing-systems-in-matrix-form" id="toc-expressing-systems-in-matrix-form" class="nav-link" data-scroll-target="#expressing-systems-in-matrix-form">Expressing Systems in Matrix Form</a>
+  <ul class="collapse">
+  <li><a href="#sec-17quest10" id="toc-sec-17quest10" class="nav-link" data-scroll-target="#sec-17quest10">Question 10:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-10" id="toc-solution-to-question-10" class="nav-link" data-scroll-target="#solution-to-question-10">Solution to Question 10:</a></li>
+  </ul></li>
+  <li><a href="#sec-17quest11" id="toc-sec-17quest11" class="nav-link" data-scroll-target="#sec-17quest11">Question 11:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-11" id="toc-solution-to-question-11" class="nav-link" data-scroll-target="#solution-to-question-11">Solution to Question 11:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#eigenvalues-of-a-2-times-2-matrix" id="toc-eigenvalues-of-a-2-times-2-matrix" class="nav-link" data-scroll-target="#eigenvalues-of-a-2-times-2-matrix">Eigenvalues of a <span class="math inline">\(2 \times 2\)</span> Matrix</a>
+  <ul class="collapse">
+  <li><a href="#finding-eigenvalues-with-sympy" id="toc-finding-eigenvalues-with-sympy" class="nav-link" data-scroll-target="#finding-eigenvalues-with-sympy">Finding Eigenvalues with Sympy</a>
+  <ul class="collapse">
+  <li><a href="#example-finding-eigenvalues-of-3-times-3-matrix" id="toc-example-finding-eigenvalues-of-3-times-3-matrix" class="nav-link" data-scroll-target="#example-finding-eigenvalues-of-3-times-3-matrix">Example: Finding Eigenvalues of <span class="math inline">\(3 \times 3\)</span> Matrix</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-17Steps" id="toc-sec-17Steps" class="nav-link" data-scroll-target="#sec-17Steps">A Step by Step Process For Solving Linear Systems of ODES</a>
+  <ul class="collapse">
+  <li><a href="#sec-17step1" id="toc-sec-17step1" class="nav-link" data-scroll-target="#sec-17step1">Step 1:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-step-1" id="toc-solution-to-step-1" class="nav-link" data-scroll-target="#solution-to-step-1">Solution to Step 1:</a></li>
+  </ul></li>
+  <li><a href="#sec-17step2" id="toc-sec-17step2" class="nav-link" data-scroll-target="#sec-17step2">Step 2:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-step-2" id="toc-solution-to-step-2" class="nav-link" data-scroll-target="#solution-to-step-2">Solution to Step 2:</a></li>
+  </ul></li>
+  <li><a href="#sec-17step3" id="toc-sec-17step3" class="nav-link" data-scroll-target="#sec-17step3">Step 3:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-step-3" id="toc-solution-to-step-3" class="nav-link" data-scroll-target="#solution-to-step-3">Solution to Step 3:</a></li>
+  </ul></li>
+  <li><a href="#sec-17step4" id="toc-sec-17step4" class="nav-link" data-scroll-target="#sec-17step4">Step 4:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-step-4" id="toc-solution-to-step-4" class="nav-link" data-scroll-target="#solution-to-step-4">Solution to Step 4:</a></li>
+  </ul></li>
+  <li><a href="#sec-17step5" id="toc-sec-17step5" class="nav-link" data-scroll-target="#sec-17step5">Step 5:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-step-5" id="toc-solution-to-step-5" class="nav-link" data-scroll-target="#solution-to-step-5">Solution to Step 5:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#practice-questions" id="toc-practice-questions" class="nav-link" data-scroll-target="#practice-questions">Practice Questions</a>
+  <ul class="collapse">
+  <li><a href="#question-12" id="toc-question-12" class="nav-link" data-scroll-target="#question-12">Question 12:</a><a name="17quest12" class="nav-link" data-scroll-target="undefined"></a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-12" id="toc-solution-to-question-12" class="nav-link" data-scroll-target="#solution-to-question-12">Solution to Question 12:</a></li>
+  </ul></li>
+  <li><a href="#question-13" id="toc-question-13" class="nav-link" data-scroll-target="#question-13">Question 13:</a><a name="17quest13" class="nav-link" data-scroll-target="undefined"></a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-13" id="toc-solution-to-question-13" class="nav-link" data-scroll-target="#solution-to-question-13">Solution to Question 13:</a></li>
+  </ul></li>
+  <li><a href="#question-14" id="toc-question-14" class="nav-link" data-scroll-target="#question-14">Question 14:</a><a name="17quest14" class="nav-link" data-scroll-target="undefined"></a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-14" id="toc-solution-to-question-14" class="nav-link" data-scroll-target="#solution-to-question-14">Solution to Question 14:</a></li>
+  </ul></li>
+  <li><a href="#question-15" id="toc-question-15" class="nav-link" data-scroll-target="#question-15">Question 15:</a><a name="17quest15" class="nav-link" data-scroll-target="undefined"></a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-15" id="toc-solution-to-question-15" class="nav-link" data-scroll-target="#solution-to-question-15">Solution to Question 15:</a></li>
+  </ul></li>
+  <li><a href="#question-16" id="toc-question-16" class="nav-link" data-scroll-target="#question-16">Question 16:</a><a name="17quest16" class="nav-link" data-scroll-target="undefined"></a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-16" id="toc-solution-to-question-16" class="nav-link" data-scroll-target="#solution-to-question-16">Solution to Question 16:</a></li>
+  </ul></li>
+  <li><a href="#question-17" id="toc-question-17" class="nav-link" data-scroll-target="#question-17">Question 17:</a><a name="17quest17" class="nav-link" data-scroll-target="undefined"></a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-17" id="toc-solution-to-question-17" class="nav-link" data-scroll-target="#solution-to-question-17">Solution to Question 17:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#creative-commons-license-information" id="toc-creative-commons-license-information" class="nav-link" data-scroll-target="#creative-commons-license-information">Creative Commons License Information</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">3.4: Population Dynamics</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp3/17-Linear-Systems.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><font color="dodgerblue">Reading: <em>Notes on Diffy Q’s</em> Section 3.2, Section 3.3, and Section 3.4</font></p>
+<section id="an-initial-model" class="level1">
+<h1>An Initial Model</h1>
+<hr>
+<section id="sec-17quest1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17quest1">Question 1:</h2>
+<hr>
+<p>Let <span class="math inline">\(x(t)\)</span> denote the number of bacteria in a colony (labeled Colony 1) at time <span class="math inline">\(t\)</span> hours since noon. Let <span class="math inline">\(y(t)\)</span> denote the number of bacteria in a separate colony (labeled Colony 2) at time <span class="math inline">\(t\)</span> hours since noon. The size of populations <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> can be modeled by system of differential equations</p>
+<p><span class="math display">\[\begin{align}
+\frac{dx}{dt} &amp;= 3x\\
+\frac{dy}{dt} &amp;= -2y
+\end{align}\]</span></p>
+<section id="sec-17quest1a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-17quest1a">Question 1a:</h3>
+<hr>
+<p>Explain in practical terms how each of the populations is changing over time. Are the two populations interacting? What happens to the size of each colony in the long run?</p>
+<section id="solution-to-question-1a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1a">Solution to Question 1a:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-17quest1b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-17quest1b">Question 1b:</h3>
+<hr>
+<p>Solve each of the differential equations and give general solutions for <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
+<section id="solution-to-question-1b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-1b">Solution to Question 1b:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+</section>
+<section id="modeling-interacting-populations" class="level1">
+<h1>Modeling Interacting Populations</h1>
+<hr>
+<section id="sec-17quest2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17quest2">Question 2:</h2>
+<hr>
+<p>Now imagine Colony 1 and Colony 2 are arranged such that the size of populations <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> can be modeled by system of differential equations</p>
+<p><span class="math display">\[\begin{align}
+\frac{dx}{dt} &amp;= 3x+10y\\
+\frac{dy}{dt} &amp;= -2y
+\end{align}\]</span></p>
+<section id="sec-17quest2a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-17quest2a">Question 2a:</h3>
+<hr>
+<p>Explain in practical terms how each of the populations is changing over time. Are the two populations interacting? What happens to the size of each colony in the long run?</p>
+<section id="solution-to-question-2a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-2a">Solution to Question 2a:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-17quest2b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-17quest2b">Question 2b:</h3>
+<hr>
+<p>Notice the solution for <span class="math inline">\(y\)</span> is the same for this modified setup. Give an educated guess for the general form of the expression for the new solution for <span class="math inline">\(x(t)\)</span>.</p>
+<section id="solution-to-question-2b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-2b">Solution to Question 2b:</h4>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-17quest2c" class="level3">
+<h3 class="anchored" data-anchor-id="sec-17quest2c">Question 2c:</h3>
+<hr>
+<p>Substitute your answer in <a href="#sec-17quest2b">Question 2b</a> as well as the original solution for <span class="math inline">\(y(t)\)</span> in <a href="#sec-17quest1b">Question 1b</a> into the differential equation for <span class="math inline">\(x\)</span>,</p>
+<p><span class="math display">\[\frac{dx}{dt} = 3x+10y,\]</span></p>
+<p>and find the general solution for <span class="math inline">\(x\)</span>.</p>
+</section>
+<section id="solution-to-question-2c" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-2c">Solution to Question 2c:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="linear-systems-of-differential-equations" class="level1">
+<h1>Linear Systems of Differential Equations</h1>
+<hr>
+<section id="sec-17quest3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17quest3">Question 3:</h2>
+<hr>
+<p>If we consider a general system of differential equations of the form</p>
+<p><span class="math display">\[\begin{align}
+x' &amp;= ax+by \\
+y' &amp;= cx+dy
+\end{align}\]</span></p>
+<p>then we can generalize our approach in the previous example by guessing solutions of the form</p>
+<p><span class="math display">\[x(t) = C_1 e^{r_1t} + C_2 e^{r_2t} \qquad \mbox{and} \qquad y(t) = C_3e^{r_1t} + C_4 e^{r_2t},\]</span></p>
+<p>where we note there is some dependence between constant <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_3\)</span> and constants <span class="math inline">\(C_2\)</span> and <span class="math inline">\(C_4\)</span>. <strong>Explain how we might interpret the meaning of the constants <span class="math inline">\(r_1\)</span> and <span class="math inline">\(r_2\)</span> in practical terms.</strong></p>
+<section id="solution-to-question-3" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-3">Solution to Question 3:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-17quest4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17quest4">Question 4:</h2>
+<hr>
+<p>By plugging the guess for <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> into the differential equation <span class="math inline">\(x'= ax+by\)</span> you can derive two equations that the values <span class="math inline">\(r_1\)</span> and <span class="math inline">\(r_2\)</span> must satisfy. Replace each ?? with an appropriate expression to give the two equations.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Run the code cell below to help save some time with the calculus and algebraic manipulations.</p>
+</div>
+</div>
+<section id="solution-to-question-4" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-4">Solution to Question 4:</h3>
+<hr>
+<p><span class="math inline">\(r_1 C_1 = ??\)</span></p>
+<p><br></p>
+<p><span class="math inline">\(r_2 C_2 = ??\)</span></p>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sym</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating symbols</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>r1, r2, C1, C2, C3, C4, a, b, t, x, y <span class="op">=</span> sym.symbols(<span class="st">'r1, r2, C1, C2, C3, C4, a, b, t, x, y'</span>)  </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> C1 <span class="op">*</span> sym.exp(r1 <span class="op">*</span> t) <span class="op">+</span> C2 <span class="op">*</span> sym.exp(r2 <span class="op">*</span> t)  <span class="co"># General solution for x</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> C3 <span class="op">*</span> sym.exp(r1 <span class="op">*</span> t) <span class="op">+</span> C4 <span class="op">*</span> sym.exp(r2 <span class="op">*</span> t)  <span class="co"># General solution for y</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> x.diff(t,<span class="dv">1</span>)  <span class="co"># find formula for x' on left side</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>right <span class="op">=</span> sym.simplify(a<span class="op">*</span>x <span class="op">+</span> b<span class="op">*</span>y)  <span class="co"># simplify right side</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The left side is "</span>, left,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>     <span class="st">"</span><span class="ch">\n</span><span class="st"> </span><span class="ch">\n</span><span class="st"> The right side side is "</span>, right)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-17quest5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17quest5">Question 5:</h2>
+<hr>
+<p>Similar to <a href="#sec-17quest4">Question 4</a>, by plugging the guess for <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> into the differential equation <span class="math inline">\(y'= cx+dy\)</span> you can derive two equations that the values <span class="math inline">\(r_1\)</span> and <span class="math inline">\(r_2\)</span> must satisfy. Replace each ?? with an appropriate expression to give the two equations.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Run the code cell below to help save some time with the calculus and algebraic manipulations.</p>
+</div>
+</div>
+<section id="solution-to-question-5" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-5">Solution to Question 5:</h3>
+<hr>
+<p><span class="math inline">\(r_1 C_3 = ??\)</span></p>
+<p><br></p>
+<p><span class="math inline">\(r_2 C_4 = ??\)</span></p>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import sympy as sym  # only need to import once</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating symbols</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>r1, r2, C1, C2, C3, C4, c, d, t, x, y <span class="op">=</span> sym.symbols(<span class="st">'r1, r2, C1, C2, C3, C4, c, d, t, x, y'</span>)  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> C1 <span class="op">*</span> sym.exp(r1 <span class="op">*</span> t) <span class="op">+</span> C2 <span class="op">*</span> sym.exp(r2 <span class="op">*</span> t)  <span class="co"># General solution for x</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> C3 <span class="op">*</span> sym.exp(r1 <span class="op">*</span> t) <span class="op">+</span> C4 <span class="op">*</span> sym.exp(r2 <span class="op">*</span> t)  <span class="co"># General solution for y</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> y.diff(t,<span class="dv">1</span>)  <span class="co"># find formula for x' on left side</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>right <span class="op">=</span> sym.simplify(c<span class="op">*</span>x <span class="op">+</span> d<span class="op">*</span>y)  <span class="co"># simplify right side</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The left side is "</span>, left,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>     <span class="st">"</span><span class="ch">\n</span><span class="st"> </span><span class="ch">\n</span><span class="st"> The right side side is "</span>, right)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-17quest6" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17quest6">Question 6:</h2>
+<hr>
+<p>From <a href="#sec-17quest4">Question 4</a> and <a href="#sec-17quest5">Question 5</a>, we get a system of two equations that <span class="math inline">\(r_1\)</span> must simultaneously satisfy. Write the resulting system of two equations below.</p>
+<section id="solution-to-question-6" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-6">Solution to Question 6:</h3>
+<hr>
+<p><br></p>
+<p><span class="math inline">\(r_1 C_1 = ??\)</span></p>
+<p><br></p>
+<p><span class="math inline">\(r_1 C_3 = ??\)</span></p>
+<p><br></p>
+</section>
+</section>
+</section>
+<section id="essentials-of-linear-algebra" class="level1">
+<h1>Essentials of Linear Algebra</h1>
+<hr>
+<p>An <span class="math inline">\(m \times n\)</span> <font color="dodgerblue"><strong>matrix</strong></font> is a rectangular array of numbers with <span class="math inline">\(m\)</span> rows and <span class="math inline">\(n\)</span> columns. For example</p>
+<p><span class="math display">\[\begin{bmatrix}
+3 &amp; -2 &amp; 7 \\
+-12 &amp; 0 &amp; 5
+\end{bmatrix}\]</span></p>
+<p>is a 2 by 3 matrix since it has 2 rows and 3 columns.</p>
+<section id="multiplication-of-a-matrix-by-a-scalar" class="level2">
+<h2 class="anchored" data-anchor-id="multiplication-of-a-matrix-by-a-scalar">Multiplication of a Matrix by a Scalar</h2>
+<hr>
+<p>We can multiple a scalar (a regular number) and a matrix by simply multiplying each value in the matrix by the scalar. For example:</p>
+<p><span class="math display">\[2 \begin{bmatrix}
+3 &amp; -2 &amp; 7 \\
+-12 &amp; 0 &amp; 5
+\end{bmatrix} =
+\begin{bmatrix}
+6 &amp; -4 &amp; 14 \\
+-24 &amp; 0 &amp; 10
+\end{bmatrix}
+\qquad \mbox{and} \qquad
+\lambda \begin{bmatrix} C_1 \\ C_3 \end{bmatrix} =
+\begin{bmatrix} \lambda C_1 \\ \lambda C_3  \end{bmatrix}\]</span></p>
+</section>
+<section id="adding-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="adding-matrices">Adding Matrices</h2>
+<hr>
+<p>We can add two <span class="math inline">\(m\)</span> by <span class="math inline">\(n\)</span> matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> by adding values in the same row and column, for example</p>
+<p><span class="math display">\[\begin{bmatrix}
+3 &amp; -2 &amp; 7 \\
+-12 &amp; 0 &amp; 5
+\end{bmatrix} + \begin{bmatrix}
+0 &amp; 2 &amp; -4 \\
+10 &amp; -3 &amp; 4
+\end{bmatrix} =  \begin{bmatrix}
+3 &amp; 0 &amp; 3 \\
+-2 &amp; -3 &amp; 9
+\end{bmatrix} .\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As a result of this definition we cannot add two matrices if they have different dimensions.</p>
+</div>
+</div>
+</section>
+<section id="multiplication-of-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="multiplication-of-matrices">Multiplication of Matrices</h2>
+<hr>
+<p>Multiplication of two matrices is a little more complicated. Let <span class="math inline">\(A\)</span> denote an <span class="math inline">\(m\)</span> by <span class="math inline">\(n\)</span> matrix and <span class="math inline">\(B\)</span> denote an <span class="math inline">\(n\)</span> by <span class="math inline">\(p\)</span> matrix, then we have</p>
+<p><span class="math display">\[AB = \begin{bmatrix}
+\color{dodgerblue}{\mathbf{a_{11}}} &amp; \color{dodgerblue}{\mathbf{a_{12}}} &amp; \color{dodgerblue}{\mathbf{\ldots}} &amp; \color{dodgerblue}{\mathbf{a_{1n}}} \\
+a_{21} &amp; a_{22} &amp; \ldots &amp; a_{2n} \\
+\vdots &amp; \vdots &amp; &amp; \vdots \\
+a_{m1} &amp; a_{m2} &amp; \mathbf{\ldots} &amp; a_{mn}
+\end{bmatrix}
+\begin{bmatrix}
+b_{11} &amp; \color{dodgerblue}{\mathbf{b_{12}}} &amp; \ldots &amp; b_{1p} \\
+b_{21} &amp; \color{dodgerblue}{\mathbf{b_{22}}} &amp; \ldots &amp; b_{2p} \\
+\vdots &amp; \color{dodgerblue}{\mathbf{ \vdots }} &amp; &amp; \vdots \\
+b_{n1} &amp; \color{dodgerblue}{\mathbf{b_{n2}}} &amp; \ldots &amp; b_{np}
+\end{bmatrix} = \begin{bmatrix}
+c_{11} &amp; \color{dodgerblue}{\mathbf{c_{12}}} &amp; \ldots &amp; c_{1p} \\
+c_{21} &amp; c_{22} &amp; \ldots &amp; c_{2p} \\
+\vdots &amp; \vdots &amp; &amp; \vdots \\
+c_{m1} &amp; c_{m2} &amp; \ldots &amp; b_{mp}
+\end{bmatrix}\]</span></p>
+<p>where entry <span class="math inline">\(c_{ij}\)</span> in the <span class="math inline">\(i^{\mbox{th}}\)</span> row and <span class="math inline">\(j^{\mbox{th}}\)</span> column of the product is found by multiplying and adding entries of the <span class="math inline">\(i^{\mbox{th}}\)</span> row of <span class="math inline">\(A\)</span> and the <span class="math inline">\(j^{\mbox{th}}\)</span> column of <span class="math inline">\(B\)</span> as follows:</p>
+<p><span class="math display">\[c_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j} + \ldots + a_{in}b_{nj} = \sum_{k = 1}^n a_{ik}b_{kj}.\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The product <span class="math inline">\(\mathbf{AB}\)</span> is only defined if the number of columns of <span class="math inline">\(\mathbf{A}\)</span> matches the number of rows of <span class="math inline">\(\mathbf{B}\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="matrix-arithmetic-in-python-using-sympy" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-arithmetic-in-python-using-sympy">Matrix Arithmetic in Python Using Sympy</h2>
+<hr>
+<p>The <code>sympy</code> package can be used to perform matrix operations such as multiplication and addition.</p>
+<ul>
+<li><p>We enter matrices using <code>sym.Matrix([ [row1], [row2], ... , [last_row] ])</code>.</p></li>
+<li><p>We can find the size of a matrix using <code>sym.shape(M)</code>.</p></li>
+<li><p>We can add two matrices <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span> (assuming they are the same size) using <code>M + N</code>.</p></li>
+<li><p>We can multiply scalar <span class="math inline">\(c\)</span> and matrix <span class="math inline">\(M\)</span> with <code>c * M</code>.</p></li>
+<li><p>We can multiply two matrices <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span> (assuming the have the appropriate sizes) with <code>M * N</code>.</p></li>
+</ul>
+<p>The code cells below verify the calculations in the examples above as well as an example of matrix multiplication.</p>
+<section id="creating-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="creating-matrices">Creating Matrices</h3>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import sympy as sym  # we have already imported sympy</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 2 by 3 matrix M</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> sym.Matrix([[<span class="dv">3</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">7</span>],</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>          [<span class="op">-</span><span class="dv">12</span>, <span class="dv">0</span>, <span class="dv">5</span>]])</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 2 by 3 matrix N</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> sym.Matrix([[<span class="dv">0</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">4</span>],</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">10</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 3 by 2 matrix P</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> sym.Matrix([[<span class="dv">5</span>, <span class="dv">2</span>], </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>          [<span class="op">-</span><span class="dv">1</span>, <span class="dv">8</span>],</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">6</span>, <span class="op">-</span><span class="dv">3</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="scalar-multiplication" class="level3">
+<h3 class="anchored" data-anchor-id="scalar-multiplication">Scalar Multiplication</h3>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scalar multiplication example</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="adding-matrices-1" class="level3">
+<h3 class="anchored" data-anchor-id="adding-matrices-1">Adding Matrices</h3>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix Addition</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>M <span class="op">+</span> N</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># See what happens if you try the command below</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># M + P</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="matrix-multiplication" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h3>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix Multiplication</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>M <span class="op">*</span> P</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># See what happens if you try the command below</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># M * N</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-17quest7" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17quest7">Question 7:</h2>
+<hr>
+<p>Compute the product <span class="math inline">\(AB\)</span> for the matrices:</p>
+<p><span class="math display">\[A =  \begin{bmatrix} 3 &amp; 2 &amp; -1  \\ -7 &amp; 0 &amp; 5 \end{bmatrix}
+\qquad \mbox{and} \qquad
+B = \begin{bmatrix} 1 \\ 2 \\ -1 \end{bmatrix}\]</span></p>
+<p>Feel free to compute by hand or using Python by inserting a code cell to do the calculations.</p>
+<section id="solution-to-question-7" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-7">Solution to Question 7:</h3>
+<hr>
+<p><br></p>
+<p><span class="math display">\[AB = \begin{bmatrix}
+?? \\
+??
+\end{bmatrix}\]</span></p>
+<p><br></p>
+</section>
+</section>
+<section id="sec-17quest8" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17quest8">Question 8:</h2>
+<hr>
+<p>Compute the product <span class="math inline">\(AB\)</span> for the matrices:</p>
+<p><span class="math display">\[A =  \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}
+\qquad \mbox{and} \qquad
+B = \begin{bmatrix} C_1 \\ C_2 \end{bmatrix}\]</span></p>
+<p>Feel free to compute by hand or using Python by inserting a code cell to do the calculations.</p>
+<section id="solution-to-question-8" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-8">Solution to Question 8:</h3>
+<hr>
+<p><br></p>
+<p><span class="math display">\[AB = \begin{bmatrix}
+?? \\
+??
+\end{bmatrix}\]</span></p>
+<p><br></p>
+</section>
+</section>
+</section>
+<section id="matrix-terminology" class="level1">
+<h1>Matrix Terminology</h1>
+<hr>
+<p>Some important terminology when working with matrices:</p>
+<ul>
+<li>A matrix that has only one column is often called a <font color="dodgerblue"><strong>column vector</strong></font>.</li>
+<li>A column vector that is a column of all zeros is called the <font color="dodgerblue"><strong>zero vector</strong></font> and denoted <font color="dodgerblue"><span class="math inline">\(\mathbf{0}\)</span> or <span class="math inline">\(\vec{0}\)</span></font> in order to distinguish itself from the scalar value 0.</li>
+<li>An <span class="math inline">\(n \times n\)</span> matrix (same number of rows and columns) is called a <font color="dodgerblue"><strong>square matrix</strong></font>.</li>
+</ul>
+<section id="sec-17quest9" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17quest9">Question 9:</h2>
+<hr>
+<p>Give the matrix <span class="math inline">\(A\)</span> such that the system of equations for <span class="math inline">\(r_1\)</span> in <a href="#sec-17quest6">Question 6</a> can be written in matrix form as</p>
+<p><span class="math display">\[A \begin{bmatrix}  C_1 \\ C_3   \end{bmatrix} = r_1  \begin{bmatrix} C_1 \\ C_3  \end{bmatrix}.\]</span></p>
+<section id="solution-to-question-9" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-9">Solution to Question 9:</h3>
+<hr>
+<p><br></p>
+<p><span class="math display">\[A = \begin{bmatrix}
+?? &amp; ??\\
+?? &amp; ??
+\end{bmatrix}\]</span></p>
+<p><br></p>
+</section>
+</section>
+</section>
+<section id="expressing-systems-in-matrix-form" class="level1">
+<h1>Expressing Systems in Matrix Form</h1>
+<hr>
+<p>Let <span class="math inline">\(\mathbf{x'}\)</span> denote a column vector of derivatives such as</p>
+<p><span class="math display">\[\mathbf{x'} =  \begin{bmatrix} \dfrac{dx_1}{dt} \\ \dfrac{dx_2}{dt} \\ \dfrac{dx_3}{dt} \end{bmatrix}.\]</span></p>
+<section id="sec-17quest10" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17quest10">Question 10:</h2>
+<hr>
+<p>Give the matrix <span class="math inline">\(A\)</span> such that the system of differential equations below can be written in the form <span class="math inline">\(\mathbf{x'} = A \mathbf{x}\)</span>.</p>
+<p><span class="math display">\[\begin{array}{rl}
+\dfrac{dx_1}{dt} &amp;= 4 x_1 + 7 x_2 - x_3 \\
+\dfrac{dx_2}{dt} &amp;= -2x_1-11x_3\\
+\dfrac{dx_3}{dt} &amp;= 8x_3-x_2
+\end{array}\]</span></p>
+<section id="solution-to-question-10" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-10">Solution to Question 10:</h3>
+<hr>
+<p><span class="math display">\[\begin{bmatrix} \dfrac{dx_1}{dt} \\ \dfrac{dx_2}{dt} \\ \dfrac{dx_3}{dt} \end{bmatrix} =
+\begin{bmatrix}
+?? &amp; ?? &amp; ?? \\
+?? &amp; ?? &amp; ?? \\
+?? &amp; ?? &amp; ??
+\end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}.\]</span></p>
+<p><br></p>
+</section>
+</section>
+<section id="sec-17quest11" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17quest11">Question 11:</h2>
+<hr>
+<p>Express the system below in matrix form.</p>
+<p><span class="math display">\[\begin{array}{rl}
+x' &amp;= \cos{(2t)}x + \sin{(2t)}z\\
+y' &amp;= e^ty \\
+z' &amp;= \sin{(2t)}x + \cos{(2t)}z
+\end{array}\]</span></p>
+<section id="solution-to-question-11" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-11">Solution to Question 11:</h3>
+<hr>
+<p><span class="math display">\[\begin{bmatrix} x' \\ y' \\ z' \end{bmatrix} =
+\begin{bmatrix}
+?? &amp; ?? &amp; ?? \\
+?? &amp; ?? &amp; ?? \\
+?? &amp; ?? &amp; ??
+\end{bmatrix}
+\begin{bmatrix} x \\ y \\ z \end{bmatrix}.\]</span></p>
+<p><br></p>
+</section>
+</section>
+</section>
+<section id="eigenvalues-of-a-2-times-2-matrix" class="level1">
+<h1>Eigenvalues of a <span class="math inline">\(2 \times 2\)</span> Matrix</h1>
+<hr>
+<p>We say a scalar <span class="math inline">\(\lambda\)</span> is an <font color="dodgerblue"><strong>eigenvalue</strong></font> of a square matrix <span class="math inline">\(A\)</span> if there exists a nonzero vector <span class="math inline">\(\mathbf{v}\)</span> such that <span class="math inline">\(A\mathbf{v} = \lambda \mathbf{v}\)</span>. The eigenvalues of matrix have many useful applications and interpretations. We will see in the context of differential equations, they can tell us very important information about how the solutions behave.</p>
+<p>We will mostly be working with a system of two differential equations, so it will suffice to restrict our attention to the case where <span class="math inline">\(A\)</span> is a <span class="math inline">\(2 \times 2\)</span> matrix, but the discussion below can be generalized to deal with much larger systems. In the <span class="math inline">\(2 \times 2\)</span> case, <span class="math inline">\(\lambda\)</span> is an eigenvalue of <span class="math inline">\(A\)</span> if there exists a nonzero vector <span class="math inline">\(\mathbf{v}\)</span> such that</p>
+<p><span class="math display">\[\begin{align}
+\lambda \mathbf{v} &amp;= \begin{bmatrix} a &amp; b  \\ c &amp; d \end{bmatrix} \mathbf{v} \\
+\textbf{0} &amp;= \begin{bmatrix} a &amp; b  \\ c &amp; d \end{bmatrix} \mathbf{v} - \lambda \mathbf{v} \\
+\textbf{0} &amp;= \begin{bmatrix} a &amp; b  \\ c &amp; d \end{bmatrix}  \mathbf{v} - \begin{bmatrix} \lambda &amp; 0  \\ 0 &amp; \lambda \end{bmatrix}  \mathbf{v} \\
+\textbf{0} &amp;= \begin{bmatrix} a-\lambda &amp; b  \\ c &amp; d-\lambda \end{bmatrix} \mathbf{v}
+\end{align}\]</span></p>
+<p>Using linear algebra, we can show that <span class="math inline">\(\lambda\)</span> is an eigenvalue of <span class="math inline">\(A\)</span> if and only if</p>
+<p><span class="math display">\[ \mbox{det} \left(  \begin{bmatrix} a-\lambda &amp; b  \\ c &amp; d-\lambda \end{bmatrix} \right) = \color{dodgerblue}{(a-\lambda)(d-\lambda) - bc = 0}.\]</span></p>
+<ul>
+<li>The resulting quadratic equation (in <span class="math inline">\(\lambda\)</span>) is called the <font color="dodgerblue"><strong>characteristic equation</strong></font> for <span class="math inline">\(A\)</span>.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We can only find eigenvalues of square matrices. We cannot find eigenvalues for matrices whose number of rows and columns are not equal.</p>
+</div>
+</div>
+<section id="finding-eigenvalues-with-sympy" class="level2">
+<h2 class="anchored" data-anchor-id="finding-eigenvalues-with-sympy">Finding Eigenvalues with Sympy</h2>
+<hr>
+<p>Let <span class="math inline">\(M\)</span> denote a square matrix.</p>
+<ul>
+<li>To find the characteristic polynomial corresponding <span class="math inline">\(M\)</span>, use <code>M.charpoly()</code>.</li>
+<li>To find the eigenvalues of <span class="math inline">\(M\)</span>, use the command <code>M.eigenvals()</code>.</li>
+</ul>
+<section id="example-finding-eigenvalues-of-3-times-3-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="example-finding-eigenvalues-of-3-times-3-matrix">Example: Finding Eigenvalues of <span class="math inline">\(3 \times 3\)</span> Matrix</h3>
+<hr>
+<p>Consider the <span class="math inline">\(3 \times 3\)</span> matrix</p>
+<p><span class="math display">\[M = \begin{bmatrix}
+-13 &amp; -8 &amp; -4 \\
+12 &amp; 7 &amp; 4\\
+24 &amp; 16 &amp; 7
+\end{bmatrix}\]</span></p>
+<ul>
+<li>In the first code cell below, we find the eigenvalues by finding the zeros of the characteristic equation.</li>
+<li>In the second code cell below, we check our eigenvalues using <code>sym.eigenvals(M)</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding Eigenvalues with Characteristic Polynomials</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># import sympy as sym  # we have already imported</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Note the lambda is reserved, so we misspell on purpose</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>lamda <span class="op">=</span> sym.symbols(<span class="st">'lamda'</span>)  </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define matrix M</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> sym.Matrix([[<span class="op">-</span><span class="dv">13</span>, <span class="op">-</span><span class="dv">8</span>, <span class="op">-</span><span class="dv">4</span>],</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                [<span class="dv">12</span>, <span class="dv">7</span>, <span class="dv">4</span>], </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                [<span class="dv">24</span>, <span class="dv">16</span>, <span class="dv">7</span>]])</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Find characteristic polynomial of M</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> M.charpoly(lamda)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Factor the characteristic equation</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>sym.factor(p.as_expr())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking our previous result</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>M.eigenvals()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-17Steps" class="level1">
+<h1>A Step by Step Process For Solving Linear Systems of ODES</h1>
+<hr>
+<p>Recall the model for bacteria populations <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> in Colony 1 and Colony 2 in <a href="#sec-17quest2">Question 2</a>. Follow the steps below to find general solutions to the system</p>
+<p><span class="math display">\[\begin{align}
+\frac{dx}{dt} &amp;= 3x+10y \\
+\frac{dy}{dt} &amp;= -2y
+\end{align}.\]</span></p>
+<section id="sec-17step1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17step1">Step 1:</h2>
+<hr>
+<p>Write the system in matrix form and identify the matrix <span class="math inline">\(A\)</span>.</p>
+<section id="solution-to-step-1" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-step-1">Solution to Step 1:</h3>
+<hr>
+<p><br></p>
+<p><span class="math display">\[A = \begin{bmatrix}
+?? &amp; ?? \\
+?? &amp; ??
+\end{bmatrix}\]</span></p>
+<p><br></p>
+</section>
+</section>
+<section id="sec-17step2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17step2">Step 2:</h2>
+<hr>
+<p>Determine the characteristic equation.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may find the equation by hand or by inserting a code cell to help with the calculation.</p>
+</div>
+</div>
+<section id="solution-to-step-2" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-step-2">Solution to Step 2:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-17step3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17step3">Step 3:</h2>
+<hr>
+<p>Solve the characteristic equation.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may solve the equation by hand or by inserting a code cell to help with the calculation.</p>
+</div>
+</div>
+<section id="solution-to-step-3" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-step-3">Solution to Step 3:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-17step4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17step4">Step 4:</h2>
+<hr>
+<p>Give a general solution for <span class="math inline">\(x(t)\)</span>.</p>
+<section id="solution-to-step-4" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-step-4">Solution to Step 4:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-17step5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-17step5">Step 5:</h2>
+<hr>
+<p>Plug your solution for <span class="math inline">\(x(t)\)</span> into the differential equation <span class="math inline">\(x'\)</span> and solve for <span class="math inline">\(y(t)\)</span>.</p>
+<section id="solution-to-step-5" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-step-5">Solution to Step 5:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="practice-questions" class="level1">
+<h1>Practice Questions</h1>
+<hr>
+<section id="question-12" class="level2">
+<h2 class="anchored" data-anchor-id="question-12">Question 12:<a name="17quest12"></a></h2><a name="17quest12">
+<hr>
+<p>Find a general solution to the system of differential equations.</p>
+<p><span class="math display">\[\begin{array}{l} x'=-\frac{20}{9}x-\frac{8}{9}y\\ y'=-\frac{4}{9}x-\frac{34}{9}y\end{array}\]</span></p>
+<section id="solution-to-question-12" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-12">Solution to Question 12:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</a></section><a name="17quest12">
+</a><section id="question-13" class="level2"><a name="17quest12">
+</a><h2 class="anchored" data-anchor-id="question-13"><a name="17quest12">Question 13:</a><a name="17quest13"></a></h2><a name="17quest13">
+<hr>
+<p>Find a general solution to the system of differential equations.</p>
+<p><span class="math display">\[\begin{array}{l} x'=x-y\\ y'=2x-y\end{array}\]</span></p>
+<section id="solution-to-question-13" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-13">Solution to Question 13:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</a></section><a name="17quest13">
+</a><section id="question-14" class="level2"><a name="17quest13">
+</a><h2 class="anchored" data-anchor-id="question-14"><a name="17quest13">Question 14:</a><a name="17quest14"></a></h2><a name="17quest14">
+<hr>
+<p>Find a general solution to the system of differential equations.</p>
+<p><span class="math display">\[\begin{array}{l}x'=12x-3y\\y'=3x+6y \end{array}\]</span></p>
+<section id="solution-to-question-14" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-14">Solution to Question 14:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</a></section><a name="17quest14">
+</a><section id="question-15" class="level2"><a name="17quest14">
+</a><h2 class="anchored" data-anchor-id="question-15"><a name="17quest14">Question 15:</a><a name="17quest15"></a></h2><a name="17quest15">
+<hr>
+<p>Find a general solution to the system of differential equations.</p>
+<p><span class="math display">\[\begin{array}{l} x' =4x+5y\\y'=-x+2y \end{array}\]</span></p>
+<section id="solution-to-question-15" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-15">Solution to Question 15:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</a></section><a name="17quest15">
+</a><section id="question-16" class="level2"><a name="17quest15">
+</a><h2 class="anchored" data-anchor-id="question-16"><a name="17quest15">Question 16:</a><a name="17quest16"></a></h2><a name="17quest16">
+<hr>
+<p>Find a general solution to the system of differential equations.</p>
+<p><span class="math display">\[\begin{array}{l} x'=4x+21y\\y'=-2x-8y\end{array}\]</span></p>
+<section id="solution-to-question-16" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-16">Solution to Question 16:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</a></section><a name="17quest16">
+</a><section id="question-17" class="level2"><a name="17quest16">
+</a><h2 class="anchored" data-anchor-id="question-17"><a name="17quest16">Question 17:</a><a name="17quest17"></a></h2><a name="17quest17">
+<hr>
+<p>Find a general solution to the system of differential equations.</p>
+<p><span class="math display">\[\begin{array}{l} x'=2x+2y\\y'=x+3y \end{array}\]</span></p>
+<section id="solution-to-question-17" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-17">Solution to Question 17:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</a></section><a name="17quest17">
+</a></section><a name="17quest17">
+</a><section id="creative-commons-license-information" class="level1"><a name="17quest17">
+<h1>Creative Commons License Information</h1>
+<hr>
+</a><p><a name="17quest17"></a><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><em>Exploring Differential Equations</em></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/CU-Denver-MathStats-OER/ODEs" property="cc:attributionName" rel="cc:attributionURL">Adam Spiegler</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/CU-Denver-MathStats-OER/ODEs" rel="dct:source">https://github.com/CU-Denver-MathStats-OER/ODEs</a> and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., &amp; Fortune, N. (2018). <em>Inquiry oriented differential equations: Course materials</em>. Available at <a href="https://iode.sdsu.edu">https://iode.sdsu.edu</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Chp3/16-Phase-Plane-Equation.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">3.3: Phase Plane Equations</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Chp3/18-Stability-of-Equilibrium.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">3.5: Stability of Equilibria</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Exploring Differential Equations by Adam Spiegler</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" class="img-fluid" alt="Creative Commons License"> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-N-SA 4.0</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

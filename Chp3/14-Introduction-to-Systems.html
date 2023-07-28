@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Exploring Differential Equations - 3.1: Introduction to Systems of ODEs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Chp3/15-Phase-Plane-Portrait.html" rel="next">
+<link href="../Chp2/Mass-Spring-Tutorial.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Chp3/14-Introduction-to-Systems.html">Chapter 3: Systems of Differential Equations</a></li><li class="breadcrumb-item"><a href="../Chp3/14-Introduction-to-Systems.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">3.1: Introduction to Systems of ODEs</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Exploring Differential Equations</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Chapter 1: First Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/01-What-is-a-Differential-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1: Interpreting Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/02-Slope-Fields.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2: Slope Fields</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/03-Phase-Line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3: The Phase Plane</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/04-Eulers-Method.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4: Numerically Approximations of Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/05-Separable-Diff-Eqs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5: Separable Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/06-Integrating-Factors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6: Solving Linear First Order Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/07-Mixture-Applications.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7: Applications to Compartmental Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/08-Application-Heating-and-Cooling.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8: Applications to Heating and Cooling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp1/ODE-Tools-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for First Order ODEs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Chapter 2: Second Order Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/09-Intro-to-Second-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1: Second Order Linear Differential Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/10-Homogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2: Homogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/11-Nonhomogeneous-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3: Nonhomogeneous Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/12-Superposition-2nd-Order.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4: Superposition and General Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/13-Mass-Spring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5: Experimenting with Mass-Spring Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp2/Mass-Spring-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Mass-Spring Systems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Chapter 3: Systems of Differential Equations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/14-Introduction-to-Systems.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">3.1: Introduction to Systems of ODEs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/15-Phase-Plane-Portrait.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2: Phase Plane Portraits</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/16-Phase-Plane-Equation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3: Phase Plane Equations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/17-Linear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4: Population Dynamics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/18-Stability-of-Equilibrium.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5: Stability of Equilibria</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/19-Nonlinear-Systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6: Dynamics of Non-Linear Systems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp3/Phase-Portraits-Tutorial.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Python Tutorial for Phase Planes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Chapter 4: Laplace Transforms</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1: Introduction to Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/21-Properties-of-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2: Properties of Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/22-Inverse-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3: Inverse Laplace Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Chp4/23-Solving-IVP-with-Laplace-Transforms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4: Solving ODEs with Laplace Transforms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#interacting-populations" id="toc-interacting-populations" class="nav-link active" data-scroll-target="#interacting-populations">Interacting Populations</a>
+  <ul class="collapse">
+  <li><a href="#sec-14quest1" id="toc-sec-14quest1" class="nav-link" data-scroll-target="#sec-14quest1">Question 1:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-1" id="toc-solution-to-question-1" class="nav-link" data-scroll-target="#solution-to-question-1">Solution to Question 1:</a></li>
+  </ul></li>
+  <li><a href="#sec-14quest2" id="toc-sec-14quest2" class="nav-link" data-scroll-target="#sec-14quest2">Question 2:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-2" id="toc-solution-to-question-2" class="nav-link" data-scroll-target="#solution-to-question-2">Solution to Question 2:</a></li>
+  </ul></li>
+  <li><a href="#sec-14quest3" id="toc-sec-14quest3" class="nav-link" data-scroll-target="#sec-14quest3">Question 3:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-3" id="toc-solution-to-question-3" class="nav-link" data-scroll-target="#solution-to-question-3">Solution to Question 3:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#visualizing-solutions-to-a-system-of-differential-equations" id="toc-visualizing-solutions-to-a-system-of-differential-equations" class="nav-link" data-scroll-target="#visualizing-solutions-to-a-system-of-differential-equations">Visualizing Solutions to a System of Differential Equations</a>
+  <ul class="collapse">
+  <li><a href="#dimensional-projections" id="toc-dimensional-projections" class="nav-link" data-scroll-target="#dimensional-projections">2-Dimensional Projections</a></li>
+  <li><a href="#sec-14quest4" id="toc-sec-14quest4" class="nav-link" data-scroll-target="#sec-14quest4">Question 4:</a>
+  <ul class="collapse">
+  <li><a href="#sec-14quest4a" id="toc-sec-14quest4a" class="nav-link" data-scroll-target="#sec-14quest4a">Question 4a: Rabbits and Time</a></li>
+  <li><a href="#sec-14quest4b" id="toc-sec-14quest4b" class="nav-link" data-scroll-target="#sec-14quest4b">Question 4b: Foxes and Time</a></li>
+  <li><a href="#sec-14quest4c" id="toc-sec-14quest4c" class="nav-link" data-scroll-target="#sec-14quest4c">Question 4c: Rabbits and Foxes</a></li>
+  </ul></li>
+  <li><a href="#sec-14quest5" id="toc-sec-14quest5" class="nav-link" data-scroll-target="#sec-14quest5">Question 5:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-5" id="toc-solution-to-question-5" class="nav-link" data-scroll-target="#solution-to-question-5">Solution to Question 5:</a></li>
+  </ul></li>
+  <li><a href="#sec-14quest6" id="toc-sec-14quest6" class="nav-link" data-scroll-target="#sec-14quest6">Question 6:</a>
+  <ul class="collapse">
+  <li><a href="#question-6a-plotting-rabbits-vs-time" id="toc-question-6a-plotting-rabbits-vs-time" class="nav-link" data-scroll-target="#question-6a-plotting-rabbits-vs-time">Question 6a: Plotting Rabbits vs Time</a></li>
+  <li><a href="#question-6b-plotting-foxes-vs-time" id="toc-question-6b-plotting-foxes-vs-time" class="nav-link" data-scroll-target="#question-6b-plotting-foxes-vs-time">Question 6b: Plotting Foxes vs Time</a></li>
+  <li><a href="#question-6c-plotting-rabbits-vs-foxes" id="toc-question-6c-plotting-rabbits-vs-foxes" class="nav-link" data-scroll-target="#question-6c-plotting-rabbits-vs-foxes">Question 6c: Plotting Rabbits vs Foxes</a></li>
+  </ul></li>
+  <li><a href="#sec-14quest7" id="toc-sec-14quest7" class="nav-link" data-scroll-target="#sec-14quest7">Question 7:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-7" id="toc-solution-to-question-7" class="nav-link" data-scroll-target="#solution-to-question-7">Solution to Question 7:</a></li>
+  </ul></li>
+  <li><a href="#sec-14quest8" id="toc-sec-14quest8" class="nav-link" data-scroll-target="#sec-14quest8">Question 8:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-8" id="toc-solution-to-question-8" class="nav-link" data-scroll-target="#solution-to-question-8">Solution to Question 8:</a></li>
+  </ul></li>
+  <li><a href="#sec-14quest9" id="toc-sec-14quest9" class="nav-link" data-scroll-target="#sec-14quest9">Question 9:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-9" id="toc-solution-to-question-9" class="nav-link" data-scroll-target="#solution-to-question-9">Solution to Question 9:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#the-phase-plane-visualizing-solutions-to-systems" id="toc-the-phase-plane-visualizing-solutions-to-systems" class="nav-link" data-scroll-target="#the-phase-plane-visualizing-solutions-to-systems">The Phase Plane: Visualizing Solutions to Systems</a>
+  <ul class="collapse">
+  <li><a href="#sec-14quest10" id="toc-sec-14quest10" class="nav-link" data-scroll-target="#sec-14quest10">Question 10:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-10" id="toc-solution-to-question-10" class="nav-link" data-scroll-target="#solution-to-question-10">Solution to Question 10:</a></li>
+  </ul></li>
+  <li><a href="#sec-14quest11" id="toc-sec-14quest11" class="nav-link" data-scroll-target="#sec-14quest11">Question 11:</a>
+  <ul class="collapse">
+  <li><a href="#solution-to-question-11" id="toc-solution-to-question-11" class="nav-link" data-scroll-target="#solution-to-question-11">Solution to Question 11:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#creative-commons-license-information" id="toc-creative-commons-license-information" class="nav-link" data-scroll-target="#creative-commons-license-information">Creative Commons License Information</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">3.1: Introduction to Systems of ODEs</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp3/14-Introduction-to-Systems.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><font color="dodgerblue">Reading: <em>Notes on Diffy Q’s</em> Section 3.1</font></p>
+<section id="interacting-populations" class="level1">
+<h1>Interacting Populations</h1>
+<hr>
+<p>Most species live in interaction with other species. For example, perhaps one species preys on another species, like foxes and rabbits. Below is a <font color="dodgerblue"><strong>system of differential equations</strong></font> intended to predict future populations of rabbits and foxes over time, where <span class="math inline">\(R\)</span> is the population (in hundreds) of rabbits at any time <span class="math inline">\(t\)</span> and <span class="math inline">\(F\)</span> is the population of foxes (in tens) at any time <span class="math inline">\(t\)</span> (in years).</p>
+<p><span class="math display">\[\begin{align}
+\frac{dR}{dt} &amp;= 3R-1.4RF\\
+\frac{dF}{dt} &amp;= -F+0.8RF
+\end{align}\]</span></p>
+<section id="sec-14quest1" class="level2">
+<h2 class="anchored" data-anchor-id="sec-14quest1">Question 1:</h2>
+<hr>
+<p>In earlier work with the rate of change equation <span class="math inline">\(\dfrac{dP}{dt}=kP\)</span> we assumed that there was only one species, that the resources were unlimited, and that the species reproduced continuously. Which, if any, of these assumptions is modified and how is this modification reflected in the above system of differential equations?</p>
+<section id="solution-to-question-1" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-1">Solution to Question 1:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-14quest2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-14quest2">Question 2:</h2>
+<hr>
+<p>Interpret the meaning of <em>each</em> term in the rate of change equations (e.g., how do you interpret or make sense of the <span class="math inline">\(-1.4RF\)</span> term) and what are the implications of this term on the future predicted populations? Similarly for <span class="math inline">\(3R\)</span>, <span class="math inline">\(-F\)</span>, and <span class="math inline">\(0.8RF\)</span>.</p>
+<section id="solution-to-question-2" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-2">Solution to Question 2:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-14quest3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-14quest3">Question 3:</h2>
+<hr>
+<p>Scientists studying a rabbit-fox population estimate that the current number of rabbits is 100 (<span class="math inline">\(R=1\)</span>) and that the number of foxes is 10 (<span class="math inline">\(F=1\)</span>). Use two steps of Euler’s method with step size of <span class="math inline">\(\Delta t =0.5\)</span> to get numerical estimates for the future number of rabbits and foxes as predicted by the differential equations. Enter your answers in the table below.</p>
+<section id="solution-to-question-3" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-3">Solution to Question 3:</h3>
+<hr>
+<p><br></p>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 17%">
+<col style="width: 13%">
+<col style="width: 16%">
+<col style="width: 10%">
+<col style="width: 16%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(t\)</span> (in years)</th>
+<th><span class="math inline">\(R\)</span> (in hundreds)</th>
+<th><span class="math inline">\(F\)</span> (in tens)</th>
+<th><span class="math inline">\(\dfrac{dR}{dt}\)</span></th>
+<th><span class="math inline">\(\Delta R\)</span></th>
+<th><span class="math inline">\(\dfrac{dF}{dt}\)</span></th>
+<th><span class="math inline">\(\Delta F\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="even">
+<td>0.5</td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</section>
+</section>
+</section>
+<section id="visualizing-solutions-to-a-system-of-differential-equations" class="level1">
+<h1>Visualizing Solutions to a System of Differential Equations</h1>
+<hr>
+<p>We will continue working with the rabbit and fox population model below:</p>
+<p><span class="math display">\[\begin{align}
+\frac{dR}{dt} &amp;= 3R-1.4RF\\
+\frac{dF}{dt} &amp;= -F+0.8RF
+\end{align}.\]</span></p>
+<p>If initially there are <span class="math inline">\(R=3\)</span> (300 rabbits) and <span class="math inline">\(F=2\)</span> (20 foxes), then the solution can be plotted in 3-dimensions as shown below.</p>
+<ul>
+<li>Run the first code cell (without any edits). The first code cell defines the parameters of the model and the initial values.</li>
+<li>Then run the second code cell (without any edits) to plot the solution in <span class="math inline">\(\mathbb{R}^3\)</span>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> odeint</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Definition of parameters</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">3.</span>  <span class="co"># rabbit growth/decay rate</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="op">-</span><span class="fl">1.4</span>  <span class="co"># rabbit interaction term with fox</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="op">-</span><span class="fl">1.</span>  <span class="co"># fox growth/decay rate</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="fl">0.8</span>  <span class="co"># fox interaction term with rabbit</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>X0 <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">2</span>])  <span class="co"># initials conditions: 3 rabbits and 2 foxes</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>tspan <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">15</span>,  <span class="dv">1000</span>)  <span class="co"># time to evaluate solution</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Define differential equation</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dxdt(X, t, a,b,c,d):</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        a<span class="op">*</span>X[<span class="dv">0</span>] <span class="op">+</span> b<span class="op">*</span>X[<span class="dv">0</span>]<span class="op">*</span>X[<span class="dv">1</span>],</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        c<span class="op">*</span>X[<span class="dv">1</span>] <span class="op">+</span> d<span class="op">*</span>X[<span class="dv">0</span>]<span class="op">*</span>X[<span class="dv">1</span>]</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    ])</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Find solution</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> odeint(dxdt, X0, t<span class="op">=</span>tspan, args <span class="op">=</span> (a,b,c,d)) <span class="co"># solve system</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>ax.plot3D(tspan, X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>])</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Rabbits'</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">'Foxes'</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="dimensional-projections" class="level2">
+<h2 class="anchored" data-anchor-id="dimensional-projections">2-Dimensional Projections</h2>
+<hr>
+<p>In our interacting rabbit and fox model, we have three variables <span class="math inline">\(R\)</span>, <span class="math inline">\(F\)</span>, and <span class="math inline">\(t\)</span>. From the solution in the <span class="math inline">\(3\)</span>-dimensional plot above, we can better understand the dynamics of these two interacting species.</p>
+<ul>
+<li>How does the rabbit population change with time?</li>
+<li>How does the fox population change with time?</li>
+<li>How do the rabbit and fox populations interact with each over time?</li>
+</ul>
+<p>A useful tool in mathematics for interpreting the relation between three variables is to consider pairwise relations. Graphically, this is equivalent to projecting the curve in 3 dimensional space above onto different 2 dimensional planes.</p>
+</section>
+<section id="sec-14quest4" class="level2">
+<h2 class="anchored" data-anchor-id="sec-14quest4">Question 4:</h2>
+<hr>
+<p>We would like to make future predictions for our rabbit-fox system</p>
+<p><span class="math display">\[\begin{align}
+\frac{dR}{dt} &amp;= 3R-1.4RF \\
+\frac{dF}{dt} &amp;= -F+0.8RF
+\end{align}\]</span></p>
+<p>if at time <span class="math inline">\(t=0\)</span> we initially have 300 rabbits (<span class="math inline">\(R=3\)</span>) and 20 foxes (<span class="math inline">\(F=2\)</span>).</p>
+<section id="sec-14quest4a" class="level3">
+<h3 class="anchored" data-anchor-id="sec-14quest4a">Question 4a: Rabbits and Time</h3>
+<hr>
+<p>Run the code cell below to plot the graph of <span class="math inline">\(R\)</span> vs <span class="math inline">\(t\)</span>.</p>
+<ul>
+<li>Use the graph to describe how the rabbit population will change as time goes on.</li>
+<li>Based on the graph, what type of function(s) would you use to model the solution <span class="math inline">\(R=f(t)\)</span>? Explain how you determined your answer.</li>
+</ul>
+<section id="solution-to-question-4a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4a">Solution to Question 4a:</h4>
+<hr>
+<p><mark>Write your interpretation in the space below.</mark></p>
+<p><br><br>
+<br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, projection<span class="op">=</span><span class="st">'3d'</span>) </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ax1.plot(tspan, X[:,<span class="dv">0</span>], <span class="st">'r:'</span>, zdir<span class="op">=</span><span class="st">'z'</span>, zs<span class="op">=</span><span class="dv">0</span>, alpha<span class="op">=</span><span class="fl">.8</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ax1.plot3D(tspan, X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>])</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ax2.plot(tspan, X[:,<span class="dv">0</span>], <span class="st">'r-'</span>, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ax2.grid()</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Rabbits'</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-14quest4b" class="level3">
+<h3 class="anchored" data-anchor-id="sec-14quest4b">Question 4b: Foxes and Time</h3>
+<hr>
+<p>Run the code cell below to plot the graph of <span class="math inline">\(F\)</span> vs <span class="math inline">\(t\)</span>.</p>
+<ul>
+<li>Use the graph to describe how the fox population will change as time goes on.</li>
+<li>Based on the graph, what type of function(s) would you use to model the solution <span class="math inline">\(F=g(t)\)</span>? Explain how you determined your answer.</li>
+</ul>
+<section id="solution-to-question-4b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4b">Solution to Question 4b:</h4>
+<hr>
+<p><mark>Write your interpretation in the space below.</mark></p>
+<p><br><br>
+<br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, projection<span class="op">=</span><span class="st">'3d'</span>) </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ax1.plot(tspan, X[:,<span class="dv">1</span>], <span class="st">'g:'</span>, zdir<span class="op">=</span><span class="st">'y'</span>, zs<span class="op">=</span><span class="dv">40</span>, alpha<span class="op">=</span><span class="fl">.8</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>ax1.plot3D(tspan, X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>])</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>ax2.plot(tspan, X[:,<span class="dv">1</span>], <span class="st">'g-'</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>ax2.grid()</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Foxes'</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-14quest4c" class="level3">
+<h3 class="anchored" data-anchor-id="sec-14quest4c">Question 4c: Rabbits and Foxes</h3>
+<hr>
+<p>Run the code cell below to plot the graph of <span class="math inline">\(R\)</span> vs <span class="math inline">\(F\)</span>. Then use the graph to describe how the rabbit and fox populations interact with each other over time.</p>
+<section id="solution-to-question-4c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-4c">Solution to Question 4c:</h4>
+<hr>
+<p><mark>Write your interpretation in the space below.</mark></p>
+<p><br><br>
+<br><br>
+<br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, projection<span class="op">=</span><span class="st">'3d'</span>) </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>ax1.plot(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], <span class="st">'k:'</span>, zdir<span class="op">=</span><span class="st">'x'</span>, zs<span class="op">=</span><span class="dv">0</span>, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ax1.plot3D(tspan, X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>ax2.plot(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], <span class="st">'k-'</span>, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ax2.grid()</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'Rabbits'</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Foxes'</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-14quest5" class="level2">
+<h2 class="anchored" data-anchor-id="sec-14quest5">Question 5:</h2>
+<hr>
+<p>Suppose the current number of rabbits is <span class="math inline">\(R=3\)</span> (300 rabbits) and the number of foxes is <span class="math inline">\(F=0\)</span>. <strong>Without using any technology and without making any calculations</strong>, what does the system of rate of change equations (same one as <a href="#sec-14quest4">Question 4</a>) predict for the future number of rabbits and foxes? Explain your reasoning.</p>
+<section id="solution-to-question-5" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-5">Solution to Question 5:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-14quest6" class="level2">
+<h2 class="anchored" data-anchor-id="sec-14quest6">Question 6:</h2>
+<hr>
+<p>Now use the code cells in parts (a)-(c) below to check your answer in <a href="#sec-14quest5">Question 5</a> (with initial population <span class="math inline">\(R=3\)</span> and <span class="math inline">\(F=0\)</span>).</p>
+<section id="question-6a-plotting-rabbits-vs-time" class="level3">
+<h3 class="anchored" data-anchor-id="question-6a-plotting-rabbits-vs-time">Question 6a: Plotting Rabbits vs Time</h3>
+<hr>
+<p>Run the code cell below to check your answer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import numpy as np</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#from scipy.integrate import odeint</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Definition of parameters</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#a = 3.  # rabbit growth/decay rate</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#b = -1.4  # rabbit interaction term with fox</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#c = -1.  # fox growth/decay rate</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#d = 0.8  # fox interaction term with rabbit</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>X0 <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">0</span>])  <span class="co"># initials conditions: 3 rabbits and 0 foxes</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>tspan <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">15</span>,  <span class="dv">1000</span>)  <span class="co"># time to evaluate solution</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Define differential equation</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dxdt(X, t, a,b,c,d):</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        a<span class="op">*</span>X[<span class="dv">0</span>] <span class="op">+</span> b<span class="op">*</span>X[<span class="dv">0</span>]<span class="op">*</span>X[<span class="dv">1</span>],</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        c<span class="op">*</span>X[<span class="dv">1</span>] <span class="op">+</span> d<span class="op">*</span>X[<span class="dv">0</span>]<span class="op">*</span>X[<span class="dv">1</span>]</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    ])</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Find solution</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> odeint(dxdt, X0, t<span class="op">=</span>tspan, args <span class="op">=</span> (a,b,c,d)) <span class="co"># solve system</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot solution</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, projection<span class="op">=</span><span class="st">'3d'</span>) </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>ax1.plot(tspan, X[:,<span class="dv">0</span>], <span class="st">'r:'</span>, zdir<span class="op">=</span><span class="st">'z'</span>, zs<span class="op">=</span><span class="dv">0</span>, alpha<span class="op">=</span><span class="fl">.8</span>)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>ax1.plot3D(tspan, X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>])</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>ax2.plot(tspan, X[:,<span class="dv">0</span>], <span class="st">'r-'</span>, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>ax2.grid()</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Rabbits'</span>)</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-6b-plotting-foxes-vs-time" class="level3">
+<h3 class="anchored" data-anchor-id="question-6b-plotting-foxes-vs-time">Question 6b: Plotting Foxes vs Time</h3>
+<hr>
+<p>Run the code cell below to check your answer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, projection<span class="op">=</span><span class="st">'3d'</span>) </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ax1.plot(tspan, X[:,<span class="dv">1</span>], <span class="st">'g:'</span>, zdir<span class="op">=</span><span class="st">'y'</span>, zs<span class="op">=</span><span class="dv">40</span>, alpha<span class="op">=</span><span class="fl">.8</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ax1.plot3D(tspan, X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>])</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ax2.plot(tspan, X[:,<span class="dv">1</span>], <span class="st">'g-'</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ax2.grid()</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Foxes'</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-6c-plotting-rabbits-vs-foxes" class="level3">
+<h3 class="anchored" data-anchor-id="question-6c-plotting-rabbits-vs-foxes">Question 6c: Plotting Rabbits vs Foxes</h3>
+<hr>
+<p>Run the code cell below to check your answer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, projection<span class="op">=</span><span class="st">'3d'</span>) </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>ax1.plot(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], <span class="st">'m:'</span>, zdir<span class="op">=</span><span class="st">'x'</span>, zs<span class="op">=</span><span class="dv">0</span>, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>ax1.plot3D(tspan, X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>])</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>ax2.plot(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], <span class="st">'m-'</span>, alpha<span class="op">=</span><span class="fl">.5</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ax2.grid()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'Rabbits'</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Foxes'</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec-14quest7" class="level2">
+<h2 class="anchored" data-anchor-id="sec-14quest7">Question 7:</h2>
+<hr>
+<p>Using initial condition <span class="math inline">\(R = 3\)</span> (300 rabbits) and <span class="math inline">\(F = 0\)</span> (no foxes), tell the story (in words) of what happens to the rabbit and fox population as time continues.</p>
+<section id="solution-to-question-7" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-7">Solution to Question 7:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-14quest8" class="level2">
+<h2 class="anchored" data-anchor-id="sec-14quest8">Question 8:</h2>
+<hr>
+<p>What would it mean for the rabbit-fox system to be in <font color="dodgerblue"><strong>equilibrium</strong></font>? Are there any equilibrium solutions to this system of rate of change equations? If so, determine all equilibrium solutions and generate the 3D and other views for each equilibrium solution.</p>
+<section id="solution-to-question-8" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-8">Solution to Question 8:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-14quest9" class="level2">
+<h2 class="anchored" data-anchor-id="sec-14quest9">Question 9:</h2>
+<hr>
+<p>For single differential equations, we classified equilibrium solutions as <font color="dodgerblue"><strong>stable (attractors)</strong></font>, <font color="dodgerblue"><strong>unstable repellers</strong></font>, or <font color="dodgerblue"><strong>semi-stable (nodes)</strong></font>. For each of the equilibrium solutions in the previous question, create your own terms to classify the equilibrium solutions in and briefly explain your reasons behind your choice of terms.</p>
+<section id="solution-to-question-9" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-9">Solution to Question 9:</h3>
+<hr>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="the-phase-plane-visualizing-solutions-to-systems" class="level1">
+<h1>The Phase Plane: Visualizing Solutions to Systems</h1>
+<hr>
+<p>One view of solutions for studying solutions to systems of <font color="dodgerblue"><strong>autonomous (independent of <span class="math inline">\(t\)</span>)</strong></font> differential equations of the form</p>
+<p><span class="math display">\[\begin{aligned}
+\frac{dx}{dt} &amp;= f(x,y)\\
+\frac{dy}{dt} &amp;= g(x,y)
+\end{aligned}\]</span></p>
+<p>is in the <span class="math inline">\(xy\)</span>-plane, called the <font color="dodgerblue"><strong>phase plane</strong></font>.</p>
+<ul>
+<li>The phase plane is the analog to the phase line for a single autonomous differential equation.</li>
+<li>In the Rabbit-Fox example, these are the plots of <span class="math inline">\(F\)</span> vs <span class="math inline">\(R\)</span>.</li>
+</ul>
+<section id="sec-14quest10" class="level2">
+<h2 class="anchored" data-anchor-id="sec-14quest10">Question 10:</h2>
+<hr>
+<p>Consider the rabbit-fox system of differential equations</p>
+<p><span class="math display">\[\begin{align}
+\frac{dR}{dt} &amp;= 3R-1.4RF \\
+\frac{dF}{dt} &amp;= -F+0.8RF
+\end{align}\]</span></p>
+<p>and the graph of the solution with initial condition <span class="math inline">\((2,3)\)</span>, as viewed in the phase plane (that is, the <span class="math inline">\(RF\)</span>-plane). The two points in the table below are on the same solution curve. Recall that the solutions we’ve seen in the past are closed curves, but the solution could be moving clockwise or counterclockwise. Fill in the following table and decide which way the solution is moving, and explain your reasoning.</p>
+<section id="solution-to-question-10" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-10">Solution to Question 10:</h3>
+<hr>
+<p><br></p>
+<table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 18%">
+<col style="width: 14%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(t\)</span> (in years)</th>
+<th><span class="math inline">\(R\)</span> (in hundreds)</th>
+<th><span class="math inline">\(F\)</span> (in tens)</th>
+<th><span class="math inline">\(\dfrac{dR}{dt}\)</span></th>
+<th><span class="math inline">\(\dfrac{dF}{dt}\)</span></th>
+<th><span class="math inline">\(\dfrac{dF}{dR}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\(2\)</span></td>
+<td><span class="math inline">\(3\)</span></td>
+<td><mark>Fill in your answer here</mark></td>
+<td><mark>Fill in your answer here</mark></td>
+<td><mark>Fill in your answer here</mark></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(2.07\)</span></td>
+<td><span class="math inline">\(0.756\)</span></td>
+<td><span class="math inline">\(1.431\)</span></td>
+<td><mark>Fill in your answer here</mark></td>
+<td><mark>Fill in your answer here</mark></td>
+<td><mark>Fill in your answer here</mark></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><img src="https://raw.githubusercontent.com/CU-Denver-MathStats-OER/ODEs/main/Chp3/Images/14Solution.png" alt="Phase Plane" width="480"></p>
+<p><br></p>
+<p><mark>Comment on which direction (clockwise or counterclockwise) the solution rotates around the curve.</mark></p>
+<p><br><br>
+<br></p>
+</section>
+</section>
+<section id="sec-14quest11" class="level2">
+<h2 class="anchored" data-anchor-id="sec-14quest11">Question 11:</h2>
+<hr>
+<p>Consider plotting additional vectors in phase plane from <a href="#sec-14quest10">Question 10</a> for the system</p>
+<p><span class="math display">\[\begin{align}
+\frac{dR}{dt} &amp;= 3R-1.4RF \\
+\frac{dF}{dt} &amp;= -F+0.8RF
+\end{align}\]</span></p>
+<p>at the points <span class="math inline">\((R,F)\)</span> in the table below. Fill in the blanks below and comment on whether you notice anything interesting about these vectors.</p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(R\)</span></th>
+<th><span class="math inline">\(F\)</span></th>
+<th><span class="math inline">\(\dfrac{dR}{dt}\)</span></th>
+<th><span class="math inline">\(\dfrac{dF}{dt}\)</span></th>
+<th><span class="math inline">\(\dfrac{dF}{dR}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(1.25\)</span></td>
+<td><span class="math inline">\(0\)</span></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(1.25\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(1.25\)</span></td>
+<td><span class="math inline">\(2\)</span></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(1.25\)</span></td>
+<td><span class="math inline">\(3\)</span></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+<td><mark>??</mark></td>
+</tr>
+</tbody>
+</table>
+<section id="solution-to-question-11" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-question-11">Solution to Question 11:</h3>
+<hr>
+<p><br></p>
+<p>Replace each <mark>??</mark> with an appropriate value. Then comment on anything interesting you observe.</p>
+<p><br><br>
+<br><br>
+<br></p>
+</section>
+</section>
+</section>
+<section id="creative-commons-license-information" class="level1">
+<h1>Creative Commons License Information</h1>
+<hr>
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><em>Exploring Differential Equations</em></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/CU-Denver-MathStats-OER/ODEs" property="cc:attributionName" rel="cc:attributionURL">Adam Spiegler</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/CU-Denver-MathStats-OER/ODEs" rel="dct:source">https://github.com/CU-Denver-MathStats-OER/ODEs</a> and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., &amp; Fortune, N. (2018). <em>Inquiry oriented differential equations: Course materials</em>. Available at <a href="https://iode.sdsu.edu">https://iode.sdsu.edu</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Chp2/Mass-Spring-Tutorial.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Python Tutorial for Mass-Spring Systems</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../Chp3/15-Phase-Plane-Portrait.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">3.2: Phase Plane Portraits</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Exploring Differential Equations by Adam Spiegler</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" class="img-fluid" alt="Creative Commons License"> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-N-SA 4.0</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>
