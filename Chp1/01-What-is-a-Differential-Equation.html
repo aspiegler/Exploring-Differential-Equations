@@ -371,13 +371,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#introduction-to-python" id="toc-introduction-to-python" class="nav-link" data-scroll-target="#introduction-to-python">Introduction to Python</a>
   <ul class="collapse">
-  <li><a href="#creating-symbolic-variables-in-sympy" id="toc-creating-symbolic-variables-in-sympy" class="nav-link" data-scroll-target="#creating-symbolic-variables-in-sympy">Creating Symbolic Variables in <code>SymPy</code></a></li>
-  <li><a href="#computing-derivatives-with-sympy" id="toc-computing-derivatives-with-sympy" class="nav-link" data-scroll-target="#computing-derivatives-with-sympy">Computing Derivatives with <code>SymPy</code></a></li>
+  <li><a href="#the-sympy-package" id="toc-the-sympy-package" class="nav-link" data-scroll-target="#the-sympy-package">The SymPy Package</a>
+  <ul class="collapse">
+  <li><a href="#symbolic-variables-and-functions" id="toc-symbolic-variables-and-functions" class="nav-link" data-scroll-target="#symbolic-variables-and-functions">Symbolic Variables and Functions</a></li>
+  </ul></li>
+  <li><a href="#computing-derivatives-with-sympy" id="toc-computing-derivatives-with-sympy" class="nav-link" data-scroll-target="#computing-derivatives-with-sympy">Computing Derivatives with SymPy</a></li>
   <li><a href="#sec-01quest8" id="toc-sec-01quest8" class="nav-link" data-scroll-target="#sec-01quest8">Question 8:</a>
   <ul class="collapse">
   <li><a href="#solution-to-question-8" id="toc-solution-to-question-8" class="nav-link" data-scroll-target="#solution-to-question-8">Solution to Question 8:</a></li>
   </ul></li>
-  <li><a href="#integration-with-sympy" id="toc-integration-with-sympy" class="nav-link" data-scroll-target="#integration-with-sympy">Integration with <code>SymPy</code></a></li>
+  <li><a href="#integration-with-sympy" id="toc-integration-with-sympy" class="nav-link" data-scroll-target="#integration-with-sympy">Integration with SymPy</a></li>
   <li><a href="#sec-01quest9" id="toc-sec-01quest9" class="nav-link" data-scroll-target="#sec-01quest9">Question 9:</a>
   <ul class="collapse">
   <li><a href="#solution-to-question-9" id="toc-solution-to-question-9" class="nav-link" data-scroll-target="#solution-to-question-9">Solution to Question 9:</a></li>
@@ -554,48 +557,90 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction-to-python" class="level1">
 <h1>Introduction to Python</h1>
 <hr>
-<p>We make use of the <a href="https://www.sympy.org/en/index.html"><code>SymPy</code></a> package in Python to symbolically differentiate/integrate and manipulate functions via simplification or factoring routines.</p>
-<p>This allows us to (1) check any of our by-hand work, and (2) get results quicker!</p>
-<p>Below, we focus just on the differentiation aspect.</p>
-<section id="creating-symbolic-variables-in-sympy" class="level2">
-<h2 class="anchored" data-anchor-id="creating-symbolic-variables-in-sympy">Creating Symbolic Variables in <code>SymPy</code></h2>
+<p>We will be using <a href="https://www.python.org/">Python</a> as a tool for experimenting with differential equations. Python is a widely used programming language suited for many purposes and applications such as computational mathematics, data science, and app development. We will create, modify, and run Python code in Jupyter notebooks. No prior programming experience is required to begin working in Python in this (or any future) notebook.</p>
+<ul>
+<li>Python is free and open-source programming language.</li>
+<li>Python has an extensive library of packages with scripts that perform many useful tasks.</li>
+<li>Python is rated as the <a href="https://bootcamp.berkeley.edu/blog/most-in-demand-programming-languages/">#2 most in-demand</a> and useful programming languages.</li>
+</ul>
+<section id="the-sympy-package" class="level2">
+<h2 class="anchored" data-anchor-id="the-sympy-package">The SymPy Package</h2>
 <hr>
+<p>Python <font color="dodgerblue"><strong>packages</strong></font> are a collection of modules, functions, data, and/or other code scripts written and openly shared by other users. There are packages to perform many common tasks in mathematics such as plotting graphs, using the number <span class="math inline">\(\pi\)</span>, taking derivatives, and solving equations. This semester, we will frequently use the <a href="https://www.sympy.org/en/index.html">SymPy</a> package in Python to symbolically differentiate, integrate, and manipulate functions.</p>
+<p>Before we can access any files in a package, we must first import the package. <strong>Run the code cell below to import the SymPy package with the abbreviation <code>sym</code>.</strong></p>
+<ul>
+<li>We only need to import a package one time during an active Python session.</li>
+<li>We can use the abbreviation <code>sym</code> instead of the full <code>sympy</code> to call in functions and modules from the SymPy package.</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sym  <span class="co"># First we need to import sympy, we use the abbreviation sym</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Below we create symbolic variable <code>t</code>.</p>
+<section id="symbolic-variables-and-functions" class="level3">
+<h3 class="anchored" data-anchor-id="symbolic-variables-and-functions">Symbolic Variables and Functions</h3>
+<hr>
+<p>Python (like most programming languages) is a very literal language. If we would like to define and store the function <span class="math inline">\(P = Ae^{kt}\)</span> in Python, we need to be sure Python is reading all the letters and mathematical operations as we intend.</p>
+<ul>
+<li>We might intend some letters such as <span class="math inline">\(t\)</span> and <span class="math inline">\(P\)</span> to denote variables.</li>
+<li>Some letters such as <span class="math inline">\(A\)</span> and <span class="math inline">\(k\)</span> might denote constant parameters.</li>
+<li>The letter <span class="math inline">\(e\)</span> denotes the natural exponential number.</li>
+</ul>
+<p>The command <code>x, y, z = sympy.sybols('x y z')</code> defines <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> as variables. We use our abbreviation <code>sym.symbols()</code> for this command. <strong>Run the code cell below to create a new symbol <code>t</code>.</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> sym.symbols(<span class="st">'t'</span>)  <span class="co"># Creating t as symbols</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now we use symbolic functions available within <code>SymPy</code> to create the symbolic function for <span class="math inline">\(P=7e^{0.3t}\)</span>.</p>
+<section id="sympy-functions" class="level4">
+<h4 class="anchored" data-anchor-id="sympy-functions">SymPy Functions</h4>
+<hr>
+<p>Next we use functions available within SymPy to create the symbolic function <span class="math inline">\(P=7e^{0.3t}\)</span>.</p>
+<ul>
+<li>We have already defined the symbol <code>t</code>.</li>
+<li>We use the function <code>sympy.exp()</code> that we abbreviate with <code>sym.exp()</code>.</li>
+<li>We must explicitly tell Python how to combine different objects.
+<ul>
+<li>By default, the expression <code>xy</code> is read as a single object named <code>xy</code>.</li>
+<li>If you want to multiply <code>x</code> and <code>y</code>, then specify the operation with <code>x * y</code>.</li>
+<li>Adding extra spaces helps make the expression easier to read.</li>
+</ul></li>
+</ul>
+<p><strong>Run the code cell below to define the exponential function <span class="math inline">\(P\)</span>.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> <span class="dv">7</span><span class="op">*</span>sym.exp(<span class="fl">0.3</span><span class="op">*</span>t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>P  <span class="co"># The standard output for a symbolic function is "pretty"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> <span class="dv">7</span> <span class="op">*</span> sym.exp(<span class="fl">0.3</span> <span class="op">*</span> t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="computing-derivatives-with-sympy" class="level2">
-<h2 class="anchored" data-anchor-id="computing-derivatives-with-sympy">Computing Derivatives with <code>SymPy</code></h2>
+<section id="printing-output" class="level4">
+<h4 class="anchored" data-anchor-id="printing-output">Printing Output</h4>
 <hr>
-<p>We now use <code>SymPy</code> to compute the derivatives <span class="math inline">\(P\)</span> with respect to <span class="math inline">\(t\)</span>.</p>
+<p>After running the code cell above, there is no output visible on the screen. The code cell above created the function and stored the function to <code>P</code>. In order to see the output, you need to command Python to print the output to the screen using either <code>print(P)</code> or more simply <code>P</code>.</p>
+<p><strong>Run the code cell below to print the function <code>P</code> to the screen.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>P.diff(t,<span class="dv">1</span>)  <span class="co"># The t indicates the variable to differentiate with respect to and 1 indicates the order.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>P  <span class="co"># The output for a symbolic function in SymPy is "pretty"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>There are many similar ways of calculating derivatives with <code>SymPy</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sym.diff(P,t) <span class="co"># Use diff from sympy library to differentiate P with respect to t</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+</section>
+<section id="computing-derivatives-with-sympy" class="level2">
+<h2 class="anchored" data-anchor-id="computing-derivatives-with-sympy">Computing Derivatives with SymPy</h2>
+<hr>
+<p>We now use SymPy to find formulas for derivatives of <span class="math inline">\(P\)</span> with respect to <span class="math inline">\(t\)</span>.</p>
+<ul>
+<li>The differentiation function is <code>sympy.diff(f, t, n)</code> finds a formula for the <span class="math inline">\(n^{\mbox{th}}\)</span> derivative of <code>f</code> with respect to variable <code>t</code>.</li>
+<li>If we have already defined function <code>f</code>, then <code>f.diff(t, n)</code> can be used in place of <code>sympy.diff(f, t, n)</code>.</li>
+</ul>
+<div class="cell" data-tags="[]">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sym.diff(P, t, <span class="dv">1</span>) <span class="co"># Differentiate P with respect to t</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Higher order derivative computations are just as easily computed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>P.diff(t,<span class="dv">5</span>)  <span class="co"># This computes a 5th order derivative.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>P.diff(t, <span class="dv">1</span>)  <span class="co"># Differentiate P with respect to t</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>P.diff(t, <span class="dv">5</span>)  <span class="co"># This computes a 5th order derivative.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sec-01quest8" class="level2">
 <h2 class="anchored" data-anchor-id="sec-01quest8">Question 8:</h2>
 <hr>
 <p>Consider the function <span class="math inline">\(y = 3\sin{(2x)} - 5 \cos{(2x)}\)</span>.</p>
-<p>Use <code>SymPy</code> to create symbolic function and find an expression for <span class="math inline">\(y''\)</span>. Several blank code cells are below to get you started, but students should feel free to make more as needed as well as adding Markdown cells for notes.</p>
+<p>Use SymPy to create symbolic function and find an expression for <span class="math inline">\(y''\)</span>. Several blank code cells are below to get you started.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -606,19 +651,39 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>First you will need to create a new symbolic variable x.</p>
+<p>You will first need to create a new symbolic variable <code>x</code>.</p>
 </div>
 </div>
 <section id="solution-to-question-8" class="level3">
 <h3 class="anchored" data-anchor-id="solution-to-question-8">Solution to Question 8:</h3>
 <hr>
+<p><br><br>
+<br></p>
 </section>
 </section>
 <section id="integration-with-sympy" class="level2">
-<h2 class="anchored" data-anchor-id="integration-with-sympy">Integration with <code>SymPy</code></h2>
+<h2 class="anchored" data-anchor-id="integration-with-sympy">Integration with SymPy</h2>
 <hr>
-<p><code>SymPy</code> also has an <a href="https://docs.sympy.org/latest/modules/integrals/integrals.html"><code>integrals</code> module</a> for computing indefinite and definite integrals as well as integral transforms (such as Laplace and Fourier transforms).</p>
-<p>We show some examples below.</p>
+<p>SymPy has an <a href="https://docs.sympy.org/latest/modules/integrals/integrals.html"><code>integrals</code> module</a> with lots of built-in functions for computing indefinite and definite integrals as well as common integral transforms (such as Laplace and Fourier transforms).</p>
+<ul>
+<li>The function <code>sympy.integrate([expr], t)</code> finds an antiderivative (with constant of integration <span class="math inline">\(C=0\)</span>) of the expression with respect to <code>t</code>.</li>
+<li>If we have already stored the expression to the function <code>f</code>, we can also use the command <code>f.integrate(t)</code>.</li>
+<li>To evaluate a definite integral <span class="math inline">\(\int_a^b f(t) \, dt\)</span>, use <code>sympy.integrate(f, (t, a, b))</code></li>
+</ul>
+<p>We show some examples below. Feel free to experiment!</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The output of <code>sympy.integrate([expr], t)</code> is not the infinite family of all possible antiderivatives. The output is the antiderivative with constant of integration <span class="math inline">\(C=0\)</span>.</p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>t, k <span class="op">=</span> sym.symbols(<span class="st">'t, k'</span>)  <span class="co"># Creating t and k as symbols</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -632,6 +697,9 @@ Tip
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sym.integrate(t<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> k, (t, <span class="dv">0</span>, <span class="dv">1</span>))  <span class="co"># A definite integral, with respect to t, from 0 to 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sym.integrate(t<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> k, (t, <span class="dv">0</span>, <span class="dv">1</span>))  <span class="co"># A definite integral, with respect to t, from 0 to 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sec-01quest9" class="level2">
@@ -649,14 +717,13 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>First you will need to create a new symbolic variable <code>p</code>.</p>
+<p>You will first need to create a new symbolic variable <code>p</code>.</p>
 </div>
 </div>
 <section id="solution-to-question-9" class="level3">
 <h3 class="anchored" data-anchor-id="solution-to-question-9">Solution to Question 9:</h3>
 <hr>
 <p><br><br>
-<br><br>
 <br></p>
 </section>
 </section>
