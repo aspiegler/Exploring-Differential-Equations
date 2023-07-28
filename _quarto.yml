@@ -96,6 +96,8 @@ execute:
 
 editor: source
 
+# quarto publish gh-pages
+
 # for two columns - see 06
 # figure see probability section in 04 
 # <img src="https://raw.githubusercontent.com/CU-Denver-MathStats-OER/ODEs/main/Chp1/Images/02SlopeField1.png" alt="Slope Field 1" width="300"/>
