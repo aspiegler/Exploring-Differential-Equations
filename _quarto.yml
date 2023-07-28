@@ -1,0 +1,183 @@
+project:
+  type: book
+#  output-dir: _book
+
+book:
+  title: "Exploring Differential Equations "
+  author: "Adam Spiegler, University of Colorado Denver"
+  reader-mode: true
+#  date: "`r Sys.Date()`"
+
+  page-footer:
+      left: |
+        Exploring Differential Equations  by Adam Spiegler
+      right: |
+        ![Creative Commons License](https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png) [CC BY-N-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+#        This book was built with <a href="https://quarto.org/">Quarto</a>.
+#  cover-image: cover.png
+
+  chapters:
+    - index.qmd
+    - part: "Chapter 1: First Order Differential Equations"
+      chapters:
+       - Chp1/01-What-is-a-Differential-Equation.ipynb
+       - Chp1/02-Slope-Fields.ipynb
+       - Chp1/03-Phase-Line.ipynb
+       - Chp1/04-Eulers-Method.ipynb
+       - Chp1/05-Separable-Diff-Eqs.ipynb
+       - Chp1/06-Integrating-Factors.ipynb
+       - Chp1/07-Mixture-Applications.ipynb
+       - Chp1/08-Application-Heating-and-Cooling.ipynb
+       - Chp1/ODE-Tools-Tutorial.ipynb
+    - part: "Chapter 2: Second Order Differential Equations"
+      chapters:
+       - Chp2/09-Intro-to-Second-Order.ipynb
+       - Chp2/10-Homogeneous-2nd-Order.ipynb
+       - Chp2/11-Nonhomogeneous-2nd-Order.ipynb
+       - Chp2/12-Superposition-2nd-Order.ipynb
+       - Chp2/13-Mass-Spring.ipynb
+       - Chp2/Mass-Spring-Tutorial.ipynb
+    - part: "Chapter 3: Systems of Differential Equations"
+      chapters:
+       - Chp3/14-Introduction-to-Systems.ipynb
+       - Chp3/15-Phase-Plane-Portrait.ipynb
+       - Chp3/16-Phase-Plane-Equation.ipynb
+       - Chp3/17-Linear-Systems.ipynb
+       - Chp3/18-Stability-of-Equilibrium.ipynb
+       - Chp3/19-Nonlinear-Systems.ipynb
+       - Chp3/Phase-Portraits-Tutorial.ipynb
+    - part: "Chapter 4: Laplace Transforms"
+      chapters:
+       - Chp4/20-Introduction-to-Laplace-Transforms.ipynb
+       - Chp4/21-Properties-of-Laplace-Transforms.ipynb
+       - Chp4/22-Inverse-Laplace-Transforms.ipynb
+       - Chp4/23-Solving-IVP-with-Laplace-Transforms.ipynb
+#  appendices:
+#       - Installing-R-and-RStudio.qmd
+#       - Intro-to-Vectors-Dataframes.qmd  
+#       - Overview-of-Plots.qmd
+#    - intro.qmd
+#    - summary.qmd
+#    - references.qmd
+
+#bibliography: references.bib
+
+
+#format:
+#  html: 
+#    theme: flatly
+#    #cover-image: https://geocompr.robinlovelace.net/images/cover.png
+#    code-link: true
+#    template-partials: [toc.html,title-block.html]
+#    toc-title: "On this page"
+#    code-overflow: wrap
+#    toc-depth: 5
+#    number-sections: false
+
+
+format:
+  html:
+#    toc: true
+    toc_depth: 4
+#    theme: cerulean
+    theme: cosmo
+#    number-depth: 4
+    number-sections: false
+##  pdf:
+##    documentclass: scrreprt
+##    number-sections: false
+##  epub:
+##    cover-image: cover.png
+
+jupyter: python3
+
+execute:
+  eval: false
+
+editor: source
+
+# for two columns - see 06
+# figure see probability section in 04 
+# <img src="https://raw.githubusercontent.com/CU-Denver-MathStats-OER/ODEs/main/Chp1/Images/02SlopeField1.png" alt="Slope Field 1" width="300"/>
+
+# find . -type f -name "*.ipynb" | xargs sed -i '' 's,https://iode.wordpress.ncsu.edu,https://iode.sdsu.edu,g'   
+# find . -type f -name "*.ipynb" | xargs sed -i '' 's/Elementary Differential Equations/*Exploring Differential Equations*/g'
+# find . -type f -name "*.ipynb" | xargs sed -i '' 's/Adam Spiegler, Jonathon Hirschi, and Dmitry Ostrovskiy/Adam Spiegler/g'
+
+
+# Edits
+## fix iode link
+## change problems to questions
+## Fix image links
+## add yml header
+## add title header
+## Moving reading up 
+## add <nbsp> after git badge
+## newline before after headers
+## change cross-ref <a name > to {#sec-}
+### Cut/paste <a name ..> to end.
+### find replace with {#sec
+### find '> and replace with }
+## change (#06quest1) to (#sec-06quest1)
+## change <br> \ to <br>  
+## search for Hints Notes etc
+## equation coloring
+## all equations rendering (no spaces before/after $)
+
+############################
+# Fixes on git versions
+########################
+# Problem to Question
+# Fix iode link
+# cc license at header level 1 or 2
+# 04 - Comparing tail to tip (fix space before closing $ in 2. )
+# Quick-Ref - How to use plot_euler  (fix space before closing $ in 2. )
+# 09 - Question 5 "solution to problem [Question]" (strikeout problem)
+# 09 - Question 13 and 14 hint: "use the ... function in Python"
+# 10 change 2nd header 10mass-spring to 10-mass-spring-exp
+# 11 fix github badge link to correct file name
+# 11 Forcing Functions with Resonance header end should be </a>
+# 11 Question 10 is raw - change to markdown
+# 11 Question 7 change b.$x_p. to b. $x_p ... (add a space)
+# 12 Table of common logs ref name change from quest1 to table
+# 12 Summary step 1 has space before ending $
+# 12 First row of table has $ issues
+# 13 fix first link to link to colab version
+# Quick-Ref-Mass TOC all sections should be MassSec
+# Quick-Ref-Mass add cc license at end
+# 15 fix link to 14 in section Defining the System ...
+# 15 Question 3 fix [Question] to [Question 2]
+# 17 Question 1 split cells
+# 17 Question 2 split cells
+# 17 Question 2 fixing numbering of part 2c
+# 18 Section Eigenvectors strikeout problem in 'problem [Question 1d]'
+# 19 Split cells in question 1
+# 19 header in 1d currently is 1c
+# 19 embed video on pendulum
+# 19 embed video with professor
+# 19 equation coloring Equations of Motion, A non-linear, Expressing, Linearization, Linearizing, Expressing, Jacobian
+# 19 question. 2 has weird id
+# 19 change purple to mediumpurple
+# Quick Ref Phase Plane blue to dodgerblue
+# Quick Ref add cc license
+# 20 consistency with </a>: and :</a> at end of headers
+# 21 Question 1 split into parts a and b
+# 21 cleaned up linear operator language and question 1
+# 21 change property links from name = to id = 
+# 22 change property links from name = to id = 
+# 22 Intro header is Inverse Operations
+# 22 Fix link to 20 in Review section (and maybe link to 21)
+# 23 change property links from name = to id = 
+# 23 fix link to worksheet 20 and 22 in Solving ODE's section
+
+###########################
+# Equation color edits
+##########################
+# 06 - Constructing a Method steps
+# 06 - Summarizing the Steps
+# 07 - Simplifying the explicit solution
+# 10 - Revisiting the roots
+# 10 - Mass-Spring Oscillator
+# 11 - Adjusting the guess for resonance (between 6 and 7)
+# 13 - intro section
+# 23 - Step 1, Step 2, Step 3 justifications
