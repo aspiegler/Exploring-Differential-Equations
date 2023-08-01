@@ -96,6 +96,15 @@ execute:
 
 editor: source
 
+###########################################
+# embed video: see Mass Spring
+###########################################
+#<a href="https://www.youtube.com/embed/SsFZlSQdPWU"><img src="http://img.youtube.com/vi/SsFZlSQdPWU/1.jpg" alt="SATURN Sounds Part 2: Resonance of Janus tanslated into music" width="400"  />
+#</a>
+#{{< video https://www.youtube.com/embed/SsFZlSQdPWU width="560" height="315"
+#                                                    title="SATURN Sounds Part 2: Resonance of Janus tanslated into music">}}
+
+
 # quarto publish gh-pages
 
 # for two columns - see 06
