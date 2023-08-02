@@ -4,35 +4,56 @@
     "href": "index.html",
     "title": "Exploring Differential Equations",
     "section": "",
-    "text": "Preface\nThis repo contains a Jupyter notebook based introduction to ordinary differential equations including first and second order differential equations, Laplace transforms, and systems of equations (linear and nonlinear), with an emphasis on modeling and applications.\nThis material serves as the textbook for the “MATH 3200: Elementary Differential Equations” course at CU Denver.\nExploring Differential Equations by Adam Spiegler (University of Colorado Denver) is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. This work is funded by an Institutional OER Grant from the Colorado Department of Higher Education (CDHE). Based on a work at https://github.com/CU-Denver-MathStats-OER/ODEs and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., & Fortune, N. (2018). Inquiry oriented differential equations: Course materials. Available at https://iode.sdsu.edu.\nFor similar interactive OER materials in other courses funded by this project in the Department of Mathematical and Statistical Sciences at the University of Colorado Denver, visit https://github.com/CU-Denver-MathStats-OER."
+    "text": "Preface\nThis collection of interactive Jupyter notebooks are intended as a set of activities for exploring models of differential equations and understanding their solutions (numerical, graphical, and analytical). Topics covered by these materials include first and second order differential equations, Laplace transforms, and systems of equations (linear and nonlinear). These materials serves as the textbook for the “MATH 3200: Elementary Differential Equations” course at University of Colorado Denver."
   },
   {
-    "objectID": "index.html#chapter-1-first-order-differential-equations",
-    "href": "index.html#chapter-1-first-order-differential-equations",
+    "objectID": "index.html#how-to-access-edit-and-save-notebooks",
+    "href": "index.html#how-to-access-edit-and-save-notebooks",
     "title": "Exploring Differential Equations",
-    "section": "Chapter 1: First Order Differential Equations",
-    "text": "Chapter 1: First Order Differential Equations\n\n\n01: What Is a Differential Equation?\n02: Slope Fields\n03: Phase Line\n04: Euler’s Method\n05: Separable Differential Equations\n06: Integrating Factors\n07: Application: Population and Compartmental Analysis\n08: Application: Heating and Cooling Models\nQuick Reference Guide on How to Use Python Functions for Chapter 1"
+    "section": "How to Access, Edit and Save Notebooks",
+    "text": "How to Access, Edit and Save Notebooks\n\nThis html version of the materials is not dynamic. You cannot edit the text or run code with the html version.\n\n\nAt the top of each notebook is a “button” such as the one above.\nClick the button to open an interactive Jupyter notebook version in Google Colaboratory (or Colab).\nYou can begin working with the notebook right away in Colab! There is no software to install (or purchase!).\nYou can also access the materials directly on GitHub at https://github.com/CU-Denver-MathStats-OER/ODEs.git.\n\nEach Jupyter notebook contains both narrative text (in Markdown cells) and Python code cells that you can create, modify, and run.\n\n\n\n\n\n\nCaution\n\n\n\nAlthough you do not need a Google account to interact with the notebooks, the Colab notebooks are “shared”, meaning you cannot save any changes to the initial shared document that opens. If you would like to save your changes, you first need to save a copy to your Google Drive. Then you can edit and save changes to your own version."
   },
   {
-    "objectID": "index.html#chapter-2-second-order-differential-equations",
-    "href": "index.html#chapter-2-second-order-differential-equations",
+    "objectID": "index.html#what-programming-background-is-required",
+    "href": "index.html#what-programming-background-is-required",
     "title": "Exploring Differential Equations",
-    "section": "Chapter 2: Second Order Differential Equations",
-    "text": "Chapter 2: Second Order Differential Equations\n\n\n09: Introduction to Second Order Linear Differential Equations\n10: Homogeneous Second Order Differential Equations\n11: Nonhomogeneous Second Order Differential Equations\n12: General Solutions to Nonhomogeneous Second Order Differential Equations\n13: Applications to Mass-Spring Systems\nQuick Reference for Mass Spring Animations in Chapter 2"
+    "section": "What Programming Background is Required?",
+    "text": "What Programming Background is Required?\n\nNo prior experience or knowledge of Python, Markdown, LaTeX, or Colaboratory is assumed or required to begin working with these materials. After working with these materials, you will have some knowledge and experience with Python, Markdown, LaTeX, and Colaboratory!\n\nWelcome to Colaboratory is a helpful notebook (with videos) to help introduce you to Colab.\nHere’s a helpful Markdown guide\n\n\nWhat is Python?\n\nWe will be using Python as a tool for experimenting with differential equations. Python is a widely used programming language suited for many purposes and applications such as computational mathematics, data science, and app development. We will create, modify, and run Python code in Jupyter notebooks. No prior programming experience is required to begin working in Python in these materials.\nThe goal of these materials are to investigate differential equations, not learn how to be an expert Python coder. The hope is that we can use Python as a tool for experimenting and gaining insight into differential equations, and in the process, gain a familiarity with Python and coding so it is no longer a barrier. Have I mentioned no prior programming experience is required to begin working in Python in these materials?\nThere are two Python modules (ode_tools.py and mass_spring.py) that accompany these materials with scripts to perform certain tasks such as plotting slope fields, Euler’s method, plotting phase planes, and widgets for experimenting with mass-spring systems. Whenever these modules are used, instructions are provided. There are more detailed instructions found:\n\nQuick Reference for Python Functions: Chapter 1\nQuick Reference for Python Functions: Chapter 2\nQuick Reference for Python Functions: Chapter 3\n\n\n\nWhat is LaTex?\n\nLaTeX is a system for rendering nice looking mathematical symbols, expressions, and equations. All of the mathematical notation in these materials are created using LaTeX. You can view and edit all of the LaTeX code in the Markdown cells. You do not need to become an expert in LaTeX, but having a familiarity with LaTeX is quite helpful and LaTeX can be used to typeset math in a number of different applications.\n\nHere is a useful dictionary of LaTeX math symbols to get a glimpse of LaTeX."
   },
   {
-    "objectID": "index.html#chapter-3-systems-of-differential-equations",
-    "href": "index.html#chapter-3-systems-of-differential-equations",
+    "objectID": "index.html#a-remix-of-inquiry-oriented-differential-equations",
+    "href": "index.html#a-remix-of-inquiry-oriented-differential-equations",
     "title": "Exploring Differential Equations",
-    "section": "Chapter 3: Systems of Differential Equations",
-    "text": "Chapter 3: Systems of Differential Equations\n\n\n14: Introduction to Systems of Differential Equations\n15: Phase Plane Portrait\n16: Phase Plane Equation\n17: Linear Systems of Differential Equations\n18: Stability of Equilibrium\n19: Nonlinear Systems of Differential Euqations\nQuick Reference hase Plane Portraits in Chapter3"
+    "section": "A Remix of Inquiry-Oriented Differential Equations",
+    "text": "A Remix of Inquiry-Oriented Differential Equations\n\nPrior to creating these notebooks, I was teaching differential equation using Inquiry-Oriented Differential Equations (IODE) by Rasmussen, C., Keene, K. A., Dunmyre, J., & Fortune, N. IODE course materials are available at https://iode.sdsu.edu. The IODE content has been kindly shared by the authors for revising, remixing and redistributing.\n\nSome notebooks in these collection are not based on IODE content.\nSome notebooks are almost identical with IODE content.\nSome sections are modifications of IODE materials."
   },
   {
-    "objectID": "index.html#chapter-4-laplace-transforms",
-    "href": "index.html#chapter-4-laplace-transforms",
+    "objectID": "index.html#supplemental-oer-texts",
+    "href": "index.html#supplemental-oer-texts",
     "title": "Exploring Differential Equations",
-    "section": "Chapter 4: Laplace Transforms",
-    "text": "Chapter 4: Laplace Transforms\n\n\n20: Introduction to Laplace Transforms\n21: Properties of Laplace Transforms\n22: Inverse Laplace Transforms\n23: Solving Differential Equations with Laplace Transforms"
+    "section": "Supplemental OER Texts",
+    "text": "Supplemental OER Texts\n\nBelow are two suggested Open Education Resources (OER) texts for a first course in differential equations for further reading.\n\nNotes on Diffy Qs: Differential Equations for Engineers by Jiri Lebl.\nElementary Differential Equations by William F. Trench"
+  },
+  {
+    "objectID": "index.html#how-to-contact-me",
+    "href": "index.html#how-to-contact-me",
+    "title": "Exploring Differential Equations",
+    "section": "How to Contact Me",
+    "text": "How to Contact Me\n\nIf you have any questions, comments, or suggestions about these materials, please feel free to reach out to me (Adam) at adam.spiegler@ucdenver.edu.\n\nConsidering using these materials in your course? Please let me know if I can help.\nIf you do use some of these materials in your course, your feedback is welcome and appreciated.\nIf you materials that you would like to share or contribute to this project, great!"
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "Exploring Differential Equations",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\n\n\nThis project was supported by the Colorado Department of Higher Education (CDHE) OER Grant Program. A big thank you to Troy Butler, Jonathon Hirschi, and Dmitry Ostrovskiy for their feedback various contributions to these materials. Lastly, thanks to my students at CU Denver for all the feedback and encouragement in developing these materials!"
+  },
+  {
+    "objectID": "index.html#creative-commons-license-information",
+    "href": "index.html#creative-commons-license-information",
+    "title": "Exploring Differential Equations",
+    "section": "Creative Commons License Information",
+    "text": "Creative Commons License Information\n\n \nExploring Differential Equations by Adam Spiegler (University of Colorado Denver) is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. This work is funded by an Institutional OER Grant from the Colorado Department of Higher Education (CDHE). Based on a work at https://github.com/CU-Denver-MathStats-OER/ODEs and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., & Fortune, N. (2018). Inquiry oriented differential equations: Course materials. Available at https://iode.sdsu.edu.\nFor similar interactive OER materials in other courses funded by this project in the Department of Mathematical and Statistical Sciences at the University of Colorado Denver, visit https://github.com/CU-Denver-MathStats-OER."
   },
   {
     "objectID": "index.html#quarto-books",
