@@ -5,6 +5,23 @@
 This collection of interactive Jupyter notebooks are intended as a set of activities for exploring models of differential equations and understanding their solutions (numerical, graphical, and analytical). Topics covered by these materials include first and second order differential equations, Laplace transforms, and systems of equations (linear and nonlinear). These materials serves as the textbook for the "MATH 3200: Elementary Differential Equations" course at University of Colorado Denver.
 
 
+## A Virtual Lab for Experimenting with Differential Equations
+
+---
+
+These materials are intended as set of activities to experiment and explore differential equations. Each interactive Jupyter notebooks is a "virtual laboratory" where we perform our experiments and summarize the results. The objectives of experimental mathematics are generally to make mathematics <font color="dodgerblue">**more tangible, lively and fun.**</font>
+
+The intent of introducing Python is not to avoid a deep and rigorous understanding of differential equations and simply use Python to solve differential equations. There are other sources that skim the concepts on the surface and focus on the coding side of things. These materials use Python as an additional tool for further exploring differential equations to gain a deeper insight into modeling with differential equations. Some of the objectives of implementing Python code cells into the materials are to:
+
+- Discover patterns and relationships.
+- Use graphical displays to investigate mathematical concepts.
+- Develop and test conjectures.
+- Explore results to help construct proofs.
+- Confirm analytically derived results.
+- Gain further insight and intuition.
+- <font color="dodgerblue">**Bridge the divide between theory and practice.**</font>
+
+
 ## How to Access, Edit and Save Notebooks
 
 ---
@@ -73,6 +90,8 @@ Prior to creating these notebooks, I was teaching differential equation using In
 - Some notebooks are almost identical with IODE content. 
 - Some sections are modifications of IODE materials.
 
+
+**Much gratitude and thanks to the IODE team for creating and sharing amazing content with instructors and students of differential equations!** 
 
 ## Supplemental OER Texts
 
