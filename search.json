@@ -7,6 +7,13 @@
     "text": "Preface\nThis collection of interactive Jupyter notebooks are intended as a set of activities for exploring models of differential equations and understanding their solutions (numerical, graphical, and analytical). Topics covered by these materials include first and second order differential equations, Laplace transforms, and systems of equations (linear and nonlinear). These materials serves as the textbook for the “MATH 3200: Elementary Differential Equations” course at University of Colorado Denver."
   },
   {
+    "objectID": "index.html#a-virtual-lab-for-experimenting-with-differential-equations",
+    "href": "index.html#a-virtual-lab-for-experimenting-with-differential-equations",
+    "title": "Exploring Differential Equations",
+    "section": "A Virtual Lab for Experimenting with Differential Equations",
+    "text": "A Virtual Lab for Experimenting with Differential Equations\n\nThese materials are intended as set of activities to experiment and explore differential equations. Each interactive Jupyter notebooks is a “virtual laboratory” where we perform our experiments and summarize the results. The objectives of experimental mathematics are generally to make mathematics more tangible, lively and fun.\nThe intent of introducing Python is not to avoid a deep and rigorous understanding of differential equations and simply use Python to solve differential equations. There are other sources that skim the concepts on the surface and focus on the coding side of things. These materials use Python as an additional tool for further exploring differential equations to gain a deeper insight into modeling with differential equations. Some of the objectives of implementing Python code cells into the materials are to:\n\nDiscover patterns and relationships.\nUse graphical displays to investigate mathematical concepts.\nDevelop and test conjectures.\nExplore results to help construct proofs.\nConfirm analytically derived results.\nGain further insight and intuition.\nBridge the divide between theory and practice."
+  },
+  {
     "objectID": "index.html#how-to-access-edit-and-save-notebooks",
     "href": "index.html#how-to-access-edit-and-save-notebooks",
     "title": "Exploring Differential Equations",
@@ -25,7 +32,7 @@
     "href": "index.html#a-remix-of-inquiry-oriented-differential-equations",
     "title": "Exploring Differential Equations",
     "section": "A Remix of Inquiry-Oriented Differential Equations",
-    "text": "A Remix of Inquiry-Oriented Differential Equations\n\nPrior to creating these notebooks, I was teaching differential equation using Inquiry-Oriented Differential Equations (IODE) by Rasmussen, C., Keene, K. A., Dunmyre, J., & Fortune, N. IODE course materials are available at https://iode.sdsu.edu. The IODE content has been kindly shared by the authors for revising, remixing and redistributing.\n\nSome notebooks in these collection are not based on IODE content.\nSome notebooks are almost identical with IODE content.\nSome sections are modifications of IODE materials."
+    "text": "A Remix of Inquiry-Oriented Differential Equations\n\nPrior to creating these notebooks, I was teaching differential equation using Inquiry-Oriented Differential Equations (IODE) by Rasmussen, C., Keene, K. A., Dunmyre, J., & Fortune, N. IODE course materials are available at https://iode.sdsu.edu. The IODE content has been kindly shared by the authors for revising, remixing and redistributing.\n\nSome notebooks in these collection are not based on IODE content.\nSome notebooks are almost identical with IODE content.\nSome sections are modifications of IODE materials.\n\nMuch gratitude and thanks to the IODE team for creating and sharing amazing content with instructors and students of differential equations!"
   },
   {
     "objectID": "index.html#supplemental-oer-texts",
@@ -303,112 +310,112 @@
   {
     "objectID": "Chp1/04-Eulers-Method.html",
     "href": "Chp1/04-Eulers-Method.html",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "",
     "text": "A Rate of Change Equation for Limited Resources\nIn a previous question we saw that the rate of change equation \\(\\dfrac{dP}{dt}=0.3P\\) can be used to model a situation where there is one species, continuous reproduction, and unlimited resources. In most situations, however, the resources are not unlimited, so to improve the model one has to modify the rate of change equation \\(\\dfrac{dP}{dt}=0.3P\\) to account for the fact that resources are limited.\n!pip install git+https://github.com/CU-Denver-MathStats-OER/ODEs\nfrom IPython.display import clear_output\nclear_output()\nExploring Differential Equations by Adam Spiegler is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.Based on a work at https://github.com/CU-Denver-MathStats-OER/ODEs and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., & Fortune, N. (2018). Inquiry oriented differential equations: Course materials. Available at https://iode.sdsu.edu."
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest1",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest1",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 1:",
     "text": "Question 1:\n\nConsider a modified rate of change equation for the population given by\n\\[\\color{dodgerblue}{\\dfrac{dP}{dt}=0.3P\\left(1-\\dfrac{P}{10}\\right)}\\]\nand answer the questions below.\n\nQuestion 1a:\n\nIn what ways does the modified rate of change equation account for limited resources? (Think of 10 as scaled to mean 10,000 or 100,000.)\n\nSolution to Question 1a:\n\n\n\n\n\n\n\nQuestion 1b:\n\nHow do you interpret the solution with initial condition \\(P(0) = 10\\)?\n\nSolution to Question 1b:"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest2",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest2",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 2:",
     "text": "Question 2:\n\nThe Python code cell below imports the slope_field() function from the ode_tools module. Recall we introduced this function in Lab 1.2 Slope Fields. See ODE Tools Tutorial for a quick reference on how to use slope_field() and other functions for Chapter 1.\n\nQuestion 2a:\n\nEnter a formula for the differential equation\n\\[\\color{dodgerblue}{\\frac{dP}{dt}=0.3P\\left(1-\\frac{P}{10}\\right)}\\]\nfrom Question 1 in place of the ?? in line of code where the formula for the differential equation should be entered. Then run the code to use the slope_field() function to plot the slope field for the differential equation. - Be sure you have already loaded ode_tools from GitHub. See either Loading from GitHub instructions above.\n\n\nSolution to Question 2a:\n\n\n\nEdit and run the code cell below. \n\n\nimport numpy as np\nfrom utils.ode_tools import slope_field\n\n# Define points where vectors will be plotted\nt = np.linspace(0, 7, 8)  # Independent variable, np.linspace(initial, end, number_values)\np = np.linspace(-4, 15, 20)  # Dependent variable, np.linspace(initial, end, number_values)\n\n# Define the differential equation\ndef diffeq(t, p):  # t is independent variable and p is dependent variable\n    return ??  # enter the formula for dp/dt\n\n# Run the slope field plotter\nslope_field(t, p, diffeq)\n\n\n\n\nQuestion 2b:\n\nIn what ways are your responses to Question 1 visible in the slope field you created in part 2a?\n\nSolution to Question 2b:\n\n\n\n\n\n\n\nQuestion 2c:\n\nIn this question, negative \\(P\\) values do not make sense, but we can still mathematically make sense of the slope field for negative \\(P\\) values. Explain why the slope field looks the way it does below the \\(t\\)-axis.\n\nSolution to Question 2c:"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest3",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest3",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 3:",
     "text": "Question 3:\n\nUsing the differential equation from from Question 1,\n\\[\\color{dodgerblue}{\\frac{dP}{dt}=0.3P\\left(1-\\frac{P}{10}\\right)},\\]\nand in addition we know there are initially \\(P(0)=2\\) fish in the lake, approximately how many fish are in the lake at time \\(t=2\\)? How did you arrive at your approximation?\n\n\n\n\n\n\nTip\n\n\n\nInitially \\(\\dfrac{dP}{dt} = 0.48\\), but what meaning does \\(0.48\\) have? What are the units?\n\n\n\nSolution to Question 3:"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest4",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest4",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 4:",
     "text": "Question 4:\n\nThe Python code cell below imports the plot_sol() function from the module named ode_tools. Recall we introduced this function in Lab 1.2 Slope Fields. See ODE Tools Tutorial for a quick reference on how to use plot_sol() and other functions for Chapter 1.\nRun the code cell below to use the plot_sol() function to check your previous answer by plotting the solution to the initial value problem\n\\[\\color{dodgerblue}{\\frac{dP}{dt}=0.3P\\left(1-\\frac{P}{10}\\right), \\qquad P(0)=2}.\\]\n\nSolution to Question 4:\n\n\n\n Run the code cell below to check your previous answer.  \n\n\nfrom utils.ode_tools import plot_sol\n\n# Note t, p, and diffeq have already been defined in Question 2\n# Enter the initial values t0 and p0 \n\nt0 = 0\np0 = 2\n\n# Run the function to create a plot\nplot_sol(t, p, diffeq, t0, p0)"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest5",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest5",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 5:",
     "text": "Question 5:\n\nThe population of fish in a lake is can be modeled with the differential equation from Question 1\n\\[\\color{dodgerblue}{\\frac{dP}{dt}=0.3P\\left(1-\\frac{P}{10}\\right)}.\\]\nEdit the code cell below to stitch together, in a tip to tail manner, several tangent vectors to produce a graph of the population versus time if at time \\(t = 0\\) we know there are 8 fish in the lake (again, think of 8 as scaled for say, 8000 or 80,000 fish).\n\nSolution to Question 5:\n\n\n\nThe first part of the code cell below that creates the slope field does not need to be edited.\nFor each of the three commented out plt.quiver() commands:\n\nThere are two ?? in each of the commented out commands that need to be replaced.\nAdd a second vector where the tail of the first vector ends by replacing each ?? with an appropriate value.\nAfter adding a second vector, repeat this process to add a third vector.\nRepeat one more time to add a fourth vector.\nYou do not need to edit the code below beyond uncommenting out lines of code and replacing each ??’s.\n\nOptional: Consider how to improve this method so the solution is more accurate.\n\n\n\n\nimport matplotlib.pyplot as plt\n\n# DO NOT EDIT: Set up gride for slope field\nt = np.linspace(0, 8, 9)  \np = np.linspace(-4, 15, 20)\nT, P = np.meshgrid(t, p)\n\n# DO NOT EDIT: Define Differential Equation\ndef diffeq(t, p):  # t is independent variable and p is dependent variable\n    return 0.3 * p * (1 - p/10) # Use t and p for ind and dep variables\ndp = diffeq(T, P)\ndt = np.ones(dp.shape)\n\n# DO NOT EDIT: normalize the line segments\ndpu = dp / np.sqrt(dt**2 + dp**2)  # normalize dp\ndtu = dt / np.sqrt(dt**2 + dp**2)  # normalize dt\n    \n# DO NOT EDIT: Plot Slope Field\nplt.quiver(T, P, dtu, dpu,  # Plot a 2D field of arrows\n            units = 'xy',  \n            angles = 'xy')\n\n#######################################\n# STUDENT TO DO: Add your own vectors\n# Replace each ?? with an appropriate value\n#######################################\n# Plot vectors\nplt.quiver(0, 8, 2, 2*diffeq(0, 8), color = 'b', \n           angles = 'xy',\n           scale = 1,\n           scale_units = 'xy') \n#plt.quiver(2, ??, 2, 2*diffeq(2, ??), color = 'b', \n#           angles = 'xy',\n#           scale = 1,\n#           scale_units = 'x') \n#plt.quiver(4, ??, 2, 2*diffeq(4, ??), color = 'b', \n#           angles = 'xy',\n#           scale = 1,\n#           scale_units = 'xy') \n#plt.quiver(6, ??, 2, 2*diffeq(6, ??), color = 'b', \n#           angles = 'xy',\n#           scale = 1,\n#           scale_units = 'xy') \n\nplt.show()"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest6",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest6",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 6:",
     "text": "Question 6:\n\nExplain how you are thinking about rate of change in your method. For example, is the rate of change constant over some increment? If yes, over what increment? If no, is the rate of change always changing?\n\nSolution to Question 6:"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest7",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest7",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 7:",
     "text": "Question 7:\n\nUsing the differential equation\n\\[\\color{dodgerblue}{\\frac{dP}{dt}= P\\left(1-\\dfrac{P}{20}\\right)}\\]\nand initial condition \\(P(0) = 10\\), José and Julie started the table given in the solution below to numerically keep track of their tip-to-tail method for connecting tangent vectors. Explain José’s and Julie’s approach and complete their table. Round to two decimal places.\n\nSolution to Question 7:\n\n\n\nExplain their approach:\n\n\nComplete table below.\n\n\n\n\n\n\nTip\n\n\n\nYou may use Python to help with calculations.\n\n\n\n\n\n\\(\\large t\\)\n\\(\\large P\\)\n\\(\\large \\dfrac{dP}{dt}\\)\n\n\n\n\n0\n10\n5\n\n\n0.5\n12.5\n??\n\n\n1.5\n??\n??\n\n\n1.0\n??\n??\n\n\n1.5\n??"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest8",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest8",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 8:",
     "text": "Question 8:\n\nUsing the same differential equation and initial condition as José and Julie in Question 7,\n\\[\\frac{dP}{dt}=P\\left( 1-\\frac{P}{20}\\right) \\quad \\mbox{with} \\quad P(0)=10,\\]\nDerrick and Delores started their table as shown in the solution below. Explain how Derrick and Delores’ approach is different from José and Julie’s and then complete their table. Round to two decimal places.\n\nSolution to Question 8:\n\n\n\nExplain how their approach is different:\n\n\nComplete table below.\n\n\n\n\n\n\nTip\n\n\n\nYou may use Python to help with calculations.\n\n\n\n\n\n\\(t\\)\n\\(P\\)\n\\(\\dfrac{dP}{dt}\\)\n\n\n\n\n0\n10\n5\n\n\n0.25\n11.25\n??\n\n\n0.5\n??\n??\n\n\n0.75\n??\n\n\n\n\n\n\n\n#import matplotlib.pyplot as plt\n\n# DO NOT EDIT: Set up grid for slope field\nt = np.linspace(0, 3, 13)  \ny = np.linspace(0, 16, 17)\nT, Y = np.meshgrid(t, y)\n\n# DO NOT EDIT: Define Differential Equation\ndef diffeq(t, y):  # t is independent variable and y is dependent variable\n    return y + t # Use t and y for ind and dep variables\ndy = diffeq(T, Y)\ndt = np.ones(dy.shape)\n\n# DO NOT EDIT: normalize the line segments\ndyu = dy / np.sqrt(dt**2 + dy**2)  # normalize dy\ndtu = dt / np.sqrt(dt**2 + dy**2)  # normalize dt\n    \n# DO NOT EDIT: Plot Slope Field\nplt.quiver(T, Y, dtu, dyu,  # Plot a 2D field of arrows\n            units = 'xy', \n            angles = 'xy')\n\n#######################################\n# STUDENT TO DO: Add your own vectors\n# Replace each ?? with an appropriate value\n#######################################\n# Plot vectors\nplt.quiver(0, 4, 0.5, 2 , color = 'b', \n           angles = 'xy',\n           scale = 1,\n           scale_units = 'xy') \nplt.quiver(0.5, ??, 0.5, ??, color = 'b', \n           angles = 'xy',\n           scale = 1,\n           scale_units = 'xy') \nplt.quiver(1, ??, 0.5, ??, color = 'b', \n           angles = 'xy',\n           scale = 1,\n           scale_units = 'xy') \n\nplt.show()"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest9",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest9",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 9:",
     "text": "Question 9:\n\nConsider the differential equation \\(\\color{dodgerblue}{\\dfrac{dy}{dt}=y+t}\\) and initial condition \\(\\color{dodgerblue}{y(0) = 4}\\).\n\nUse José and Julie’s approach (using \\(\\Delta t = 0.5\\)) to find \\(y(1.5)\\). You may find the table below useful for organizing your work.\nEdit the code cell below to plot your answer to part (a).\n\n\nSolution to Question 9:\n\n\n\nComplete table below.\n\n\n\n\n\n\n\nTip\n\n\n\nYou may use Python to help with calculations.\n\n\n\n\n\n\n\n\n\n\n\n\\(t\\)\n\\(y\\)\n\\(\\dfrac{dy}{dt}\\)\n\\(\\Delta y\\)\n\n\n\n\n0\n4\n??\n??\n\n\n??\n??\n??\n??\n\n\n??\n??\n??\n??\n\n\n??\n??\n??\n??\n\n\n\n\n\n\nIn the code cell below, you need to replace each ?? in the last portion of the code.\n\n\nThere are two ?? in lines of code that add the last two vectors to the plot.\nAdd a second vector where the tail of the first vector ends by replacing each ?? with appropriate values.\nAfter adding a second vector, repeat this process to add a third vector.\nYou do not need to edit the code below beyond replacing each ??."
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest10",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest10",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 10:",
     "text": "Question 10:\n\n\nIs your value for \\(y(1.5)\\) the exact value or an approximate value? Explain.\n\n\n\nGeneralizing your tip-to-tail approach: Create an equation-based procedure/algorithm that would allow you to predict future \\(y\\)-values for any differential equation \\(\\dfrac{dy}{dt}\\), any given initial condition, and any time increment.\n\n\n\nSolution to Question 10:\n\n\na. Explain.\n\nWrite a formula."
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#comparing-tail-to-tip-sketch-with-actual-solution",
     "href": "Chp1/04-Eulers-Method.html#comparing-tail-to-tip-sketch-with-actual-solution",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Comparing Tail to Tip Sketch with Actual Solution",
     "text": "Comparing Tail to Tip Sketch with Actual Solution\n\nRun the code below (no edits needed) to compare your approximation from Question 9 with the actual solution.\n\n\n\n\n\n\nNote\n\n\n\nThe plot below is generated using the plot_euler() function is in the ode_tools module. See ODE Tools Tutorial for a quick reference on how to use plot_euler() and other functions for Chapter 1.\n\n\n\nInput vectors of values for t and x (points where the vectors will be plotted) and define diffeq.\nDefine an initial condition \\((t_0, x_0) =\\)(t0, x0), step size \\(\\Delta t=\\) dt, and number of iterations \\(n=\\) n.\nWe import the plot_euler() function.\n\nBe sure you have already loaded the module from GitHub.\nLike packages, you only need to import a function one time after opening a notebook.\n\nWe generate the plot by running the function with the command plot_euler(t, x, diffeq, t0, x0, dt, n).\n\n\n# Import plot_euler function from utils.ode_tools module.\nfrom utils.ode_tools import plot_euler\n\n# Set up gride for slope field\nt = np.linspace(0, 1.5, 7)  \ny = np.linspace(0, 20, 21)\n\n# Define differential equation\ndef diffeq(t, y):\n    return y + t \n\n# Define initial value, step size, and number of steps\nt0 = 0  # initial input value\ny0 = 4  # initial output value\ndt = 0.5  # step size\nn = 3  # number of steps\n\n\nplot_euler(t, y, diffeq, t0, y0, dt, n)"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest11",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest11",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 11:",
     "text": "Question 11:\n\nConsider the differential equation \\(\\color{dodgerblue}{\\dfrac{dy}{dt}=y+t}\\) and initial condition \\(\\color{dodgerblue}{y(0) = 4}\\).\nUsing steps each size \\(\\Delta t = 0.5\\), approximate \\(y(1.5)\\) by completing the formulas in the code cell below.\n\nSolution to Question 11:\n\n \nReplace each ?? in the code below with an appropriate formula. \n\n\n\n#import numpy as np\n\nv = np.zeros(n+1)  # creates a vector of zeros where we'll store output\ndt = 0.5  # define the step size\n\n# Define diffeq\ndef diffeq(t, y):  # t is independent variable and y is dependent variable\n    return y + t  # Use t and y for ind and dep variables\n\n# Initial value\nv[0] = 4  # initial condition is y_0 = 4\n\n# Result after step 1\nv[1] = ??\n\n# Result after step 2\nv[2] = ??\n\n# Result after step 3\nv[3] = ??\n\nprint(\"After step 1, we have y(0.5) is approximately\", v[1],\n     \"\\n \\n After step 2, we have y(1) is approximately\", v[2],\n     \"\\n \\n After step 3, we have y(1.5) is approximately\", v[3],)"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#computing-eulers-method-with-the-euler_method-function",
     "href": "Chp1/04-Eulers-Method.html#computing-eulers-method-with-the-euler_method-function",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Computing Euler’s Method with the euler_method Function",
     "text": "Computing Euler’s Method with the euler_method Function\n\nThe step-by-step method derived above is called Euler’s method. In the code cell below, we import a function called euler_method() from the ode_tools module that performs identical calculations as the code above. See ODE Tools Tutorial for a quick reference on how to use euler_method() and other functions for Chapter 1.\n\nDefine diffeq.\nDefine the initial value \\((t_0, x_0) =\\) (t0, x0).\nDefine the step size dt and number of steps n.\nWe import the euler_method() function.\n\nBe sure you have already loaded the module from GitHub.\nLike packages, you only need to import a function one time after opening a notebook.\n\nCalculate each step with the function euler_method(diffeq, t0, x0, dt, n).\n\n\nfrom utils.ode_tools import euler_method\n\n# Define diffeq\ndef diffeq(t, y):  # t is independent variable and y is dependent variable\n    return y + t  # Use t and y for ind and dep variables\n\n# Initial value\nt0 = 0 # initial value of input\ny0 = 4 # initial value output when t = t_0\n\n# Step size and number of steps\ndt = 0.5\nn = 3\n\n# Apply Euler's method\neuler_method(diffeq, t0, y0, dt, n)"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest12",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest12",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 12:",
     "text": "Question 12:\n\nUsing the same differential equation from Question 11, experiment with the code below to estimate \\(y(1.5)\\) accurate to one decimal place. How many steps did you use? What is the corresponding step size?\n\nSolution to Question 12:\n\n \nReplace each ?? to define appropriate values for n and dt in the code cell below.\n\n\n\n\n# We are not changing the differential equation or initial conditions\n# Thus we do not need to redefine diffeq, t0, or y0\n\n# Number of steps and step size\nn = ??\ndt = ??\n\n# Apply Euler's method\neuler_method(diffeq, t0, y0, dt, n)"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest13",
     "href": "Chp1/04-Eulers-Method.html#sec-04quest13",
-    "title": "1.4: Numerically Approximations of Solutions",
+    "title": "1.4: Numerical Approximations",
     "section": "Question 13:",
     "text": "Question 13:\n\nConsider the differential equation \\(\\dfrac{dy}{dt} = y+t\\). Estimate the value of \\(y(2)\\) on the solution that passes through the point \\((1, 3)\\) using 10 steps. Use the euler_method() function in the ode_tools module to perform the calculations.\n\nSolution to Question 13:\n\n \nReplace each ?? to define appropriate values or expressions in the code cell below.\n\n\n\n\n# Define diffeq\ndef diffeq(t, y):  # t is independent variable and y is dependent variable\n    return ??  # Use t and y for ind and dep variables\n\n# Initial value\nt0 = ?? # initial value of input\ny0 = ?? # initial value output when t = t_0\n\n# Step size and number of steps\ndt = ??\nn = ??\n\n# Apply Euler's method\neuler_method(diffeq, t0, y0, dt, n)"
   },
