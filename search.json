@@ -172,14 +172,14 @@
     "href": "Chp1/02-Slope-Fields.html#sec-02quest1",
     "title": "1.2: Slope Fields",
     "section": "Question 1:",
-    "text": "Question 1:\n\nCompute the slope of the solution to \\[\\dfrac{dy}{dt}= \\dfrac{t^2y}{4}\\] passing through each of the given points.\n\n\\((2,-2)\\)\n\\((0, -1)\\)\n\\((2,-2)\\)\n\\((-3,-2)\\)\n\n\nSolution to Question 1:"
+    "text": "Question 1:\n\nCompute the slope of the solution to \\[\\dfrac{dy}{dt}= \\dfrac{t^2y}{4}\\] passing through each of the given points.\n\n\\((2,-2)\\)\n\\((0, -1)\\)\n\\((-2,2)\\)\n\\((-3,-2)\\)\n\n\nSolution to Question 1:"
   },
   {
     "objectID": "Chp1/02-Slope-Fields.html#slope-field-for-question-1",
     "href": "Chp1/02-Slope-Fields.html#slope-field-for-question-1",
     "title": "1.2: Slope Fields",
     "section": "Slope Field for Question 1",
-    "text": "Slope Field for Question 1\n\n\nThe figure on the left shows the corresponding vectors at the points \\((1,4)\\), \\((2,-2)\\), \\((0, -1)\\), \\((2,-2)\\), and \\((-3,-2)\\).\nThe figure on the right gives a more complete slope field with several solutions added.\nSee the Appendix for the code used to generate the figures below.\n\n\n\n\n\n\n\nVectors from Question 1\n\n\n\n\n\n\n\nA More Complete Slope Fields with Solutions"
+    "text": "Slope Field for Question 1\n\n\nThe figure on the left shows the corresponding vectors at the points \\((1,4)\\), \\((2,-2)\\), \\((0, -1)\\), \\((-2,2)\\), and \\((-3,-2)\\).\nThe figure on the right gives a more complete slope field with several solutions added.\nSee the Appendix for the code used to generate the figures below.\n\n\n\n\n\n\n\nVectors from Question 1\n\n\n\n\n\n\n\nA More Complete Slope Fields with Solutions"
   },
   {
     "objectID": "Chp1/02-Slope-Fields.html#sec-02quest2",
