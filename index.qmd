@@ -26,9 +26,9 @@ The intent of introducing Python is not to avoid a deep and rigorous understandi
 
 ---
 
-This [html version](https://aspiegler.github.io/Exploring-Differential-Equations/) of the materials is not dynamic. You cannot edit the text or run code with the html version.
+This [html version](https://aspiegler.github.io/Exploring-Differential-Equations/){target="_blank"} of the materials is not dynamic. You cannot edit the text or run code with the html version.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/01-What-is-a-Differential-Equation.ipynb)<nbsp>
+__[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/01-What-is-a-Differential-Equation.ipynb)__ <nbsp>
 
 - At the top of each notebook is a "button" such as the one above.
 - Click the button to open an interactive Jupyter notebook version in [Google Colaboratory](https://colab.research.google.com/) (or Colab).
