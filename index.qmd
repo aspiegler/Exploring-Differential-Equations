@@ -28,10 +28,10 @@ The intent of introducing Python is not to avoid a deep and rigorous understandi
 
 This [html version](https://aspiegler.github.io/Exploring-Differential-Equations/){target="_blank"} of the materials is not dynamic. You cannot edit the text or run code with the html version.
 
-__[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/01-What-is-a-Differential-Equation.ipynb)__ <nbsp>
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/01-What-is-a-Differential-Equation.ipynb){target="_blank"} <nbsp>
 
 - At the top of each notebook is a "button" such as the one above.
-- Click the button to open an interactive Jupyter notebook version in [Google Colaboratory](https://colab.research.google.com/) (or Colab).
+- Click the button to open an interactive Jupyter notebook version in [Google Colaboratory](https://colab.research.google.com/){target="_blank"} (or Colab).
 - You can begin working with the notebook right away in Colab! There is no software to install (or purchase!).
 - You can also access the materials directly on GitHub at <https://github.com/CU-Denver-MathStats-OER/ODEs.git>.
 
@@ -50,23 +50,23 @@ Although you do not need a Google account to interact with the notebooks, the Co
 
 No prior experience or knowledge of Python, Markdown, LaTeX, or Colaboratory is assumed or required to begin working with these materials. After working with these materials, you will have some knowledge and experience with Python, Markdown, LaTeX, and Colaboratory!
 
-- [Welcome to Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb) is a helpful notebook (with videos) to help introduce you to Colab.
-- Here's a helpful [Markdown guide](https://colab.research.google.com/notebooks/markdown_guide.ipynb)
+- [Welcome to Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb){target="_blank"} is a helpful notebook (with videos) to help introduce you to Colab.
+- Here's a helpful [Markdown guide](https://colab.research.google.com/notebooks/markdown_guide.ipynb){target="_blank"}.
 
 
 ### What is Python?
 
 ---
 
-We will be using [Python](https://www.python.org/) as a tool for experimenting with differential equations. Python is a widely used programming language suited for many purposes and applications such as computational mathematics, data science, and app development. We will create, modify, and run Python code in Jupyter notebooks. **No prior programming experience is required to begin working in Python in these materials.**
+We will be using [Python](https://www.python.org/){target="_blank"} as a tool for experimenting with differential equations. Python is a widely used programming language suited for many purposes and applications such as computational mathematics, data science, and app development. We will create, modify, and run Python code in Jupyter notebooks. **No prior programming experience is required to begin working in Python in these materials.**
 
 The goal of these materials are to investigate differential equations, not learn how to be an expert Python coder. The hope is that we can use Python as a tool for experimenting and gaining insight into  differential equations, and in the process, gain a familiarity with Python and coding so it is no longer a barrier. Have I mentioned **no prior programming experience is required to begin working in Python in these materials**?
 
 There are two Python modules (`ode_tools.py` and `mass_spring.py`) that accompany these materials with scripts to perform certain tasks such as plotting slope fields, Euler's method, plotting phase planes, and widgets for experimenting with mass-spring systems. Whenever these modules are used, instructions are provided. There are more detailed instructions found:
 
-- [Quick Reference for Python Functions: Chapter 1](https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/ODE-Tools-Tutorial.ipynb)
-- [Quick Reference for Python Functions: Chapter 2](https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/Mass-Spring-Tutorial.ipynb)
-- [Quick Reference for Python Functions: Chapter 3](https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp3/Phase-Portraits-Tutorial.ipynb)
+- [Quick Reference for Python Functions: Chapter 1](https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/ODE-Tools-Tutorial.ipynb){target="_blank"}
+- [Quick Reference for Python Functions: Chapter 2](https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/Mass-Spring-Tutorial.ipynb){target="_blank"}
+- [Quick Reference for Python Functions: Chapter 3](https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp3/Phase-Portraits-Tutorial.ipynb){target="_blank"}
 
 
 
@@ -75,9 +75,9 @@ There are two Python modules (`ode_tools.py` and `mass_spring.py`) that accompan
 
 ---
 
-[LaTeX](https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf) is a system for rendering nice looking mathematical symbols, expressions, and equations. All of the mathematical notation in these materials are created using LaTeX. You can view and edit all of the LaTeX code in the Markdown cells. You do not need to become an expert in LaTeX, but having a familiarity with LaTeX is quite helpful and LaTeX can be used to typeset math in a number of different applications.
+[LaTeX](https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf){target="_blank"} is a system for rendering nice looking mathematical symbols, expressions, and equations. All of the mathematical notation in these materials are created using LaTeX. You can view and edit all of the LaTeX code in the Markdown cells. You do not need to become an expert in LaTeX, but having a familiarity with LaTeX is quite helpful and LaTeX can be used to typeset math in a number of different applications.
 
-- Here is a useful [dictionary of LaTeX math symbols](https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf) to get a glimpse of LaTeX.
+- Here is a useful [dictionary of LaTeX math symbols](https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf){target="_blank"} to get a glimpse of LaTeX.
 
 
 ## A Remix of Inquiry-Oriented Differential Equations
@@ -99,8 +99,8 @@ Prior to creating these notebooks, I was teaching differential equation using In
 
 Below are two suggested Open Education Resources (OER) texts for a first course in differential equations for further reading.
 
-- [Notes on Diffy Qs: Differential Equations for Engineers](https://www.jirka.org/diffyqs/) by Jiri Lebl.
-- [Elementary Differential Equations](https://digitalcommons.trinity.edu/mono/8/) by William F. Trench
+- [Notes on Diffy Qs: Differential Equations for Engineers](https://www.jirka.org/diffyqs/){target="_blank"} by Jiri Lebl.
+- [Elementary Differential Equations](https://digitalcommons.trinity.edu/mono/8/){target="_blank"} by William F. Trench
 
 
 ## How to Contact Me
@@ -118,9 +118,9 @@ If you have any questions, comments, or suggestions about these materials, pleas
 
 --- 
 
-![Colorado Department of Higher Education](https://cdhe.colorado.gov/sites/highered/files/logo.svg){fig-align="left" width=30% fig-alt="Colorado Department of Higher Education"}<nbsp>
+![Colorado Department of Higher Education](https://cdhe.colorado.gov/sites/highered/files/logo.svg){fig-align="left" width=30% fig-alt="Colorado Department of Higher Education" target="_blank"}<nbsp>
 
-This project was supported by the [Colorado Department of Higher Education (CDHE)](https://cdhe.colorado.gov/) OER Grant Program. A big thank you to Troy Butler, Jonathon Hirschi, and Dmitry Ostrovskiy for their feedback various contributions to these materials. Lastly, thanks to my students at CU Denver for all the feedback and encouragement in developing these materials!
+This project was supported by the [Colorado Department of Higher Education (CDHE)](https://cdhe.colorado.gov/){target="_blank"} OER Grant Program. A big thank you to Troy Butler, Jonathon Hirschi, and Dmitry Ostrovskiy for their feedback various contributions to these materials. Lastly, thanks to my students at CU Denver for all the feedback and encouragement in developing these materials!
 
 
 
