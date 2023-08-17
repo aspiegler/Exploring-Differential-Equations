@@ -410,7 +410,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/01-What-is-a-Differential-Equation.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp1/01-What-is-a-Differential-Equation.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <nbsp></nbsp></p>
 <p><font color="dodgerblue">Reading: <em>Notes on Diffy Q’s</em> Sections 0.2, 0.3, and 1.1</font></p>
 <section id="modeling-rates-of-change" class="level1">
 <h1>Modeling Rates of Change</h1>
@@ -557,16 +557,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction-to-python" class="level1">
 <h1>Introduction to Python</h1>
 <hr>
-<p>We will be using <a href="https://www.python.org/">Python</a> as a tool for experimenting with differential equations. Python is a widely used programming language suited for many purposes and applications such as computational mathematics, data science, and app development. We will create, modify, and run Python code in Jupyter notebooks. No prior programming experience is required to begin working in Python in this (or any future) notebook.</p>
+<p>We will be using <a href="https://www.python.org/" target="_blank">Python</a> as a tool for experimenting with differential equations. Python is a widely used programming language suited for many purposes and applications such as computational mathematics, data science, and app development. We will create, modify, and run Python code in Jupyter notebooks. No prior programming experience is required to begin working in Python in this (or any future) notebook.</p>
 <ul>
 <li>Python is free and open-source programming language.</li>
 <li>Python has an extensive library of packages with scripts that perform many useful tasks.</li>
-<li>Python is rated as the <a href="https://bootcamp.berkeley.edu/blog/most-in-demand-programming-languages/">#2 most in-demand</a> and useful programming languages.</li>
+<li>Python is rated as the <a href="https://bootcamp.berkeley.edu/blog/most-in-demand-programming-languages/" target="_blank">#2 most in-demand</a> and useful programming languages.</li>
 </ul>
 <section id="the-sympy-package" class="level2">
 <h2 class="anchored" data-anchor-id="the-sympy-package">The SymPy Package</h2>
 <hr>
-<p>Python <font color="dodgerblue"><strong>packages</strong></font> are a collection of modules, functions, data, and/or other code scripts written and openly shared by other users. There are packages to perform many common tasks in mathematics such as plotting graphs, using the number <span class="math inline">\(\pi\)</span>, taking derivatives, and solving equations. This semester, we will frequently use the <a href="https://www.sympy.org/en/index.html">SymPy</a> package in Python to symbolically differentiate, integrate, and manipulate functions.</p>
+<p>Python <font color="dodgerblue"><strong>packages</strong></font> are a collection of modules, functions, data, and/or other code scripts written and openly shared by other users. There are packages to perform many common tasks in mathematics such as plotting graphs, using the number <span class="math inline">\(\pi\)</span>, taking derivatives, and solving equations. This semester, we will frequently use the <a href="https://www.sympy.org/en/index.html" target="_blank">SymPy</a> package in Python to symbolically differentiate, integrate, and manipulate functions.</p>
 <p>Before we can access any files in a package, we must first import the package. <strong>Run the code cell below to import the SymPy package with the abbreviation <code>sym</code>.</strong></p>
 <ul>
 <li>We only need to import a package one time during an active Python session.</li>
@@ -664,7 +664,7 @@ Tip
 <section id="integration-with-sympy" class="level2">
 <h2 class="anchored" data-anchor-id="integration-with-sympy">Integration with SymPy</h2>
 <hr>
-<p>SymPy has an <a href="https://docs.sympy.org/latest/modules/integrals/integrals.html"><code>integrals</code> module</a> with lots of built-in functions for computing indefinite and definite integrals as well as common integral transforms (such as Laplace and Fourier transforms).</p>
+<p>SymPy has an <a href="https://docs.sympy.org/latest/modules/integrals/integrals.html" target="_blank"><code>integrals</code> module</a> with lots of built-in functions for computing indefinite and definite integrals as well as common integral transforms (such as Laplace and Fourier transforms).</p>
 <ul>
 <li>The function <code>sympy.integrate([expr], t)</code> finds an antiderivative (with constant of integration <span class="math inline">\(C=0\)</span>) of the expression with respect to <code>t</code>.</li>
 <li>If we have already stored the expression to the function <code>f</code>, we can also use the command <code>f.integrate(t)</code>.</li>
