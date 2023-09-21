@@ -418,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/22-Inverse-Laplace-Transforms.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/22-Inverse-Laplace-Transforms.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <nbsp></nbsp></p>
 <p><font color="dodgerblue">Reading: <em>Notes on Diffy Q’s</em> Section 6.1 Part B</font></p>
 <section id="inverse-operations" class="level1">
 <h1>Inverse Operations</h1>
@@ -443,12 +443,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Then solve for <span class="math inline">\(s(t)\)</span> using the initial position and algebra.</li>
 </ol>
 <p><span class="math display">\[s(t) = -200 \cos{t} + 200\]</span></p>
-<p>Similar to the derivative, the Laplace transform is a mapping of one function <span class="math inline">\(f(t)\)</span> to another function, its Laplace transform <span class="math inline">\(\color{dodgerblue}{F(s)= \mathscr{L} \left\{ f \right\}}\)</span>. In <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/23-Solving-IVP-with-Laplace-Transforms.ipynb">Worksheet 23 (the next worksheet)</a>, we will explore how Laplace transforms help us solve differential equations. Before focusing our efforts back on differential equations, in this notebook we will practice transforming functions in the opposite direction with the <font color="dodgerblue"><strong>inverse Laplace transform</strong></font>.</p>
+<p>Similar to the derivative, the Laplace transform is a mapping of one function <span class="math inline">\(f(t)\)</span> to another function, its Laplace transform <span class="math inline">\(\color{dodgerblue}{F(s)= \mathscr{L} \left\{ f \right\}}\)</span>. In <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/23-Solving-IVP-with-Laplace-Transforms.ipynb" target="_blank">Worksheet 23 (the next worksheet)</a>, we will explore how Laplace transforms help us solve differential equations. Before focusing our efforts back on differential equations, in this notebook we will practice transforming functions in the opposite direction with the <font color="dodgerblue"><strong>inverse Laplace transform</strong></font>.</p>
 </section>
 <section id="reviewing-the-laplace-transform" class="level1">
 <h1>Reviewing the Laplace Transform</h1>
 <hr>
-<p>So far we have explored Laplace transforms in <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/20-Introduction-to-Laplace-Transforms.ipynb">Worksheet 20</a> and some useful properties of Laplace transforms in <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/21-Properties-of-Laplace-Transforms.ipynb">Worksheet 21</a>. The main results of these investigations are summarized in <a href="#sec-22LaplaceTable">Appendix A</a> and <a href="#sec-22PropTable">Appendix B</a>.</p>
+<p>So far we have explored Laplace transforms in <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/20-Introduction-to-Laplace-Transforms.ipynb" target="_blank">Worksheet 20</a> and some useful properties of Laplace transforms in <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp4/21-Properties-of-Laplace-Transforms.ipynb" target="_blank">Worksheet 21</a>. The main results of these investigations are summarized in <a href="#sec-22LaplaceTable">Appendix A</a> and <a href="#sec-22PropTable">Appendix B</a>.</p>
 <p>Before defining the inverse Laplace transform and applying this concept to solve differential equations, let’s first refresh ourselves of key properties of the Laplace transform that will be particularly useful when solving differential equations.</p>
 <p>For example, <a href="#22Prop1">Property 1</a> and <a href="#22Prop2">Property 2</a> tell us that the Laplace transform is a <font color="dodgerblue"><strong>linear operator</strong></font>,</p>
 <p><span class="math display">\[\color{dodgerblue}{\mathscr{L} \left\{ c_1 f_1(t) + c_2 f_2(t) \right\} = c_1 \mathscr{L} \left\{ f_1(t) \right\} + c_2 \mathscr{L} \left\{ f_2(t) \right\}}.\]</span></p>
@@ -631,12 +631,12 @@ Tip
 <li>We use <code>t</code> as the variable in <span class="math inline">\(f(t)\)</span>.</li>
 <li>The function will return the inverse Laplace transform (if it exists) <span class="math inline">\(f(t)\)</span>.</li>
 </ul></li>
-<li>For a review of Laplace transforms using <code>sympy.laplace_transform()</code>, see the section on <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html#20LaplacePython">Computing Laplace Transforms in Python</a> from Worksheet 20.</li>
+<li>For a review of Laplace transforms using <code>sympy.laplace_transform()</code>, see the section on <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html#20LaplacePython" target="_blank">Computing Laplace Transforms in Python</a> from Worksheet 20.</li>
 </ul>
 <p>Below are a couple of additional resources for help with Laplace transforms with <code>SymPy</code>.</p>
 <ul>
-<li>For more examples with <code>sympy.inverse_laplace_transform_()</code>, <a href="https://dynamics-and-control.readthedocs.io/en/latest/1_Dynamics/3_Linear_systems/Laplace%20transforms.html">here’s a good resource</a></li>
-<li>For official documentation, see <a href="https://docs.sympy.org/latest/modules/integrals/integrals.html">SymPy Doc</a></li>
+<li>For more examples with <code>sympy.inverse_laplace_transform_()</code>, <a href="https://dynamics-and-control.readthedocs.io/en/latest/1_Dynamics/3_Linear_systems/Laplace%20transforms.html" target="_blank">here’s a good resource</a></li>
+<li>For official documentation, see <a href="https://docs.sympy.org/latest/modules/integrals/integrals.html" target="_blank">SymPy Doc</a></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sym</span>
