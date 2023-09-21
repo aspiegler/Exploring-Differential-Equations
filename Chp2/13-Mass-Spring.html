@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exploring Differential Equations - eval: false</title>
+<title>Exploring Differential Equations - 2.5: Mass Spring Systems</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -393,7 +393,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">2.5: Mass Spring Systems</h1>
+<h1 class="title"><span class="chapter-title">2.5: Mass Spring Systems</span></h1>
 </div>
 
 
@@ -408,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/13-Mass-Spring.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/13-Mass-Spring.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <nbsp></nbsp></p>
 <p>A second order linear differential equation has the form</p>
 <p><span class="math display">\[\color{dodgerblue}{P(t)\frac{d^2y}{dt^2}+Q(t)\frac{dy}{dt}+R(t)y=G(t)}\]</span></p>
 <p>where <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, <span class="math inline">\(R\)</span>, and <span class="math inline">\(G\)</span> are continuous functions of the independent variable (<span class="math inline">\(t\)</span>). There are many applications for which this type of differential equation is a useful model.</p>
@@ -425,11 +425,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Credit: Qkrckdwls1004 <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> via via Wikimedia Commons</figcaption>
 </figure>
 </div>
-<p><a href="https://en.wikipedia.org/wiki/Rings_of_Saturn">Saturn’s rings</a> are mostly made of many (a big understatement!) tiny, nearly pure (99.9%) water ice particles. The inner-most ring starts about 4,000 miles above Saturn, and the rings extend out to 50,000 miles. The <a href="https://en.wikipedia.org/wiki/Rings_of_Saturn#Cassini_Division">Cassini division</a> is the biggest gap in the rings at 3,000 miles wide, and it is the result of resonance in the orbital frequencies between ice particles in the ring and the moon <a href="https://en.wikipedia.org/wiki/Mimas_(moon)">Mimas</a>.</p>
+<p><a href="https://en.wikipedia.org/wiki/Rings_of_Saturn" target="_blank">Saturn’s rings</a> are mostly made of many (a big understatement!) tiny, nearly pure (99.9%) water ice particles. The inner-most ring starts about 4,000 miles above Saturn, and the rings extend out to 50,000 miles. The <a href="https://en.wikipedia.org/wiki/Rings_of_Saturn#Cassini_Division" target="_blank">Cassini division</a> is the biggest gap in the rings at 3,000 miles wide, and it is the result of resonance in the orbital frequencies between ice particles in the ring and the moon <a href="https://en.wikipedia.org/wiki/Mimas_(moon)" target="_blank">Mimas</a>.</p>
 <p>Mimas orbits Saturn every <span class="math inline">\(22.5\)</span> hours. At one point, (long long ago) there were particles in the ring that orbited every <span class="math inline">\(11.25\)</span> hours. Every two orbits, those particles felt a big pull in the same direction due to the gravity of Mimas. As a result, those ice particles were pulled further out towards Mimas. The particles eventually slowed down as they were pulled further from Saturn, breaking the resonance with Mimas and resettling into a new orbit. Thus, we have the Cassini division!</p>
 <p>The Cassini division is a result of a 2:1 ratio with Mimas. Other gaps are the result of other rations (such as 3:1 and 3:2) and other moons. Below is a mesmerizing video with an audio translation of the harmonizing of the resonance between Saturn’s co-orbital moons Janus and Epimetheus and nearby ice particles.</p>
 <div class="quarto-video"><iframe data-external="1" src="https://www.youtube.com/embed/SsFZlSQdPWU" width="400" title="SATURN Sounds Part 2: Resonance of Janus translated into music" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>Video: <a href="https://www.youtube.com/watch?v=SsFZlSQdPWU">SATURN Sounds Part 2: Resonance of Janus translated into music</a> by SYSTEM Sounds, uploaded August 23, 2017.</p>
+<p>Video: <a href="https://www.youtube.com/watch?v=SsFZlSQdPWU" target="_blank">SATURN Sounds Part 2: Resonance of Janus translated into music</a> by SYSTEM Sounds, uploaded August 23, 2017.</p>
 </section>
 <section id="breaking-a-glass-with-your-voice" class="level2">
 <h2 class="anchored" data-anchor-id="breaking-a-glass-with-your-voice">Breaking a Glass with your Voice</h2>
@@ -471,7 +471,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="revisiting-unforced-mass-spring-systems" class="level1">
 <h1>Revisiting Unforced Mass-Spring Systems</h1>
 <hr>
-<p>Recall the mass-spring oscillator introduced in <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/10-Homogeneous-2nd-Order.ipynb">Worksheet 10 Homogeneous 2nd Order</a>. We connect an object with <font color="mediumseagreen">mass <span class="math inline">\(m\)</span></font> kg to a spring with <font color="dodgerblue">stiffness coefficient</font> <span class="math inline">\(k\)</span> kg/sec<span class="math inline">\(^2\)</span> that is connected to a stationary wall on the other end. We give the mass some initial position <span class="math inline">\(s_0\)</span> and velocity <span class="math inline">\(v_0\)</span>, and we observe the mechanics of how the mass moves along a surface with <font color="tomato">friction coefficient <span class="math inline">\(b\)</span></font> kg/sec.&nbsp;Such a system is called a <font color="dodgerblue"><strong>mass-spring oscillator</strong></font> or a <font color="dodgerblue"><strong>harmonic oscillator</strong></font>. The position of the mass at time, <span class="math inline">\(y(t)\)</span>, is modeled by the second order differential equation</p>
+<p>Recall the mass-spring oscillator introduced in <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/10-Homogeneous-2nd-Order.ipynb" target="_blank">Worksheet 10 Homogeneous 2nd Order</a>. We connect an object with <font color="mediumseagreen">mass <span class="math inline">\(m\)</span></font> kg to a spring with <font color="dodgerblue">stiffness coefficient</font> <span class="math inline">\(k\)</span> kg/sec<span class="math inline">\(^2\)</span> that is connected to a stationary wall on the other end. We give the mass some initial position <span class="math inline">\(s_0\)</span> and velocity <span class="math inline">\(v_0\)</span>, and we observe the mechanics of how the mass moves along a surface with <font color="tomato">friction coefficient <span class="math inline">\(b\)</span></font> kg/sec.&nbsp;Such a system is called a <font color="dodgerblue"><strong>mass-spring oscillator</strong></font> or a <font color="dodgerblue"><strong>harmonic oscillator</strong></font>. The position of the mass at time, <span class="math inline">\(y(t)\)</span>, is modeled by the second order differential equation</p>
 <p><span class="math display">\[\large {\color{mediumseagreen}{m}}y''+ {\color{tomato}{b}} y'+ {\color{dodgerblue}{k}} y=0; \qquad y(0)=s_0, \quad y'(0)=v_0.\]</span></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -526,7 +526,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Be sure you have already imported <code>damped_harmonic_oscillator()</code> from the <code>mass_spring</code> module. See <a href="#sec-13Import">Importing Functions</a> for code cells to perform this task.</li>
 <li>See the <a href="#sec-13append-one">Appendix</a> for a quick set of instructions for using <code>damped_harmonic_oscillator()</code>.</li>
-<li>See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/Mass-Spring-Tutorial.ipynb">Mass-Spring-Tutorial.ipynb</a> for more detailed instructions.</li>
+<li>See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/Mass-Spring-Tutorial.ipynb" target="_blank">Mass-Spring-Tutorial.ipynb</a> for more detailed instructions.</li>
 </ul>
 <section id="solution-to-question-2" class="level3">
 <h3 class="anchored" data-anchor-id="solution-to-question-2">Solution to Question 2</h3>
@@ -704,7 +704,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <p>In order to use either <code>damped_harmonic_oscillator</code> or <code>damped_harmonic_oscillator_comp</code>, we first need to import the functions from <code>mass_spring</code> module. See <a href="#sec-13Import">Importing Functions</a> for code cells to perform this task.</p>
 <ul>
-<li>See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/Mass-Spring-Tutorial.ipynb">Mass-Spring-Tutorial.ipynb</a> for more detailed instructions.</li>
+<li>See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/Mass-Spring-Tutorial.ipynb" target="_blank">Mass-Spring-Tutorial.ipynb</a> for more detailed instructions.</li>
 </ul>
 <section id="sec-13append-one" class="level2">
 <h2 class="anchored" data-anchor-id="sec-13append-one">Testing One System with <code>damped_harmonic_oscillator</code></h2>

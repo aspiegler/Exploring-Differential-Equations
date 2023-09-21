@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -377,7 +377,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#sec-10mass-spring" id="toc-sec-10mass-spring" class="nav-link" data-scroll-target="#sec-10mass-spring">Testing Our Results in the Mass-Spring Lab</a>
   <ul class="collapse">
-  <li><a href="#sec-LoadModule" id="toc-sec-LoadModule" class="nav-link" data-scroll-target="#sec-LoadModule">Loading <code>mass_spring</code> from GitHub</a></li>
   <li><a href="#sec-10import" id="toc-sec-10import" class="nav-link" data-scroll-target="#sec-10import">Importing <code>damped_harmonic_oscillator</code></a></li>
   <li><a href="#sec-10mass-spring-exp" id="toc-sec-10mass-spring-exp" class="nav-link" data-scroll-target="#sec-10mass-spring-exp">Running Experiments</a></li>
   <li><a href="#running-a-side-by-side-comparison" id="toc-running-a-side-by-side-comparison" class="nav-link" data-scroll-target="#running-a-side-by-side-comparison">Running A Side-by-Side Comparison</a></li>
@@ -406,7 +405,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/10-Homogeneous-2nd-Order.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a><nbsp></nbsp></p>
+<p><a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/10-Homogeneous-2nd-Order.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid" alt="Open In Colab"></a> <nbsp></nbsp></p>
 <p><font color="dodgerblue">Reading: <em>Notes on Diffy Q’s</em> Section 2.2 Part 2 (complex roots)</font></p>
 <section id="solving-the-homogeneous-equations" class="level1">
 <h1>Solving the Homogeneous Equations</h1>
@@ -663,38 +662,22 @@ Note
 <hr>
 <p>We now import a function named <code>damped_harmonic_oscillator()</code> that lives inside a module named <code>mass_spring</code> stored in GitHub.</p>
 <ul>
-<li>See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/Mass-Spring-Tutorial.ipynb">Mass-Spring-Tutorial.ipynb</a> for more detailed instructions.</li>
+<li>See <a href="https://githubtocolab.com/CU-Denver-MathStats-OER/ODEs/blob/main/Chp2/Mass-Spring-Tutorial.ipynb" target="_blank">Mass-Spring-Tutorial.ipynb</a> for more detailed instructions.</li>
 </ul>
-<section id="sec-LoadModule" class="level2">
-<h2 class="anchored" data-anchor-id="sec-LoadModule">Loading <code>mass_spring</code> from GitHub</h2>
+<section id="sec-10import" class="level2">
+<h2 class="anchored" data-anchor-id="sec-10import">Importing <code>damped_harmonic_oscillator</code></h2>
 <hr>
 <ul>
-<li>Run the code cell below to load the most up to date modules stored in GitHub.</li>
-<li>You will only need to run this code cell one time during an active session.</li>
+<li>Run the first code cell below to load the most up to date modules stored in GitHub.</li>
+<li>Run the second code cell to import the<code>damped_harmonic_oscillator</code> function from the <code>mass_spring</code> module</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>CU<span class="op">-</span>Denver<span class="op">-</span>MathStats<span class="op">-</span>OER<span class="op">/</span>ODEs</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>clear_output()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="sec-10import" class="level2">
-<h2 class="anchored" data-anchor-id="sec-10import">Importing <code>damped_harmonic_oscillator</code></h2>
-<hr>
-<p>In the first code cell we install a package to allow us to run interactives in Jupyter.</p>
-<ul>
-<li>You only need to run this one time ever! If you have already run this command before, you do not need to ever run it again!</li>
-</ul>
-<p>In the second code cell below, we import the <code>damped_harmonic_oscillator</code> function from the <code>mass_spring</code> module.</p>
-<ul>
-<li>If you receive an error when running the second code cell, this means you have not loaded <code>mass_spring</code> from GitHub in a previous code cell.</li>
-</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If not already installed, then will install and ask to restart runtime</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install matplotlib<span class="op">==</span><span class="fl">3.5.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.mass_spring <span class="im">import</span> damped_harmonic_oscillator  <span class="co"># Only need to import one time.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.mass_spring <span class="im">import</span> damped_harmonic_oscillator  <span class="co"># Only need to import one time.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sec-10mass-spring-exp" class="level2">
@@ -713,10 +696,10 @@ Note
 <li>Note the animation may take several seconds to complete running.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>damped_harmonic_oscillator(m<span class="op">=</span><span class="dv">1</span>,  <span class="co"># mass is 1</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                           b<span class="op">=</span><span class="dv">0</span>,  <span class="co"># friction is 0</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                           k<span class="op">=</span><span class="dv">4</span>,  <span class="co"># stiffness is 4</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                           x0<span class="op">=</span>[<span class="dv">1</span>,<span class="dv">0</span>])  <span class="co"># initial position and velocity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>damped_harmonic_oscillator(m<span class="op">=</span><span class="dv">1</span>,  <span class="co"># mass is 1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                           b<span class="op">=</span><span class="dv">0</span>,  <span class="co"># friction is 0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                           k<span class="op">=</span><span class="dv">4</span>,  <span class="co"># stiffness is 4</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                           x0<span class="op">=</span>[<span class="dv">1</span>,<span class="dv">0</span>])  <span class="co"># initial position and velocity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="running-a-side-by-side-comparison" class="level2">
@@ -731,17 +714,17 @@ Note
 <li>Press the play button.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.mass_spring <span class="im">import</span> damped_harmonic_oscillator_comp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.mass_spring <span class="im">import</span> damped_harmonic_oscillator_comp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>damped_harmonic_oscillator_comp(m<span class="op">=</span>[<span class="fl">0.2</span>, <span class="fl">0.3</span>],  <span class="co"># masses</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                                b<span class="op">=</span>[<span class="fl">0.5</span>, <span class="fl">0.1</span>],  <span class="co"># frictions</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                k<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>],  <span class="co"># stiffnesses  </span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                A<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Amplitudes of forcing</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                omega<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>],  <span class="co"># Frequencies of forcing</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                x0<span class="op">=</span>[[<span class="fl">0.5</span>, <span class="dv">1</span>], [<span class="op">-</span><span class="fl">0.5</span>, <span class="op">-</span><span class="dv">1</span>]],  <span class="co"># initial conditions</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                                fps<span class="op">=</span><span class="dv">4</span>,  <span class="co"># frames per second</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                tf<span class="op">=</span><span class="dv">40</span>)  <span class="co"># total time</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>damped_harmonic_oscillator_comp(m<span class="op">=</span>[<span class="fl">0.2</span>, <span class="fl">0.3</span>],  <span class="co"># masses</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                                b<span class="op">=</span>[<span class="fl">0.5</span>, <span class="fl">0.1</span>],  <span class="co"># frictions</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                k<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>],  <span class="co"># stiffnesses  </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                A<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Amplitudes of forcing</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                                omega<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>],  <span class="co"># Frequencies of forcing</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                x0<span class="op">=</span>[[<span class="fl">0.5</span>, <span class="dv">1</span>], [<span class="op">-</span><span class="fl">0.5</span>, <span class="op">-</span><span class="dv">1</span>]],  <span class="co"># initial conditions</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                                fps<span class="op">=</span><span class="dv">4</span>,  <span class="co"># frames per second</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                                tf<span class="op">=</span><span class="dv">40</span>)  <span class="co"># total time</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
