@@ -623,20 +623,17 @@ Tip
 <section id="sec-22InvL" class="level1">
 <h1>Inverse Laplace Transforms with <code>SymPy</code></h1>
 <hr>
-<p>We can use the <code>sympy.inverse_laplace_transform(F,s,t)</code> function from the <code>SymPy</code> library to check our work.</p>
-<ul>
-<li><code>sympy.laplace_transform_(F,s,t)</code>.
+<p>We can use the <code>sympy.inverse_laplace_transform(F, s, t)</code> function from the <code>SymPy</code> library to check our work.</p>
 <ul>
 <li>We use <code>s</code> as the variable in the resulting transform <span class="math inline">\(F(s)\)</span>.</li>
 <li>We use <code>t</code> as the variable in <span class="math inline">\(f(t)\)</span>.</li>
 <li>The function will return the inverse Laplace transform (if it exists) <span class="math inline">\(f(t)\)</span>.</li>
-</ul></li>
-<li>For a review of Laplace transforms using <code>sympy.laplace_transform()</code>, see the section on <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html#20LaplacePython" target="_blank">Computing Laplace Transforms in Python</a> from Worksheet 20.</li>
 </ul>
 <p>Below are a couple of additional resources for help with Laplace transforms with <code>SymPy</code>.</p>
 <ul>
-<li>For more examples with <code>sympy.inverse_laplace_transform_()</code>, <a href="https://dynamics-and-control.readthedocs.io/en/latest/1_Dynamics/3_Linear_systems/Laplace%20transforms.html" target="_blank">here’s a good resource</a></li>
-<li>For official documentation, see <a href="https://docs.sympy.org/latest/modules/integrals/integrals.html" target="_blank">SymPy Doc</a></li>
+<li>For more examples with <code>sympy.inverse_laplace_transform()</code>, <a href="https://dynamics-and-control.readthedocs.io/en/latest/1_Dynamics/3_Linear_systems/Laplace%20transforms.html">here’s a good resource</a>.</li>
+<li>For official documentation, see <a href="https://docs.sympy.org/latest/modules/integrals/integrals.html">SymPy Doc</a>.</li>
+<li>For a review of Laplace transforms using <code>sympy.laplace_transform()</code>, see the section on <a href="../Chp4/20-Introduction-to-Laplace-Transforms.html#20LaplacePython">Computing Laplace Transforms in Python</a> from Worksheet 20.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sym</span>
