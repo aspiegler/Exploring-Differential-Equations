@@ -268,42 +268,42 @@
   {
     "objectID": "Chp1/03-Phase-Line.html",
     "href": "Chp1/03-Phase-Line.html",
-    "title": "1.3: The Phase Plane",
+    "title": "1.3: The Phase Line",
     "section": "",
     "text": "Analyzing Autonomous DEs: Spotted Owls\nA group of biologists are making predictions about the spotted owl population in a forest in the Pacific Northwest. The autonomous differential equation the scientist use to model the spotted owl population is\n\\[\\frac{dP}{dt}=\\frac{P}{2}\\left(1-\\frac{P}{5}\\right)\\left(\\frac{P}{8}-1\\right),\\]\nwhere \\(P\\) is in hundreds of owls and \\(t\\) is in years. The issue is that the current number of owls is only approximately known.\nA phase line is the standard one-dimensional diagram that depicts the qualitative behavior of solutions to an autonomous differential equation.\nExploring Differential Equations by Adam Spiegler is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.Based on a work at https://github.com/CU-Denver-MathStats-OER/ODEs and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., & Fortune, N. (2018). Inquiry oriented differential equations: Course materials. Available at https://iode.sdsu.edu."
   },
   {
     "objectID": "Chp1/03-Phase-Line.html#sec-03quest1",
     "href": "Chp1/03-Phase-Line.html#sec-03quest1",
-    "title": "1.3: The Phase Plane",
+    "title": "1.3: The Phase Line",
     "section": "Question 1:",
     "text": "Question 1:\n\nSuppose the scientists estimate that currently \\(P\\) is about 5 (i.e. there are currently about 500 owls in the forest). Since 5 is only an estimate, they make long-term predictions of the owl population for the initial conditions \\(P = 4.9\\), \\(P = 5.0\\), and \\(P = 5.1\\).\nWithout using Python or any other technology, determine the long-term predictions for these initial conditions based on the differential equation. Will slightly different initial conditions yield only slightly different long-term predictions, or will they be radically different? Carry out a similar analysis if the current number of owls is somewhere near 800 owls.\n\nSolution to Question 1:"
   },
   {
     "objectID": "Chp1/03-Phase-Line.html#sec-03quest2",
     "href": "Chp1/03-Phase-Line.html#sec-03quest2",
-    "title": "1.3: The Phase Plane",
+    "title": "1.3: The Phase Line",
     "section": "Question 2:",
     "text": "Question 2:\n\nGive a one dimensional representation, without words, that would describe all solutions to the differential equation.\n\nSolution to Question 2:"
   },
   {
     "objectID": "Chp1/03-Phase-Line.html#sec-03quest3",
     "href": "Chp1/03-Phase-Line.html#sec-03quest3",
-    "title": "1.3: The Phase Plane",
+    "title": "1.3: The Phase Line",
     "section": "Question 3:",
     "text": "Question 3:\n\nLabel the dots and add arrows to the figure below to represent all solutions to the differential equation in Question 1.\n\n\nSolution to Question 3:"
   },
   {
     "objectID": "Chp1/03-Phase-Line.html#sec-03quest4",
     "href": "Chp1/03-Phase-Line.html#sec-03quest4",
-    "title": "1.3: The Phase Plane",
+    "title": "1.3: The Phase Line",
     "section": "Question 4:",
     "text": "Question 4:\n\nFor the differential equation in questions 1 thru 3 there are three equilibrium solutions. Recall that equilibrium solutions are constant functions that satisfy the differential equation. How do the other solution functions near each equilibrium solution behave in the long term? If you were to label each of these equilibrium solutions based on the way in which nearby solutions behave, what terms would you use and why?\n\nSolution to Question 4:"
   },
   {
     "objectID": "Chp1/03-Phase-Line.html#sec-03quest5",
     "href": "Chp1/03-Phase-Line.html#sec-03quest5",
-    "title": "1.3: The Phase Plane",
+    "title": "1.3: The Phase Line",
     "section": "Question 5:",
     "text": "Question 5:\n\nCreate an autonomous differential equation that has exactly two equilibrium solutions: \\(y(t)=3\\) is a stable equilibrium and \\(y(t) = -4\\) is an unstable equilibrium.\n\nSolution to Question 5:"
   },
