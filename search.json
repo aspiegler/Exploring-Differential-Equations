@@ -361,7 +361,7 @@
     "href": "Chp1/04-Eulers-Method.html#sec-04quest7",
     "title": "1.4: Numerical Approximations",
     "section": "Question 7:",
-    "text": "Question 7:\n\nUsing the differential equation\n\\[\\color{dodgerblue}{\\frac{dP}{dt}= P\\left(1-\\dfrac{P}{20}\\right)}\\]\nand initial condition \\(P(0) = 10\\), José and Julie started the table given in the solution below to numerically keep track of their tip-to-tail method for connecting tangent vectors. Explain José’s and Julie’s approach and complete their table. Round to two decimal places.\n\nSolution to Question 7:\n\n\n\nExplain their approach:\n\n\nComplete table below.\n\n\n\n\n\n\nTip\n\n\n\nYou may use Python to help with calculations.\n\n\n\n\n\n\\(\\large t\\)\n\\(\\large P\\)\n\\(\\large \\dfrac{dP}{dt}\\)\n\n\n\n\n0\n10\n5\n\n\n0.5\n12.5\n??\n\n\n1.5\n??\n??\n\n\n1.0\n??\n??\n\n\n1.5\n??"
+    "text": "Question 7:\n\nUsing the differential equation\n\\[\\color{dodgerblue}{\\frac{dP}{dt}= P\\left(1-\\dfrac{P}{20}\\right)}\\]\nand initial condition \\(P(0) = 10\\), José and Julie started the table given in the solution below to numerically keep track of their tip-to-tail method for connecting tangent vectors. Explain José’s and Julie’s approach and complete their table. Round to two decimal places.\n\nSolution to Question 7:\n\n\n\nExplain their approach:\n\n\nComplete table below.\n\n\n\n\n\n\nTip\n\n\n\nYou may use Python to help with calculations.\n\n\n\n\n\n\\(\\large t\\)\n\\(\\large P\\)\n\\(\\large \\dfrac{dP}{dt}\\)\n\n\n\n\n0\n10\n5\n\n\n0.5\n12.5\n??\n\n\n1.0\n??\n??\n\n\n1.5\n??"
   },
   {
     "objectID": "Chp1/04-Eulers-Method.html#sec-04quest8",
