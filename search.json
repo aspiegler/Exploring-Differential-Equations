@@ -634,7 +634,7 @@
     "href": "Chp1/07-Mixture-Applications.html#sec-07quest2",
     "title": "1.7: Applications to Compartmental Analysis",
     "section": "Question 2:",
-    "text": "Question 2:\n\nLet \\(P\\) denote the population of the world (in billions) \\(t\\) years since \\(1960\\). In 1960 the world’s population was approximately 3 billion, and the population growth is model by \\[\\frac{dP}{dt} =0.2P  , \\qquad \\ P(0)=3.\\]\nSolving this model gives \\(P(t)=3e^{0.02t}\\), and predicts the population in 2021 is \\(10.16\\) billion.\nWhy do you think predicted value is different from the actual value?\n\nSolution to Question 2:"
+    "text": "Question 2:\n\nLet \\(P\\) denote the population of the world (in billions) \\(t\\) years since \\(1960\\). In 1960 the world’s population was approximately 3 billion, and the population growth is model by \\[\\frac{dP}{dt} =0.02P  , \\qquad \\ P(0)=3.\\]\nSolving this model gives \\(P(t)=3e^{0.02t}\\), and predicts the population in 2025 is \\(11.01\\) billion.\nWhy do you think predicted value is different from the actual value?\n\nSolution to Question 2:"
   },
   {
     "objectID": "Chp1/07-Mixture-Applications.html#the-logistic-model",
