@@ -464,6 +464,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#solution-to-question-17" id="toc-solution-to-question-17" class="nav-link" data-scroll-target="#solution-to-question-17">Solution to Question 17:</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#modeling-higher-dimensional-systems-pharmacokinetics" id="toc-modeling-higher-dimensional-systems-pharmacokinetics" class="nav-link" data-scroll-target="#modeling-higher-dimensional-systems-pharmacokinetics"></a><a name="higher-model" class="nav-link" data-scroll-target="undefined">Modeling Higher-Dimensional Systems: Pharmacokinetics</a></li>
+  <li><a href="#question-18" id="toc-question-18" class="nav-link" data-scroll-target="#question-18">Question 18:</a><a name="17quest18" class="nav-link" data-scroll-target="undefined"></a>
+  <ul class="collapse">
+  <li><a href="#question-18a" id="toc-question-18a" class="nav-link" data-scroll-target="#question-18a">Question 18a:</a><a name="17quest18a" class="nav-link" data-scroll-target="undefined"></a></li>
+  <li><a href="#question-18b" id="toc-question-18b" class="nav-link" data-scroll-target="#question-18b">Question 18b:</a><a name="17quest18b" class="nav-link" data-scroll-target="undefined"></a>
+  <ul class="collapse">
+  <li><a href="#question-18c" id="toc-question-18c" class="nav-link" data-scroll-target="#question-18c">Question 18c:</a><a name="17quest18c" class="nav-link" data-scroll-target="undefined"></a></li>
+  <li><a href="#question-18d" id="toc-question-18d" class="nav-link" data-scroll-target="#question-18d">Question 18d:</a><a name="17quest18d" class="nav-link" data-scroll-target="undefined"></a></li>
+  </ul></li>
+  </ul></li>
   <li><a href="#creative-commons-license-information" id="toc-creative-commons-license-information" class="nav-link" data-scroll-target="#creative-commons-license-information">Creative Commons License Information</a></li>
   </ul>
 </nav>
@@ -1227,10 +1237,80 @@ Tip
 </section>
 </a></section><a name="17quest17">
 </a></section><a name="17quest17">
-</a><section id="creative-commons-license-information" class="level1"><a name="17quest17">
+</a><section id="modeling-higher-dimensional-systems-pharmacokinetics" class="level1"><a name="17quest17">
+</a><h1><a name="17quest17"></a><a name="higher-model">Modeling Higher-Dimensional Systems: Pharmacokinetics</a></h1>
+<hr>
+<p>In practice, systems often involve many more interconnected variables. In these cases, finding the characteristic polynomial and its roots manually becomes incredibly tedious, which is why we turn to computational tools like Python.</p>
+</section>
+<section id="question-18" class="level1">
+<h1>Question 18:<a name="17quest18"></a></h1>
+<hr>
+<p>Consider a 4-compartment model used in pharmacology to track the absorption and metabolism of an oral medication. We define the following variables for the amount of drug in each compartment at time <span class="math inline">\(t\)</span> (in hours):</p>
+<ul>
+<li><strong><span class="math inline">\(x_g\)</span>:</strong> Amount of drug in the GI Tract.</li>
+<li><strong><span class="math inline">\(x_b\)</span>:</strong> Amount of drug in the Bloodstream.</li>
+<li><strong><span class="math inline">\(x_o\)</span>:</strong> Amount of drug in the Tissues/Organs.</li>
+<li><strong><span class="math inline">\(x_m\)</span>:</strong> Amount of metabolized/eliminated drug.</li>
+</ul>
+<p>The transfer of the drug between these compartments can be modeled by a system of differential equations, where <span class="math inline">\(k_1, k_2, k_3, k_4\)</span> are positive rate constants:</p>
+<ul>
+<li>Drug leaves the GI tract at a rate proportional to the amount in the GI tract (<span class="math inline">\(k_1\)</span>).</li>
+<li>Drug in the bloodstream comes from the GI tract, leaves to enter the tissues (<span class="math inline">\(k_2\)</span>), returns from the tissues (<span class="math inline">\(k_3\)</span>), and is eliminated by the liver/kidneys (<span class="math inline">\(k_4\)</span>).</li>
+<li>Drug in the tissues comes from the bloodstream and returns to the bloodstream.</li>
+<li>Eliminated drug comes solely from the bloodstream and does not return to the body.</li>
+</ul>
+<section id="question-18a" class="level3">
+<h3 class="anchored" data-anchor-id="question-18a">Question 18a:<a name="17quest18a"></a></h3>
+<hr>
+<p>Write the system of four differential equations for <span class="math inline">\(x_g', x_b', x_o', x_m'\)</span> based on the description above.</p>
+<section id="solution-to-question-18a" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-18a">Solution to Question 18a:</h4>
+<hr>
+<p><br> <br> <br> <br></p>
+</section>
+</section>
+<section id="question-18b" class="level2">
+<h2 class="anchored" data-anchor-id="question-18b">Question 18b:<a name="17quest18b"></a></h2>
+<hr>
+<p>Express the system in matrix form <span class="math inline">\(\mathbf{x}' = A\mathbf{x}\)</span>.</p>
+<p><br></p>
+<section id="solution-to-question-18b" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-18b">Solution to Question 18b:</h4>
+<hr>
+<p><br> <br> <br> <br></p>
+</section>
+<section id="question-18c" class="level3">
+<h3 class="anchored" data-anchor-id="question-18c">Question 18c:<a name="17quest18c"></a></h3>
+<hr>
+<p>Suppose clinical trials determine the following transfer rates (measured in 1/hours): <span class="math inline">\(k_1 = 1.2\)</span>, <span class="math inline">\(k_2 = 0.5\)</span>, <span class="math inline">\(k_3 = 0.3\)</span>, <span class="math inline">\(k_4 = 0.2\)</span>.</p>
+<p>Use the code cell below to define the matrix <span class="math inline">\(A\)</span> and find its eigenvalues using Python (<code>sympy</code> or <code>numpy</code>).</p>
+<p><br></p>
+<section id="solution-to-question-18c" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-18c">Solution to Question 18c:</h4>
+<hr>
+<p><br> <br></p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Solution to Question 18c</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="question-18d" class="level3">
+<h3 class="anchored" data-anchor-id="question-18d">Question 18d:<a name="17quest18d"></a></h3>
+<hr>
+<p>Run your code from <a href="#17quest18c">Question 18c</a>. Based on the numerical eigenvalues output by Python, what will happen to the amount of drug in the active compartments (<span class="math inline">\(x_g, x_b, x_o\)</span>) of the patient’s system as <span class="math inline">\(t \to \infty\)</span>? Explain how the eigenvalues tell you this.</p>
+<p><br></p>
+<section id="solution-to-question-18d" class="level4">
+<h4 class="anchored" data-anchor-id="solution-to-question-18d">Solution to Question 18d:</h4>
+<hr>
+<p><br> <br> <br> <br></p>
+</section>
+</section>
+</section>
+</section>
+<section id="creative-commons-license-information" class="level1">
 <h1>Creative Commons License Information</h1>
 <hr>
-</a><p><a name="17quest17"></a><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><em>Exploring Differential Equations</em></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/CU-Denver-MathStats-OER/ODEs" property="cc:attributionName" rel="cc:attributionURL">Adam Spiegler</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/CU-Denver-MathStats-OER/ODEs" rel="dct:source">https://github.com/CU-Denver-MathStats-OER/ODEs</a> and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., &amp; Fortune, N. (2018). <em>Inquiry oriented differential equations: Course materials</em>. Available at <a href="https://iode.sdsu.edu">https://iode.sdsu.edu</a>.</p>
+<p><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><em>Exploring Differential Equations</em></span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/CU-Denver-MathStats-OER/ODEs" property="cc:attributionName" rel="cc:attributionURL">Adam Spiegler</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/CU-Denver-MathStats-OER/ODEs" rel="dct:source">https://github.com/CU-Denver-MathStats-OER/ODEs</a> and original content created by Rasmussen, C., Keene, K. A., Dunmyre, J., &amp; Fortune, N. (2018). <em>Inquiry oriented differential equations: Course materials</em>. Available at <a href="https://iode.sdsu.edu">https://iode.sdsu.edu</a>.</p>
 
 
 </section>
