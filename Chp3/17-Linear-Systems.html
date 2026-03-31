@@ -1252,12 +1252,25 @@ Tip
 <li><strong><span class="math inline">\(x_o\)</span>:</strong> Amount of drug in the Tissues/Organs.</li>
 <li><strong><span class="math inline">\(x_m\)</span>:</strong> Amount of metabolized/eliminated drug.</li>
 </ul>
-<p>The transfer of the drug between these compartments can be modeled by a system of differential equations, where <span class="math inline">\(k_1, k_2, k_3, k_4\)</span> are positive rate constants:</p>
+<p>The transfer of the drug between these compartments can be modeled by a system of differential equations, where <span class="math inline">\(k_1, k_2, k_3, k_4\)</span> denote <strong>positive</strong> constants:</p>
 <ul>
-<li>Drug leaves the GI tract at a rate proportional to the amount in the GI tract (<span class="math inline">\(k_1\)</span>).</li>
-<li>Drug in the bloodstream comes from the GI tract, leaves to enter the tissues (<span class="math inline">\(k_2\)</span>), returns from the tissues (<span class="math inline">\(k_3\)</span>), and is eliminated by the liver/kidneys (<span class="math inline">\(k_4\)</span>).</li>
-<li>Drug in the tissues comes from the bloodstream and returns to the bloodstream.</li>
-<li>Eliminated drug comes solely from the bloodstream and does not return to the body.</li>
+<li>The drug leaves the GI tract at a rate proportional to the amount in the GI tract and enters the bloodstream at the same rate.
+<ul>
+<li>Use the <strong>positive</strong> constant <span class="math inline">\(k_1\)</span> to denote the constant of proportionality.</li>
+</ul></li>
+<li>Some of the drug leaves the bloodstream and enters tissue/organs at a rate proportional to the amount present in the bloodstream.
+<ul>
+<li>Use the <strong>positive</strong> constant <span class="math inline">\(k_2\)</span> to denote the constant of proportionality.</li>
+</ul></li>
+<li>The drug leaves the tissue/organs and goes back into the bloodstream at a rate proportional to the amount present in the tissue/organs.
+<ul>
+<li>Use the <strong>positive</strong> constant <span class="math inline">\(k_3\)</span> to denote the constant of proportionality.</li>
+</ul></li>
+<li>Some of the drug in the bloodstream is metabolized and is eliminated from the body. The amount of the drug that is metabolized leaves the bloodstream at a rate proportional to the amount present in the bloodstream.
+<ul>
+<li>Use the <strong>positive</strong> constant <span class="math inline">\(k_4\)</span> to denote the constant of proportionality.</li>
+</ul></li>
+<li>The amount of the drug that is metabolized comes only from the bloodstream and does not return to the body.</li>
 </ul>
 <section id="question-18a" class="level3">
 <h3 class="anchored" data-anchor-id="question-18a">Question 18a:<a name="17quest18a"></a></h3>
